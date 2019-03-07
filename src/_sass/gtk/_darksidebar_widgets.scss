@@ -93,7 +93,7 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
   }
 }
 
-%headerbar_appmenu {
+%side_titlebutton {
   &.appmenu { // appmenu button
     border: none;
     min-height: 30px;
@@ -146,7 +146,26 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
   }
 
   button.titlebutton {
-    @extend %headerbar_appmenu;
+    @extend %side_titlebutton;
+
+    // Load png assets for each button, Fix the Chrome window restore button bug
+    @each $k in ('close', 'maximize', 'minimize', 'restore') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
+
+        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}-dark.png'),
+                                                     url('assets/titlebutton-#{$k}#{$m}-dark@2.png')); }
+      }
+    }
+  }
+
+  .fullscreen &,
+  .maximized & {
+    button.titlebutton {
+      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
+      &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}-dark.png'),
+                                                      url('assets/titlebutton-restore#{$m}-dark@2.png')); }
+      }
+    }
   }
 }
 
@@ -609,6 +628,16 @@ window.background.csd {
     }
   }
 
+  > headerbar.titlebar { // gnome 3.32
+    > hdyleaflet > headerbar:first-child {
+      @extend %side_headerbar;
+    }
+
+    > hdyleaflet > separator.sidebar {
+      border-right-style: if($variant == 'light', none, solid);
+    }
+  }
+
   > box.horizontal > box.vertical {
     > scrolledwindow.view {
       > viewport.frame > stack {
@@ -630,6 +659,41 @@ window.background.csd {
       }
     }
   }
+
+  > hdyleaflet > box.vertical { // gnome 3.32
+    > scrolledwindow.view {
+      > viewport.frame > stack {
+        > list {
+          @extend %side_background;
+
+          separator { background: none; }
+
+          row.activatable:not(:hover):not(:selected) {
+            background-image: image($side_theme_bg);
+          }
+
+          row.activatable:not(:selected):hover {
+            color: $side_theme_alt_fg;
+            background-color: rgba($side_theme_fg, 0.06);
+            // transition: all 50ms $ease-out-quad;
+          }
+        }
+      }
+    }
+
+    > searchbar {
+      @extend %side_searchbar;
+    }
+  }
+
+  > hdyleaflet > separator.sidebar {
+    border-right-style: if($variant == 'light', none, solid);
+  }
+}
+
+hdyleaflet > separator.sidebar {
+  background: none;
+  min-width: 0;
 }
 
 //
@@ -680,7 +744,7 @@ window#GearyMainWindow {
     }
   }
 
-  > box.vertical > paned {
+  > box.vertical > paned { // Geary 0.12.1
     > separator {
       background-image: if($variant == 'light', none, image($solid_borders_color));
     }
@@ -689,11 +753,23 @@ window#GearyMainWindow {
       @extend %side_searchbar;
     }
   }
+
+  > overlay > box.vertical > paned.horizontal { // Geary 0.13.1
+    > box.sidebar.vertical {
+      @extend %side_headerbar;
+
+      > searchbar {
+        @extend %side_searchbar;
+      }
+    }
+  }
 }
 
 .geary-titlebar-left {
   margin-right: $cont_padding;
-  @extend %side_background;
+  &, &.geary-titlebar {
+    @extend %side_headerbar;
+  }
 
   // remove unexpected "hardcoded" vertical separator
   separator {

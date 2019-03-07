@@ -1123,7 +1123,7 @@ searchbar {
     padding: $cont_padding;
     margin: -$cont_padding;
     border-style: solid;
-    border-color: $borders_color;
+    border-color: $solid_borders_color;
     background-color: $bg_color;
     border-width: 0 0 1px;
   }
@@ -1258,7 +1258,7 @@ headerbar,
 headerbar {
   @extend %header_widgets;
 
-  entry, button, separator {
+  entry, button, separator:not(.sidebar) {
     margin-top: $icon_padding;
     margin-bottom: $icon_padding;
   }
