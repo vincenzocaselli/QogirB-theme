@@ -69,8 +69,10 @@ $dark_sidebar_bg: white;
 
 $dark_sidebar_fg: if($titlebar == 'light', #646972, #C4CAD1);
 $alt_dark_sidebar_fg: if($variant == 'light', darken($dark_sidebar_fg, 10%), lighten($dark_sidebar_fg, 10%));
-$dark_sidebar_icon_fg: #F6F6FB;
+
 $dark_sidebar_icon_bg: #32343D;
+$dark_sidebar_icon_fg: #F6F6FB;
+
 $dark_sidebar_border: if($variant == 'light', darken($dark_sidebar_bg, 10%), lighten($dark_sidebar_bg, 8%));
 
 $osd_fg_color: #D3DAE3;
@@ -88,6 +90,9 @@ $osd_borders_color: $osd_button_border;
 
 $panel_bg: #21232b;
 $panel_fg: $osd_fg_color;
+
+$dash_bg: $dark_sidebar_icon_bg;
+$dash_fg: $osd_fg_color;
 
 $entry_bg: if($variant=='light', $base_color, lighten($base_color, 0%));
 $entry_border: $borders_color;

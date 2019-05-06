@@ -43,9 +43,8 @@ Usage:  ./Install  [OPTIONS...]
 | -d, --dest   | destination directory (Default: $HOME/.themes) |
 | -n, --name   | name (Default: Qogir) |
 | -c, --color  | color variant(s) (standard/light/dark) |
-| -m, --menu   | appmenu button variant(s) (standard/gnome) |
 | -i, --image  | Install theme with nautilus background image |
-| -s, --square | Install theme with square titlebutton |
+| -w, --win    | titlebutton variant(s) (standard/square) |
 | -h, --help   | Show this help |
 
 **FOR EXAMPLE:**
@@ -54,21 +53,9 @@ Usage:  ./Install  [OPTIONS...]
 ```
 (Install all themes)
 ```sh
-./Install -m standard
-```
-(Install themes for appmenu button on header)
-```sh
-./Install -m gnome
-```
-(Install themes for appmenu button on panel)
-```sh
 ./Install -i
 ```
 (Install themes with nautilus background imge)
-```sh
-./Install -s
-```
-(Install themes with square titlebuttons)
 
 ## Screenshots
 ![1](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot01.png?raw=true)

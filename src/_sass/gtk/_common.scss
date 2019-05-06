@@ -1,3 +1,4 @@
+$header_padding: if($titlebutton == 'circle', 0, 5px);
 
 * {
   background-clip: padding-box;
@@ -503,16 +504,19 @@ button {
       padding-left: $cont_padding;  // label padding
       padding-right: $cont_padding; //
     }
+
     > image {
       padding-left: $cont_padding;
       padding-right: $cont_padding;
       padding-top: 3px;
       padding-bottom: 3px;
     }
+
     &.text-button {
       padding-left: 10px;
       padding-right: 10px;
     }
+
     &.image-button {
       padding-left: 2px;
       padding-right: 2px;
@@ -766,13 +770,14 @@ toolbar.inline-toolbar toolbutton {
 
 // Apply the rules defined above
 .linked:not(.vertical) {
-  &:not(.path-bar) { @include linking_rules(); }
-  &.path-bar:not(.stack-switcher) { @include pathbar_linking_rules(); }
+  &:not(.path-bar):not(.nautilus-path-bar) { @include linking_rules(); }
+  &.path-bar, &.stack-switcher { @include pathbar_linking_rules(); }
+  .osd & { @include linking_rules($e_border:$osd_entry_border, $b_border:$osd_button_border); }
 }
 
 headerbar,
 headerbar.titlebar {
-  .linked:not(.vertical):not(.path-bar) {
+  .linked:not(.vertical):not(.path-bar):not(.nautilus-path-bar):not(.stack-switcher) {
     @include linking_rules($entry_rules:'false', $button_rules:'false', $e_border: $header_entry_border, $b_border: transparent);
   }
 }
@@ -1021,11 +1026,25 @@ combobox {
 
   arrow {
     -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
-    min-height: $small_size;
-    min-width: $small_size;
+    min-height: 16px;
+    min-width: 16px;
   }
 
   &:drop(active) button.combo { @extend button:drop(active); }
+
+  decoration,
+  button.combo:checked { transition: none; } // workaround for menuitem selection
+
+  // #gtk-combobox-popup-menu {
+  //   padding: 4px 0;
+  //
+  //   menuitem {
+  //     min-height: 16px;
+  //     min-width: 38px;
+  //     padding: 4px $cont_padding;
+  //     transition: none;
+  //   }
+  // }
 
   .linked:not(.vertical) > & > box > button.combo {
     // the combobox is a composite widget so the way we do button linking doesn't
@@ -1146,11 +1165,11 @@ headerbar,
   color: $header_fg;
   box-shadow: inset 0 -1px $borders_color;
   background-color: $header_bg;
-  min-height: $medium_size + 2px;
+  min-height: $large_size;
 
   // .csd & {  // Transparent header-bars only in csd windows
   //   background-color: $header_bg;
-  //   min-height: $medium_size + 2px;
+  //   min-height: $medium_size + 6px;
   // }
 
   &:backdrop {
@@ -1212,8 +1231,9 @@ headerbar,
   }
 
   %square_titlebutton {
+    min-width: 38px;
     min-height: 30px;
-    min-width: 30px;
+    margin: 0 -3px;
   }
 
   %circle_titlebutton {
@@ -1224,14 +1244,13 @@ headerbar,
 
   &:not(.csd).default-decoration {
     min-height: 30px;
-    padding: 0 8px - $header_padding;
-    margin: 0;
+    padding: 0 if($titlebutton == 'circle', 8px, 3px);
     background-color: $header_bg;
 
-    button.titlebutton {
-      @extend %circle_titlebutton;
+    > button.titlebutton {
       border: none;
-      margin: 0 0 - ($header_padding * 0.6);
+      @if $titlebutton == 'circle' { @extend %circle_titlebutton; }
+      @else { @extend %square_titlebutton; }
     }
   }
 
@@ -1358,6 +1377,45 @@ headerbar {
   &:disabled:active, &:disabled:checked { @include button(header-insensitive-active); }
 }
 
+%headerbar_pathbar_button {
+  background: none;
+  border: none;
+  border-radius: 0;
+  border-image: radial-gradient(circle closest-corner at center calc(100% - 1px),
+                                $selected_bg_color 0%,
+                                transparent 0%)
+                                0 0 0 / 0 0 0;
+
+  &:hover {
+    color: $alt_header_fg;
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgba($selected_bg_color, 0.5);
+  }
+
+  &:checked, &:active {
+    color: $header_fg;
+    background-color: transparent;
+    border-image: radial-gradient(circle closest-corner at center calc(100% - 1px),
+                                  $selected_bg_color 100%,
+                                  transparent 0%)
+                                  0 0 2 / 0 0 2px;
+  }
+
+  &:disabled {
+    color: rgba($header_fg, 0.4);
+    background-color: transparent;
+  }
+
+  &:checked:disabled {
+    color: rgba($header_fg, 0.4);
+    background-color: transparent;
+    border-image: radial-gradient(circle closest-corner at center calc(100% - 1px),
+                                  rgba($selected_bg_color, 0.4) 100%,
+                                  transparent 0%)
+                                  0 0 2 / 0 0 2px;
+  }
+}
+
 %header_widgets {
 
   // Headerbar Entries
@@ -1395,19 +1453,19 @@ headerbar {
   // Linking stuff
 
   // Disconnect linked buttons
-  .linked:not(.vertical):not(.path-bar):not(.stack-switcher) {
+  .linked:not(.vertical):not(.path-bar):not(.nautilus-path-bar):not(.stack-switcher) {
     button:not(:only-child) { margin-left: 1px; }
   }
 
   // Reset buttons
-  .linked:not(.vertical):not(.path-bar):not(.stack-switcher) > button {
+  .linked:not(.vertical):not(.path-bar):not(.nautilus-path-bar):not(.stack-switcher) > button {
     &, &:hover, &:active, &:checked, &:disabled {
       border-radius: 3px;
       border-style: solid;
     }
   }
 
-  .linked:not(.vertical):not(.path-bar) {
+  .linked:not(.vertical):not(.path-bar):not(.nautilus-path-bar) {
     $_uncolored_button: 'button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action)';
 
     > #{$_uncolored_button}:hover:not(:only-child),
@@ -1432,27 +1490,8 @@ headerbar {
   .linked:not(.vertical):not(.stack-switcher).path-bar {
     > button {
       margin: 0;
-      color: $header_fg;
-      border-radius: 0;
-      border: none;
-      background-color: transparent;
-
-      &:hover {
-        color: $alt_header_fg;
-        box-shadow: inset 0 -2px rgba($alt_selected_bg_color, 0.5);
-      }
-
-      &:active, &:checked {
-        transition: box-shadow 0.2s;
-        color: $header_fg;
-        background-color: transparent;
-        box-shadow: inset 0 -2px $alt_selected_bg_color;
-      }
-
-      &:disabled { color: rgba($header_fg, 0.4); }
-      // &, &:hover, &:active, &:checked, &:disabled { @extend %linked_flat; }
+      @extend %headerbar_pathbar_button;
     }
-    // @include pathbar_linking_rules($sep_color:$header_button_border);
   }
 
   // special case and stack-switchers
@@ -1793,13 +1832,14 @@ menubar,
   > menuitem {
     transition: all 0.2s cubic-bezier(0.0, 0.0, 0.2, 1);
     padding: 4px 8px;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 0;
 
     &:hover { //Seems like it :hover even with keyboard focus
-      background-color: transparent;
-      box-shadow: inset 0 -2px $selected_bg_color;
-      color: $alt_header_fg;
+      background-color: $selected_bg_color;
+      box-shadow: none;
+      border-color: if($titlebar == 'light', $sec_selected_bg_color, $alt_selected_bg_color);
+      color: $selected_fg_color;
     }
 
     &:disabled {
@@ -1810,20 +1850,19 @@ menubar,
   }
 }
 
+$_menu_bg: if($variant=='light', $base_color, $bg_color);
+
 menu,
 .menu,
 .context-menu {
-  $_menu_bg: if($variant=='light', $base_color, $bg_color);
+  // margin: 0; // See https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 4px 0;
   border-radius: 0;
+  transition: none;
   background-color: $_menu_bg;
-  border: 1px solid $borders_color;
+  border: 1px solid $borders_color; // adds borders in a non composited env
 
-  .csd & {
-    padding: 4px 0;
-    border-radius: 0;
-    border: none;
-  }
+  .csd & { border: none; }
 
   separator,
   .csd & separator {
@@ -1831,49 +1870,47 @@ menu,
     background-color: $_menu_bg;
   }
 
-  // Firefox workaround
-  .separator:not(label),
-  .csd & .separator:not(label) { color: $_menu_bg; }
-  // Firefox workaround end
-
   menuitem {
-    min-height: $small_size;
-    min-width: $large_size;
-    padding: 4px $cont_padding;
+    min-height: 16px;
+    min-width: 38px;
+    padding: 4px 8px;
+    text-shadow: none;
+    transition: background-color 20ms ease-out;
 
     &:hover {
+      transition: none;
       color: $selected_fg_color;
       background-color: $selected_bg_color;
     }
 
-    &:disabled {
-      color: $insensitive_fg_color;
-    }
+    &:disabled { color: $insensitive_fg_color; }
 
-    label { &:disabled { color: $insensitive_fg_color; }}
+    // avoids labels color being overridden, see
+    // https://bugzilla.gnome.org/show_bug.cgi?id=767058
+    label { &:dir(rtl), &:dir(ltr) { color: inherit; }}
 
     //submenu indicators
     arrow {
-      min-height: $small_size;
-      min-width: $small_size;
+      min-height: 16px;
+      min-width: 16px;
 
       &:dir(ltr) {
         -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-        margin-left: 10px;
+        margin-left: 8px;
       }
 
       &:dir(rtl) {
         -gtk-icon-source:-gtk-icontheme('pan-end-symbolic-rtl');
-        margin-right: 10px;
+        margin-right: 8px;
       }
     }
 
     @at-root menuitem {
-      accelerator { color: gtkalpha(currentColor,0.55); }
+      accelerator { color: gtkalpha(currentColor, 0.55); }
 
       check, radio {
-        min-height: $small_size;
-        min-width: $small_size;
+        min-height: 16px;
+        min-width: 16px;
         &:dir(ltr) { margin-right: $cont_padding; margin-left: 2px; }
         &:dir(rtl) { margin-left: $cont_padding; margin-right: 2px; }
       }
@@ -1881,23 +1918,24 @@ menu,
   }
 
   // overflow buttons
-
   > arrow {
     // @include button(undecorated);
-    min-width: $small_size;
-    min-height: $small_size;
+    min-width: 16px;
+    min-height: 16px;
     padding: 4px;
     background-color: $_menu_bg;
     border-radius: 0;
+    transition: none;
     // border: 1px solid $borders_color;
 
     &.top {
-      margin-top: -6px;
+      margin-top: -4px;
       border-bottom: 1px solid $borders_color;
       -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
     }
 
     &.bottom {
+      margin-top: 8px;
       margin-bottom: -12px;
       border-top: 1px solid $borders_color;
       -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
@@ -2118,8 +2156,8 @@ notebook {
       // close button
       button.flat {
         border-radius: 100%;
-        min-height: $small_size;
-        min-width: $small_size;
+        min-height: 16px;
+        min-width: 16px;
         padding: 0;
         margin: 4px 0;
         color: mix($bg_color, $fg_color, 35%);
@@ -2370,8 +2408,8 @@ checkbutton, radiobutton {
 
 check,
 radio {
-  min-width: $small_size;
-  min-height: $small_size;
+  min-width: 16px;
+  min-height: 16px;
   margin: 0 2px;
 
   &:only-child,
@@ -2841,8 +2879,8 @@ row {
 //
 expander {
   arrow {
-    min-width: $small_size;
-    min-height: $small_size;
+    min-width: 16px;
+    min-height: 16px;
     -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
@@ -2918,12 +2956,22 @@ calendar {
 
 messagedialog { // Message Dialog styling
 
+  &.background {
+    background-color: $header_bg;
+    color: $header_fg;
+  }
+
   .titlebar {
     min-height: 20px;
     background-color: $header_bg;
     border-bottom: none;
     border-top-left-radius: $bt_radius;
     border-top-right-radius: $bt_radius;
+    box-shadow: none;
+
+    &:backdrop {
+      background-color: $header_bg;
+    }
   }
 
   .dialog-action-area {
@@ -2932,6 +2980,8 @@ messagedialog { // Message Dialog styling
       border-radius: 0;
       border: none;
       border-top: 1px solid $borders_color;
+      background-color: $header_bg;
+      color: $header_fg;
 
       &:active, &:checked {
         transition: background-color 0.00001s 0.2s;
@@ -2954,12 +3004,12 @@ messagedialog { // Message Dialog styling
   .dialog-action-area button:not(.suggested-action):not(.destructive-action) {
 
     &:hover {
-      background-color: rgba($fg_color, 0.06);
+      background-color: rgba($header_fg, 0.06);
     }
 
     &:active, &:checked {
-      background-color: rgba($fg_color, 0.1);
-      color: $fg_color;
+      background-color: rgba($header_fg, 0.1);
+      color: $header_fg;
     }
   }
 
@@ -3433,7 +3483,7 @@ button.circular-button {
 }
 
 .keycap {
-  min-width: $small_size;
+  min-width: 16px;
   min-height: 20px;
 
   padding: 3px $cont_padding 4px $cont_padding;
@@ -3462,39 +3512,40 @@ stackswitcher button {
 // Window Decorations
 //
 
-$_wm_border: if($variant=='light', transparentize(black, 0.9), transparentize(black, 0.8));
+$_wm_border: if($variant=='light', rgba(black, 0.1), rgba(black, 0.2));
 
 decoration {
   border-radius: 0;
   border: none;
+  transition: $backdrop_transition;
 
-  box-shadow: 0 3px 5px 0 if($variant == 'light', opacify($_wm_border, 0.1), opacify($_wm_border, 0.05)),
-              0 8px 8px 0 if($variant == 'light', opacify($_wm_border, 0.1), opacify($_wm_border, 0.05)),
-              0 0 0 1px $borders_color;
+  box-shadow: 0 3px 5px 0 if($variant == 'light', rgba($_wm_border, 0.15), rgba($_wm_border, 0.08)),
+              0 8px 8px 0 if($variant == 'light', rgba($_wm_border, 0.15), rgba($_wm_border, 0.08)),
+              0 0 0 1px rgba($_wm_border, 0.1);
 
   // this is used for the resize cursor area
-  margin: $cont_padding;
+  margin: 4px;
 
   &:backdrop {
     // the transparent shadow here is to enforce that the shadow extents don't
     // change when we go to backdrop, to prevent jumping windows
     box-shadow: 0 3px 5px 0 transparent, 0 8px 8px 0 transparent,
-                0 3px 3px 0 if($variant == 'light', opacify($_wm_border, 0.06), opacify($_wm_border, 0.03)),
-                0 0 0 1px $borders_color;
-    transition: $backdrop_transition;
+                0 3px 3px 0 if($variant == 'light', rgba($_wm_border, 0.1), rgba($_wm_border, 0.06)),
+                0 0 0 1px rgba($_wm_border, 0.1);
   }
 
+  .maximized &,
   .fullscreen &,
   .tiled & {
     border-radius: 0;
-    box-shadow: 0 3px 3px 0 if($variant == 'light', opacify($_wm_border, 0.06), opacify($_wm_border, 0.03));
+    box-shadow: 0 3px 3px 0 if($variant == 'light', rgba($_wm_border, 0.1), rgba($_wm_border, 0.06));
   }
 
   // server-side decorations as used by mutter
   .ssd & {
     border-radius: 0;
     box-shadow: 0 0 0 1px $borders_color;
-    border: none;
+    // border: none;
     // &.maximized { border-radius: 0; }
   }
 
@@ -3518,7 +3569,7 @@ decoration {
   }
 
   .solid-csd & {
-    border: none;
+    border: 2px solid $dark_sidebar_icon_bg;
     border-radius: 0;
     margin: 0;
     background-color: $header_bg;
@@ -3529,16 +3580,13 @@ decoration {
 //
 // Titlebuttons
 //
-headerbar, .titlebar {
-  @extend %csd_circle_titlebutton;
-}
 
-%csd_square_titlebutton {
+%small_titlebutton {
   > box.horizontal {
     &.left {
-      @each $class, $_left, $_right in ('.close', -10px, 0),
-                                       ('.maximize', -6px, 0),
-                                       ('.minimize', -6px, 0) {
+      @each $class, $_left, $_right in ('.close', -3px, 0),
+                                       ('.maximize', -3px, 0),
+                                       ('.minimize', -3px, 0) {
         > button.titlebutton#{$class} {
           margin-left: #{$_left};
         }
@@ -3546,9 +3594,9 @@ headerbar, .titlebar {
     }
 
     &.right {
-      @each $class, $_left, $_right in ('.close', 0, -10px),
-                                       ('.maximize', 0, -6px),
-                                       ('.minimize', 0, -6px) {
+      @each $class, $_left, $_right in ('.close', 0, -3px),
+                                       ('.maximize', 0, -3px),
+                                       ('.minimize', 0, -3px) {
         > button.titlebutton#{$class} {
           margin-right: #{$_right};
         }
@@ -3556,43 +3604,18 @@ headerbar, .titlebar {
     }
   }
 
-  button.titlebutton { // csd titlebuttons
-    margin: 0;
-    padding: 0;
-    min-width: $medium_size;
-    min-height: $medium_size;
-
-    @include button(undecorated);
-    background-color: transparentize($header_bg, 1);
-
-    &:hover {
-      @include button(header-hover);
-    }
-
-    &:active, &:checked {
-      @include button(header-active);
-    }
-
-    &.close, &.maximize, &.minimize, &.restore { // csd windows control titlebuttons
-      padding: 0;
-      min-width: $large_size;
-      min-height: $large_size;
-      color: transparent;
-      background-color: transparent;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-width: 0;
-      border-radius: 0;
-
-      &:backdrop { opacity: 1; }
+  button.titlebutton {
+    &.close, &.maximize, &.minimize, &.restore {
+      min-width: 38px;
+      min-height: 30px;
     }
 
     // Load png assets for each button, Fix the Chrome window restore button bug
     @each $k in ('close', 'maximize', 'minimize', 'restore') {
       @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
 
-        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-win.png'),
-                                                        url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-win@2.png')); }
+        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-smaller.png'),
+                                                     url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-smaller@2.png')); }
       }
     }
   }
@@ -3601,18 +3624,21 @@ headerbar, .titlebar {
   .maximized & {
     button.titlebutton {
       @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-      &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-win.png'),
-                                                      url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-win@2.png')); }
+      &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-smaller.png'),
+                                                      url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-smaller@2.png')); }
       }
     }
   }
+}
 
-  &.default-decoration {
+%csd_titlebutton {
+
+  @if $titlebutton == 'square' {
     > box.horizontal {
       &.left {
-        @each $class, $_left, $_right in ('.close', -3px, 0),
-                                         ('.maximize', -3px, 0),
-                                         ('.minimize', -3px, 0) {
+        @each $class, $_left, $_right in ('.close', -10px, 0),
+                                         ('.maximize', -6px, 0),
+                                         ('.minimize', -6px, 0) {
           > button.titlebutton#{$class} {
             margin-left: #{$_left};
           }
@@ -3620,9 +3646,9 @@ headerbar, .titlebar {
       }
 
       &.right {
-        @each $class, $_left, $_right in ('.close', 0, -3px),
-                                         ('.maximize', 0, -3px),
-                                         ('.minimize', 0, -3px) {
+        @each $class, $_left, $_right in ('.close', 0, -10px),
+                                         ('.maximize', 0, -6px),
+                                         ('.minimize', 0, -6px) {
           > button.titlebutton#{$class} {
             margin-right: #{$_right};
           }
@@ -3630,35 +3656,9 @@ headerbar, .titlebar {
       }
     }
 
-    button.titlebutton {
-      &.close, &.maximize, &.minimize, &.restore {
-        min-width: 30px;
-        min-height: 30px;
-      }
-
-      // Load png assets for each button, Fix the Chrome window restore button bug
-      @each $k in ('close', 'maximize', 'minimize', 'restore') {
-        @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-
-          &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-small.png'),
-                                                          url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-small@2.png')); }
-        }
-      }
-    }
-
-    .fullscreen &,
-    .maximized & {
-      button.titlebutton {
-        @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-        &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-small.png'),
-                                                        url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-small@2.png')); }
-        }
-      }
-    }
+    &.default-decoration { @extend %small_titlebutton; }
   }
-}
 
-%csd_circle_titlebutton {
   button.titlebutton { // csd titlebuttons
     margin: 0;
     padding: 0;
@@ -3678,8 +3678,8 @@ headerbar, .titlebar {
 
     &.close, &.maximize, &.minimize, &.restore { // csd windows control titlebuttons
       padding: 0;
-      min-width: 27px;
-      min-height: 27px;
+      min-width: if($titlebutton == 'circle', 27px, 38px);
+      min-height: if($titlebutton == 'circle', 27px, 38px);
       color: transparent;
       background-color: transparent;
       background-position: center;
@@ -3694,8 +3694,9 @@ headerbar, .titlebar {
     @each $k in ('close', 'maximize', 'minimize', 'restore') {
       @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
 
-        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}.png'),
-                                                        url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}@2.png')); }
+        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}.png'),
+                                                     url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}@2.png'));
+        }
       }
     }
   }
@@ -3704,10 +3705,17 @@ headerbar, .titlebar {
   .maximized & {
     button.titlebutton {
       @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-      &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}.png'),
-                                                      url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}@2.png')); }
+        &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}.png'),
+                                                        url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}@2.png'));
+        }
       }
     }
+  }
+}
+
+headerbar, .titlebar {
+  &, .csd &, .solid-csd & {
+    @extend %csd_titlebutton;
   }
 }
 

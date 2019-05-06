@@ -14,24 +14,23 @@
    viewBox="0 0 32 84"
    id="svg5386"
    version="1.1"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="modal.svg">
   <defs
      id="defs5388">
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath4154">
-      <rect
-         transform="scale(1,-1)"
-         ry="1.5"
-         rx="1.5"
-         y="-992.36218"
-         x="-5.5"
-         height="24.500061"
-         width="43"
-         id="rect4156"
-         style="opacity:1;fill:#5294e2;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </clipPath>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter897"
+       x="-0.22275"
+       width="1.4455"
+       y="-0.07128"
+       height="1.14256">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.2275"
+         id="feGaussianBlur899" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -40,22 +39,25 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.9999996"
-     inkscape:cx="-9.2891371"
-     inkscape:cy="51.435312"
+     inkscape:zoom="2.828427"
+     inkscape:cx="-9.0660299"
+     inkscape:cy="45.577091"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      units="px"
      inkscape:snap-bbox="true"
-     inkscape:bbox-paths="true"
+     inkscape:bbox-paths="false"
      inkscape:bbox-nodes="true"
      inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1012"
+     inkscape:window-width="1366"
+     inkscape:window-height="711"
      inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1">
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:snap-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true">
     <inkscape:grid
        type="xygrid"
        id="grid5954" />
@@ -78,24 +80,34 @@
      id="layer1"
      transform="translate(0,-968.3622)">
     <rect
+       clip-path="none"
+       ry="2.054812"
+       rx="2.1818182"
+       y="972.86218"
+       x="4"
+       height="75"
+       width="24"
+       id="rect815"
+       style="display:inline;opacity:0.15;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.36386275;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter897)"
+       transform="matrix(1,0,0,0.9620531,0,39.763123)" />
+    <rect
        style="display:inline;opacity:0.1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.99999988;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4164-4-3"
        width="23"
        height="73.999352"
        x="4.5"
        y="972.86285"
-       rx="2.0000005"
-       ry="1.9999999" />
+       rx="2.5"
+       ry="2.499346" />
     <rect
-       style="display:inline;opacity:1;fill:#f5f6f7;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="display:inline;opacity:1;fill:#f5f6f7;fill-opacity:1;stroke:none;stroke-width:1.3377353;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4164"
        width="22"
-       height="20.999971"
+       height="73.000015"
        x="5"
-       y="973.36285"
-       rx="1.4"
-       ry="0.78232586"
-       clip-path="url(#clipPath4154)"
-       transform="matrix(1,0,0,1.7895356,0,-768.50527)" />
+       y="973.36218"
+       rx="2"
+       ry="2.0000174"
+       clip-path="none" />
   </g>
 </svg>

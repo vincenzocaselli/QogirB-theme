@@ -6,6 +6,10 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
 %side_background {
   color: $side_theme_fg;
   background-color: $side_theme_bg;
+
+  &:disabled, label:disabled {
+    color: rgba($side_theme_alt_fg, 0.35);
+  }
 }
 
 %side_buttons {
@@ -59,7 +63,7 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
     background-color: rgba($side_theme_alt_fg, 0.1);
   }
 
-  &:disabled {
+  &:disabled, label:disabled {
     color: rgba($side_theme_alt_fg, 0.35);
   }
 
@@ -90,36 +94,31 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
     &:focus {
       background-color: rgba($side_theme_fg, 0.12);
     }
+
+    &:disabled, label:disabled, image:disabled {
+      color: rgba($side_theme_alt_fg, 0.35);
+    }
   }
 }
 
 %side_titlebutton {
-  &.appmenu { // appmenu button
-    border: none;
-    min-height: 30px;
-    min-width: 30px;
-    border-radius: 50px;
-    color: transparent;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/logo.png"),
-                                  url("assets/logo@2.png"));
-    background-repeat: no-repeat;
-    background-position: center;
-
-    image { opacity: 0; } // Make menu button icon invisible
-
-    &:hover {
-      background-image: -gtk-scaled(url("assets/logo-hover.png"),
-                                    url("assets/logo-hover@2.png"));
-      background-repeat: no-repeat;
-      background-position: center;
+  button.titlebutton {
+    @each $k in ('close', 'maximize', 'minimize', 'restore') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
+        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}-dark#{$asset_suffix_win}.png'),
+                                                     url('assets/titlebutton-#{$k}#{$m}-dark#{$asset_suffix_win}@2.png'));
+        }
+      }
     }
+  }
+}
 
-    &:checked, &:active {
-      background-image: -gtk-scaled(url("assets/logo-active.png"),
-                                  url("assets/logo-active@2.png"));
-      background-repeat: no-repeat;
-      background-position: center;
+%side_max_titlebutton {
+  button.titlebutton {
+    @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
+      &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}-dark#{$asset_suffix_win}.png'),
+                                                      url('assets/titlebutton-restore#{$m}-dark#{$asset_suffix_win}@2.png'));
+      }
     }
   }
 }
@@ -130,6 +129,15 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
   background-image: image($side_theme_bg);
   border: none;
   box-shadow: none;
+
+  @extend %side_titlebutton;
+
+  .fullscreen &,
+  .maximized & {
+    > box.left.horizontal {
+      @extend %side_max_titlebutton;
+    }
+  }
 
   button:not(.titlebutton) {
     color: $side_theme_fg;
@@ -146,24 +154,32 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
   }
 
   button.titlebutton {
-    @extend %side_titlebutton;
+    &.appmenu { // appmenu button
+      border: none;
+      min-height: 30px;
+      min-width: 30px;
+      border-radius: 50px;
+      color: transparent;
+      background-color: transparent;
+      background-image: -gtk-scaled(url("assets/logo.png"),
+                                    url("assets/logo@2.png"));
+      background-repeat: no-repeat;
+      background-position: center;
 
-    // Load png assets for each button, Fix the Chrome window restore button bug
-    @each $k in ('close', 'maximize', 'minimize', 'restore') {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
+      image { opacity: 0; } // Make menu button icon invisible
 
-        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}-dark.png'),
-                                                     url('assets/titlebutton-#{$k}#{$m}-dark@2.png')); }
+      &:hover {
+        background-image: -gtk-scaled(url("assets/logo-hover.png"),
+                                      url("assets/logo-hover@2.png"));
+        background-repeat: no-repeat;
+        background-position: center;
       }
-    }
-  }
 
-  .fullscreen &,
-  .maximized & {
-    button.titlebutton {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-      &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}-dark.png'),
-                                                      url('assets/titlebutton-restore#{$m}-dark@2.png')); }
+      &:checked, &:active {
+        background-image: -gtk-scaled(url("assets/logo-active.png"),
+                                      url("assets/logo-active@2.png"));
+        background-repeat: no-repeat;
+        background-position: center;
       }
     }
   }
@@ -267,7 +283,7 @@ filechooser {
       }
 
       label.sidebar-label {
-        padding-right: 2px; padding-left: $small_size + 4px;
+        padding-right: 2px; padding-left: 20px;
       }
 
       &.has-open-popup,
@@ -398,20 +414,20 @@ filechooser {
   junction { background-color: darken($dark_sidebar_bg, 5%); }
 }
 
-filechooser {
-  actionbar {
-    color: $dark_sidebar_fg;
-    background-color: $dark_sidebar_bg;
-    border-color: $solid_borders_color;
-
-    button { @extend %dark_sidebar_button; }
-    entry { @extend %dark_sidebar_entry; }
-
-    @extend %osd_check_radio;
-
-    label, combobox { color: $dark_sidebar_fg; }
-  }
-}
+// filechooser {
+//   actionbar {
+//     color: $dark_sidebar_fg;
+//     background-color: $dark_sidebar_bg;
+//     border-color: $solid_borders_color;
+//
+//     button { @extend %dark_sidebar_button; }
+//     entry { @extend %dark_sidebar_entry; }
+//
+//     @extend %osd_check_radio;
+//
+//     label, combobox { color: $dark_sidebar_fg; }
+//   }
+// }
 
 //
 // Gedit
@@ -423,6 +439,15 @@ window.org-gnome-gedit {
   > overlay > box.vertical > paned > separator {
     &, &:backdrop {
       background-image: if($variant == 'light', image($side_theme_bg), image($solid_borders_color));
+    }
+  }
+}
+
+window.fullscreen.org-gnome-gedit,
+window.maximized.org-gnome-gedit {
+  > .titlebar > headerbar:first-child {
+    > box.left.horizontal {
+      @extend %side_max_titlebutton;
     }
   }
 }
@@ -541,6 +566,14 @@ list.gedit-document-panel {
   }
 }
 
+textview.view.sourceview.gedit-view {
+  window#gtk-tooltip {
+    @extend %side_background;
+
+    treeview.view { @extend %side_views; }
+  }
+}
+
 .gedit-bottom-panel-paned { background-color: $base_color; }
 .gedit-side-panel-paned > separator { background-image: _solid($dark_sidebar_border); }
 .gedit-bottom-panel-paned > separator { background-image: _solid($borders_color); }
@@ -580,7 +613,16 @@ list#AutostartListBoxTweakGroup {
 }
 
 // Themed left side headerbar
-headerbar.titlebar.tweak-titlebar-left { @extend %side_headerbar; }
+.titlebar > headerbar.titlebar.tweak-titlebar-left {
+  @extend %side_headerbar;
+
+  .fullscreen &,
+  .maximized & {
+    > box.left.horizontal {
+      @extend %side_max_titlebutton;
+    }
+  }
+}
 
 // Themed left sidebar
 .tweak-categories,
@@ -640,9 +682,31 @@ window.background.csd {
     }
   }
 
+  &.fullscreen,
+  &.maximized {
+    > box.titlebar.horizontal {
+      > headerbar:first-child {
+        > box.left.horizontal {
+          @extend %side_max_titlebutton;
+        }
+      }
+    }
+
+    > headerbar.titlebar { // gnome 3.32
+      > box.horizontal > headerbar:first-child,
+      > hdyleaflet > headerbar:first-child {
+        > box.left.horizontal {
+          @extend %side_max_titlebutton;
+        }
+      }
+    }
+  }
+
   > box.horizontal > box.vertical,
   > hdyleaflet > box.vertical { // gnome 3.32
     > scrolledwindow.view {
+      @extend %side_background;
+
       > viewport.frame > stack {
         > list {
           @extend %side_background;
@@ -660,6 +724,8 @@ window.background.csd {
           }
         }
       }
+
+      // > scrollbar { @extend %dark_sidebar_scrollbar; }
     }
 
     > searchbar {
@@ -673,11 +739,6 @@ window.background.csd {
     background: none;
     min-width: 0;
   }
-}
-
-hdyleaflet > separator.sidebar {
-  background: none;
-  min-width: 0;
 }
 
 //
@@ -760,6 +821,17 @@ window#GearyMainWindow {
     margin: 0 -10px 0 0;
     border-right: if($variant == 'light', none, 1px solid $solid_borders_color);
     background: none;
+  }
+}
+
+window#GearyMainWindow.fullscreen,
+window#GearyMainWindow.maximized {
+  .geary-titlebar-left {
+    &, &.geary-titlebar {
+      > box.left.horizontal {
+        @extend %side_max_titlebutton;
+      }
+    }
   }
 }
 
@@ -853,6 +925,123 @@ window.background.csd {
 
     .activatable, .inactive, .room-list-header {
       @extend %side_views;
+    }
+  }
+}
+
+//
+// Contacts
+//
+
+// box.horizontal, // gnome 3.30
+hdyleaflet {
+  > stack > frame > grid.vertical {
+    @extend %side_background;
+
+    > scrolledwindow {
+      > viewport.frame {
+        // @extend %side_background;
+
+        > list.contacts-contact-list {
+          @extend %side_background;
+
+          row.activatable.contact-data-row {
+            @extend %side_views;
+          }
+        }
+      }
+    }
+
+    > entry.search {
+      color: $side_theme_fg;
+      background-color: rgba($side_theme_fg, 0.1);
+
+      image { color: $side_theme_fg; }
+
+      &:focus {
+        background-color: rgba($side_theme_fg, 0.12);
+      }
+
+      &:disabled {
+        label, image {
+          color: rgba($side_theme_alt_fg, 0.35);
+        }
+      }
+    }
+
+    > actionbar {
+      @extend %side_background;
+
+      button {
+        @extend %side_buttons;
+      }
+    }
+  }
+
+  > separator.sidebar {
+    border-right-style: if($variant == 'light', none, solid);
+    background: none;
+    min-width: 0;
+  }
+
+  // selection-mode
+  .selection-mode & headerbar {
+    color: $selection_mode_fg;
+    background-color: $selection_mode_bg;
+    border-color: darken($selection_mode_bg, 4%);
+    box-shadow: none;
+
+    &:backdrop {
+      background-color: $selection_mode_bg;
+      color: transparentize($selection_mode_fg, 0.4);
+    }
+
+    .subtitle:link { @extend *:link:selected;  }
+
+    .selection-menu {
+      box-shadow: none;
+      padding-left: 10px;
+      padding-right: 10px;
+      GtkArrow { -GtkArrow-arrow-scaling: 1; }
+
+      .arrow {
+        -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+      }
+    }
+
+    .maximized & { background-color: opacify($selection_mode_bg, 1); }
+
+    button:not(.titlebutton) {
+      &, &.flat {
+        @include button(undecorated);
+        color: $selection_mode_fg;
+        background-color: transparentize($selection_mode_fg, 1);
+      }
+
+      &:hover { background-color: gtkalpha($selection_mode_fg, 0.3); }
+      &:active, &:checked { @extend %selected-button:active; }
+
+      &:disabled {
+        @extend %selected-button.flat:disabled;
+
+        &:checked, &:active { @extend %selected-button:disabled:checked; }
+      }
+
+      &:backdrop { opacity: 0.7; background: none; }
+    }
+
+    button.titlebutton {
+      &.close, &.maximize, &.minimize {
+        color: transparent;
+        background-color: transparent;
+      }
+    }
+
+    @extend %side_titlebutton;
+
+    .fullscreen &,
+    .maximized & {
+      @extend %side_max_titlebutton;
     }
   }
 }

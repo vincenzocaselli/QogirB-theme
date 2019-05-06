@@ -227,27 +227,25 @@ StScrollBar {
 
 .modal-dialog {
   color: $fg_color;
-  background-color: $bg_color;
-	border-radius: 2px;
+  background-color: transparentize($bg_color, 1);
+	border-radius: 0;
   border: none;
-//  border-image: url("assets/misc/modal.svg") 9 9 9 67;
-  padding: 0;
-	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.3);
+  border-image: url("assets/misc/modal.svg") 9 9 9 67;
+  padding: 0 5px 6px 5px;
+	box-shadow: none;
 
   .modal-dialog-content-box {
-    padding: 24px;
+    padding: 20px 10px 10px 10px;
   }
 
   &-linked-button {
     height: if($variant=='light', 38px, 37px);
     padding: 0;
     box-shadow: inset 0 0 black;
-    border-top-width: if($variant=='light', 0px, 1px);
-    border-bottom-width: 0;
-
     color: $osd_fg_color;
     background-color: $osd_bg_color;
-    border-color: darken($osd_bg_color, 5%);
+    border-top-width: if($variant=='light', 0px, 1px);
+    border-bottom-width: 0;
 
     &:hover { background-color: lighten($osd_bg_color, 5%); }
     &:focus { color: $selected_bg_color; }
@@ -626,12 +624,13 @@ StScrollBar {
 }
 
 //
-// Popvers/Menus
+// Popovers/Menus
 //
 .popup-menu {
   min-width: 15em;
   color: $fg_color;
   border-image: url("assets/menu/menu.svg") 9 9 9 9;
+  box-shadow: none;
 
   .popup-menu-arrow { } //defined globally in the TOP BAR
   .popup-sub-menu {
@@ -687,11 +686,17 @@ StScrollBar {
 
 .popup-menu-boxpointer {
   -arrow-border-radius: 2px;
-  -arrow-background-color:  rgba(0,0,0,0.0);
+  -arrow-background-color: rgba(0,0,0,0.0);
   -arrow-border-width: 1px;
   -arrow-border-color: rgba(0,0,0,0.0);
   -arrow-base: 0;
   -arrow-rise: 0;
+
+  StEntry {
+    selection-background-color: $selected_fg_color;
+    selected-background-color: $selected_fg_color;
+    selected-color: $selected_bg_color;
+  }
 }
 
 .candidate-popup-boxpointer {
@@ -738,29 +743,30 @@ StScrollBar {
   border: none;
   border-radius: 5px;
   border-image: url("common-assets/misc/osd.svg") 9 9 9 9;
+  box-shadow: none;
 
-.osd-monitor-label { font-size: 3em; }
+  .osd-monitor-label { font-size: 3em; }
 
   .level {
-    padding: 0;
     height: 4px;
-    background-color: transparentize(black, 0.5);
-    border-radius: 2px;
+    background-color: rgba(black, 0.15);
+    border-radius: 3px;
     color: $selected_bg_color;
 
     // For >= 3.29.90
-    -barlevel-height: 3px;
+    -barlevel-height: 4px;
     // FIXME: above 'background-color' property rendered correct trough
     // colour already, so keep -background-color style-property transparent
-    -barlevel-background-color: transparent;
-    -barlevel-active-background-color: $success_color;
+    -barlevel-background-color: rgba(black, 0.15);
+    -barlevel-active-background-color: $selected_bg_color;
     -barlevel-overdrive-color: $destructive_color;
-    -barlevel-overdrive-separator-width: 3px;
+    -barlevel-overdrive-separator-width: 2px;
     -barlevel-border-width: 0;
   }
+
   .level-bar {
     background-color: $selected_bg_color;
-    border-radius: 2px;
+    border-radius: 3px;
   }
 }
 
@@ -770,6 +776,7 @@ StScrollBar {
   border: none;
   border-radius: 5px;
   border-image: url("common-assets/misc/osd.svg") 9 9 9 9;
+  box-shadow: none;
   padding: 12px;
 }
 
@@ -787,6 +794,7 @@ StScrollBar {
   border-image: url("common-assets/misc/bg.svg") 9 9 9 9;
   border-radius: 3px;
   padding: 20px;
+  box-shadow: none;
 
   &-item-container { spacing: 8px; }
 
@@ -1018,11 +1026,11 @@ StScrollBar {
     &:overview { background-color: transparent; } // for Ubuntu session
 
     .panel-corner {
-      -panel-corner-background-color: $header_bg;
+      -panel-corner-background-color: $panel_bg;
     }
 
     .panel-button {
-//      color: $fg_color;
+      color: $panel_fg;
       text-shadow: none;
 
       &:hover, &:active, &:overview, &:focus, &:checked {
@@ -1041,10 +1049,10 @@ StScrollBar {
   .screencast-indicator { color: $error_color; }
   .remote-access-indicator { color: $warning_color; } // > 3.29.4
 
-  .clock-display > * > *:last-child {
-    color: $selected_bg_color;
-    margin-left: .3em;
-  }
+  // .clock-display > * > *:last-child {
+  //   color: $selected_bg_color;
+  //   margin-left: .3em;
+  // }
 
   .popup-menu-arrow { width: 0; }
 }
@@ -1077,12 +1085,17 @@ StScrollBar {
 }
 
 // a little unstructured mess:
-.system-switch-user-submenu-icon {
+.system-switch-user-submenu-icon.user-icon {
   icon-size: 20px;
   padding: 0 2px;
 }
 
 .system-switch-user-submenu-icon.default-icon {
+  icon-size: 16px;
+  padding: 0 4px;
+}
+
+.system-switch-user-submenu-icon {
   icon-size: 16px;
   padding: 0 4px;
 }
@@ -1254,13 +1267,14 @@ StScrollBar {
   padding: 0.1em;
   margin: 2px;
   border-radius: 12.5px;
+  font-feature-settings: "tnum";
 
   &:hover, &:focus { background-color: $alt_bg_color; }
 
-  &:active, &:selected {
+  &:active, &:checked, &:selected {
     color: $fg_color;
     background-color: $sec_bg_color;
-    border-width: 0; //avoid jumparound due to today
+    border: none;
   }
 
   &.calendar-day-heading {  //day of week heading
@@ -1273,6 +1287,12 @@ StScrollBar {
 .calendar-day { //border collapse hack - see calendar.js
   border-width: 0;
   color: transparentize($fg_color, 0.2);
+
+  &:active, &:checked, &:selected {
+    color: $fg_color;
+    background-color: $sec_bg_color;
+    border: none;
+  }
 }
 
 .calendar-day-top { border-top-width: 0; }
@@ -1499,6 +1519,13 @@ StScrollBar {
   background-size: 26px;
   height: 26px;
   width: 26px;
+  -shell-close-overlap: 10px;
+  border-radius: 100px;
+  border: 0 none transparent;
+  background-color: transparent;
+  color: transparent;
+  box-shadow: none;
+  StIcon { icon-size: 26px; } // for safety
 
   &:hover {
     background-image: url("common-assets/misc/close-hover.svg");
@@ -1513,10 +1540,6 @@ StScrollBar {
     height: 26px;
     width: 26px;
   }
-}
-
-.window-close {
-  -shell-close-overlap: 11px;
 }
 
 //
@@ -1577,7 +1600,59 @@ StScrollBar {
 //
 // Overview
 //
-#overview { spacing: 24px; }
+#overview {
+  spacing: 24px;
+
+  // App Vault/Grid
+  .icon-grid {
+    spacing: 30px;
+    -shell-grid-horizontal-item-size: 136px;
+    -shell-grid-vertical-item-size: 136px;
+
+    .overview-icon { icon-size: 96px; }
+  }
+
+  //.app-display { spacing: 20px; }
+
+  //favorties | all toggle container
+  .app-view-controls { padding-bottom: 32px; }
+
+  //favorties | all toggle button
+  .app-view-control {
+    padding: 4px 32px;
+    margin: 0;
+
+    @include button(osd);
+
+    &:hover { @include button(osd-hover); }
+    &:checked {
+      color: $selected_fg_color;
+      background-color: $selected_bg_color;
+    }
+
+    &:first-child:ltr,
+    &:last-child:rtl {
+      border-radius: 2px 0 0 2px;
+      border-right-width: 0;
+      margin: 0;
+    }
+
+    &:last-child:ltr,
+    &:first-child:rtl {
+      border-radius: 0 2px 2px 0;
+      border-left-width: 1px;
+      margin: 0;
+    }
+  }
+}
+
+.app-view-control {
+  &:first-child:ltr,
+  &:last-child:rtl { border-radius: 2px 0 0 2px; border-right-width: 0; }
+
+  &:last-child:ltr,
+  &:first-child:rtl { border-radius: 0 2px 2px 0; border-left-width: 1px;}
+}
 
 .overview-controls { padding-bottom: 32px; }
 
@@ -1683,8 +1758,8 @@ StScrollBar {
 //
 #dash {
   font-size: 1em;
-  color: $dark_sidebar_icon_fg;
-  background-color: $dark_sidebar_icon_bg;
+  color: $dash_fg;
+  background-color: $dash_bg;
   border-color: rgba(0,0,0,0.4);
   padding: 4px 0;
   border-radius: 0 3px 3px 0;
@@ -1748,11 +1823,25 @@ StScrollBar {
     border: 1px solid darken($selected_bg_color, 10%);
   }
 
+  &:checked .overview-icon,
+  .right &:checked .overview-icon,
+  .bottom &:checked .overview-icon,
+  .top &:checked .overview-icon {
+    box-shadow: none;
+    background-color: rgba($selected_bg_color, 0.5);
+    border: 1px solid rgba($selected_bg_color, 0.5);
+  }
+
+  &:checked:hover .overview-icon,
+  .right &:checked:hover .overview-icon,
+  .bottom &:checked:hover .overview-icon,
+  .top &:checked:hover .overview-icon,
   &:active:hover .overview-icon,
   .right &:active:hover .overview-icon,
   .bottom &:active:hover .overview-icon,
   .top &:active:hover .overview-icon {
-    border: 1px solid rgba($selected_fg_color, 0.2);
+    background-color: rgba($selected_bg_color, 0.75);
+    border: 1px solid $selected_bg_color;
   }
 
   &-running-dot {
@@ -1763,22 +1852,7 @@ StScrollBar {
   }
 }
 
-#dashtodockContainer {
-  .app-well-app-running-dot {
-    background: none;
-    width: 28px;
-    height: 4px;
-  }
-
-  @each $var in 1, 2, 3, 4 {
-    .running#{$var} .app-well-app-running-dot {
-      background-image: url("common-assets/dash/running#{$var}.svg");
-    }
-  }
-}
-
 .show-apps {
-
   .show-apps-icon {
     color: $selected_fg_color;
   }
@@ -1794,7 +1868,7 @@ StScrollBar {
   .overview-icon {
     background-color: transparent;
     border-radius: 2px;
-    border: 0px solid;
+    // border: 1px solid transparent;
     color: $header_fg;
   }
 
@@ -1809,41 +1883,6 @@ StScrollBar {
     box-shadow: none;
     transition-duration: 0ms;
   }
-}
-
-//
-// App Vault/Grid
-//
-.icon-grid {
-  spacing: 30px;
-  -shell-grid-horizontal-item-size: 136px;
-  -shell-grid-vertical-item-size: 136px;
-
-  .overview-icon { icon-size: 96px; }
-}
-
-//.app-display { spacing: 20px; }
-
-//favorties | all toggle container
-.app-view-controls { padding-bottom: 32px; }
-
-//favorties | all toggle button
-.app-view-control {
-  padding: 4px 32px;
-
-  @include button(osd);
-
-  &:hover { @include button(osd-hover); }
-  &:checked {
-    color: $selected_fg_color;
-    background-color: $selected_bg_color;
-  }
-
-  &:first-child:ltr,
-  &:last-child:rtl { border-radius: 2px 0 0 2px; border-right-width: 0; }
-
-  &:last-child:ltr,
-  &:first-child:rtl { border-radius: 0 2px 2px 0; border-left-width: 0;}
 }
 
 //
@@ -1883,13 +1922,6 @@ StScrollBar {
     border: 1px solid rgba($osd_fg_color, 0.1);
     background-image: none;
   }
-}
-
-.app-well-app-running-dot { //running apps indicator
-  width: 20px;
-  height: 2px;
-  margin-bottom: 4px;
-  background-color: $selected_bg_color;
 }
 
 %icon_tile {
@@ -1950,13 +1982,31 @@ StScrollBar {
   .page-indicator-icon {
     width: 18px;
     height: 18px;
+    margin: 0;
+    padding: 0;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
     background-image: url(common-assets/misc/page-indicator-inactive.svg);
   }
 
-  &:hover .page-indicator-icon { background-image: url(common-assets/misc/page-indicator-hover.svg); }
-  &:active .page-indicator-icon { background-image: url(common-assets/misc/page-indicator-active.svg); }
+  &:hover .page-indicator-icon {
+    background-image: url(common-assets/misc/page-indicator-hover.svg);
+  }
+  &:active .page-indicator-icon {
+    margin: 0;
+    padding: 0;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    background-image: url(common-assets/misc/page-indicator-active.svg);
+  }
   &:checked .page-indicator-icon,
-  &:checked:active { background-image: url(common-assets/misc/page-indicator-checked.svg); }
+  &:checked:active {
+    background-image: url(common-assets/misc/page-indicator-checked.svg);
+  }
 }
 
 .no-frequent-applications-label { @extend %status_text; }
@@ -2023,13 +2073,12 @@ StScrollBar {
   font-size: 1em;
   width: 34em;
   margin: 5px;
-  padding: 0;
-	border-radius: 2px;
+  padding: 10px;
   color: $fg_color;
-  background-color: if($variant=='light', $base_color, $bg_color);
-  border: none;
-  border-image: none;
-	box-shadow: 0 3px 5px rgba(black, 0.15), 0 2px 3px rgba(black, 0.25);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-image: url("assets/menu/menu.svg") 9 9 9 9;
+  box-shadow: none;
 
   .notification-icon { padding: 5px; }
 
@@ -2043,6 +2092,7 @@ StScrollBar {
     spacing: 3px;
     border-color: $borders_color;
   }
+
   .notification-button {
     padding: 2px 4px;
     @extend %button;

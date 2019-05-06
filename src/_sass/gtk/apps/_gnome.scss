@@ -21,6 +21,14 @@ terminal-window,
   }
 }
 
+window.background { // gnome-terminal 3.32
+  > box.vertical > box.horizontal > frame {
+    > border {
+      border-width: 0 1px 0 0;
+    }
+  }
+}
+
 //
 // Nautilus
 //
@@ -62,7 +70,6 @@ terminal-window,
   .path-bar-box {
     margin-top: $icon_padding;
     margin-bottom: $icon_padding;
-    // border-radius: 2px;
     color: $header_fg;
     background-color: transparent;
     border: none;
@@ -79,6 +86,14 @@ terminal-window,
       button.image-button.text-button {
         margin-top: 0;
         margin-bottom: 0;
+        @extend %headerbar_pathbar_button;
+
+        &:not(:only-child):last-child {
+          border-image: radial-gradient(circle closest-corner at center calc(100% - 1px),
+                                        $selected_bg_color 100%,
+                                        transparent 0%)
+                                        0 0 2 / 0 0 2px;
+        }
       }
     }
 
@@ -135,9 +150,18 @@ terminal-window,
 }
 
 .nautilus-window {
-//  searchbar { border-bottom: none; }
+
+  // searchbar { border-bottom: none; }
+
   .searchbar-container { margin-top: -1px; }
+
   actionbar { border-color: $solid_borders_color; }
+
+  > menubar { // For wayland
+    border: none;
+    box-shadow: none;
+    background: none;
+  }
 }
 
 .nautilus-window notebook,
@@ -442,6 +466,12 @@ box.speedometer {
 // TODO: Merge this with the upstream stylesheet
 .gb-search-entry-occurrences-tag { background: none; }
 
+window.org-gnome-Builder > menubar { // For wayland
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
 workbench.csd > stack.titlebar:not(headerbar) {
   padding: 0;
   background: none;
@@ -604,6 +634,16 @@ preferencesbin {
   }
 }
 
+//
+//  Gnome Contol Center
+//
+window.background.csd {
+  > box.horizontal > stack.background > widget {
+    > scrolledwindow.frame {
+      border: none; // Remove ubuntu-dock setting page border
+    }
+  }
+}
 
 //
 // Gnome-Software
@@ -994,6 +1034,17 @@ flowboxchild.bookmark-tag-widget {
 }
 
 //
+// gnome-system-monitor
+//
+window#gnome-system-monitor {
+  > menubar { // For wayland
+    border: none;
+    box-shadow: none;
+    background: none;
+  }
+}
+
+//
 // RhythmBox
 //
 
@@ -1086,6 +1137,17 @@ dialog.background.csd {
 
   headerbar.default-decoration { // Add box-shadow as bottom border for default-decoration headerbar of dialog
     box-shadow: inset 0 -1px $borders_color;
+  }
+}
+
+//
+// seahorse
+//
+window.background.csd {
+  > paned.horizontal {
+    > scrolledwindow.frame.sidebar {
+      border-top: none;
+    }
   }
 }
 
