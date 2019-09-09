@@ -46,13 +46,13 @@ Use "light theme" for webs on Firefox.
 
 3. and give it a value of `Qogir-light` (or `Qogir-win-light` ). This will fix it.
 
-### Fix win titlebutton issues on firfox
+### Fix win titlebutton issues on Firefox
 
 add the `src/other/firefox/userChrome.css` into `~/.mozilla/firefox/{your_profile}/chrome/`
 
 ## Install
 
-Usage:  ./Install  [OPTIONS...]
+Usage:  ./install.sh  [OPTIONS...]
 
 |  OPTIONS:    | |
 |:-------------|:-------------|
@@ -65,13 +65,12 @@ Usage:  ./Install  [OPTIONS...]
 
 **FOR EXAMPLE:**
 ```sh
-./Install
+./install.sh  (Install all themes)
 ```
-(Install all themes)
+
 ```sh
-./Install -i
+./install.sh -i  (Install themes with nautilus background image)
 ```
-(Install themes with nautilus background imge)
 
 ## Screenshots
 ![1](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot01.png?raw=true)
