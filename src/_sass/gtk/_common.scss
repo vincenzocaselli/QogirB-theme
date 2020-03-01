@@ -1608,7 +1608,7 @@ headerbar {
 
       &:active {
         background-color: $selected_bg_color;
-        border-color: $selected_bg_color;
+        border-color: if($variant=='light', $sec_selected_bg_color, $alt_selected_bg_color);
       }
 
       &:disabled {
@@ -2177,8 +2177,7 @@ notebook {
     }
 
   // Button on notebook header
-  button { margin: 2px; }
-
+  // button { margin: 2px; }
   }
 }
 
@@ -2479,7 +2478,7 @@ scale {
     }
 
     // Troughs in selected list-rows and infobars
-    menuitem:hover &,
+    // menuitem:hover &,
     row:selected &,
     infobar & {
       background-color: transparentize(black, 0.8);
@@ -2524,13 +2523,13 @@ scale {
     &:hover {
       background-clip: border-box;
       background-color: lighten($selected_bg_color, 3%);
-      border-color: lighten($selected_bg_color, 3%);
+      border-color: if($variant=='light', $sec_selected_bg_color, $alt_selected_bg_color);
     }
 
     &:active {
       background-clip: border-box;
       background-color: darken($selected_bg_color, 3%);
-      border-color: darken($selected_bg_color, 3%);
+      border-color: if($variant=='light', $sec_selected_bg_color, $alt_selected_bg_color);
     }
 
     &:disabled {
@@ -2539,7 +2538,7 @@ scale {
     }
 
     // Selected list-row and infobar sliders
-    menuitem:hover &,
+    // menuitem:hover &,
     row:selected &,
     infobar & {
       background-clip: border-box;

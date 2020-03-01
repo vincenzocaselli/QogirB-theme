@@ -158,28 +158,21 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
       border: none;
       min-height: 30px;
       min-width: 30px;
-      border-radius: 50px;
+      border-radius: 1000px;
       color: transparent;
       background-color: transparent;
-      background-image: -gtk-scaled(url("assets/logo.png"),
-                                    url("assets/logo@2.png"));
+      background-image: -gtk-scaled(url("assets/logo.svg"));
       background-repeat: no-repeat;
       background-position: center;
 
       image { opacity: 0; } // Make menu button icon invisible
 
       &:hover {
-        background-image: -gtk-scaled(url("assets/logo-hover.png"),
-                                      url("assets/logo-hover@2.png"));
-        background-repeat: no-repeat;
-        background-position: center;
+        background-color: rgba($side_theme_fg, 0.15);
       }
 
       &:checked, &:active {
-        background-image: -gtk-scaled(url("assets/logo-active.png"),
-                                      url("assets/logo-active@2.png"));
-        background-repeat: no-repeat;
-        background-position: center;
+        background-color: rgba($side_theme_fg, 0.25);
       }
     }
   }
@@ -223,17 +216,10 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
 }
 
 %headerbar_image {
-  background-image: -gtk-scaled(url("assets/logo.png"),
-                                url("assets/logo@2.png"));
+  background-image: url("assets/logo.svg"), image($dark_sidebar_icon_bg);
   background-repeat: no-repeat;
+  background-size: 38px auto;
   background-position: left center;
-
-  &:backdrop {
-    background-image: -gtk-scaled(url("assets/logo-backdrop.png"),
-                                  url("assets/logo-backdrop@2.png"));
-    background-repeat: no-repeat;
-    background-position: left center;
-  }
 }
 
 // Reset filechooser separator
@@ -390,28 +376,6 @@ filechooser {
 
     scrollbar { @extend %dark_sidebar_scrollbar }
   }
-}
-
-.caja-side-pane {
-
-  &,
-  > notebook > stack > widget > box,
-  text,
-  treeview {
-    color: $dark_sidebar_fg;
-    caret-color: $dark_sidebar_fg;
-    background-color: opacify($dark_sidebar_bg, 1);
-  }
-
-  > box button {
-    &:not(:active):not(:checked) { color: $dark_sidebar_fg; }
-    &:hover:not(:active) { @extend %dark_sidebar_button:hover; }
-  }
-
-  .frame { border-color: $solid_borders_color; }
-
-  scrollbar { @extend %dark_sidebar_scrollbar; }
-  junction { background-color: darken($dark_sidebar_bg, 5%); }
 }
 
 // filechooser {
@@ -708,7 +672,7 @@ window.background.csd {
       @extend %side_background;
 
       > viewport.frame > stack {
-        > list {
+         list {
           @extend %side_background;
 
           separator { background: none; }
@@ -721,6 +685,21 @@ window.background.csd {
             color: $side_theme_alt_fg;
             background-color: rgba($side_theme_fg, 0.06);
             // transition: all 50ms $ease-out-quad;
+          }
+        }
+
+        entry.search {
+          color: $side_theme_fg;
+          background-color: rgba($side_theme_fg, 0.1);
+
+          image { color: $side_theme_fg; }
+
+          &:focus {
+            background-color: rgba($side_theme_fg, 0.12);
+          }
+
+          &:disabled, label:disabled, image:disabled {
+            color: rgba($side_theme_alt_fg, 0.35);
           }
         }
       }
@@ -817,7 +796,8 @@ window#GearyMainWindow {
 }
 
 .geary-titlebar-left {
-  margin-right: $cont_padding;
+  // margin-right: $cont_padding;
+
   &, &.geary-titlebar {
     @extend %side_headerbar;
   }
