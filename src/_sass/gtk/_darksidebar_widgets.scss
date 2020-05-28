@@ -32,7 +32,7 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
     background-color: rgba($side_theme_alt_fg, 0.08);
   }
 
-  &.flat {
+  @at-root %side_buttons_flat, &.flat {
     border: none;
     background: none;
     box-shadow: none;
@@ -161,7 +161,7 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
       border-radius: 1000px;
       color: transparent;
       background-color: transparent;
-      background-image: -gtk-scaled(url("assets/logo.svg"));
+      background-image: -gtk-scaled(url("assets/logo.svg"),url("assets/logo@2.svg"));
       background-repeat: no-repeat;
       background-position: center;
 
@@ -216,7 +216,7 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
 }
 
 %headerbar_image {
-  background-image: url("assets/logo.svg"), image($dark_sidebar_icon_bg);
+  background-image: -gtk-scaled(url("assets/logo.svg"),url("assets/logo@2.svg")), image($dark_sidebar_icon_bg);
   background-repeat: no-repeat;
   background-size: 38px auto;
   background-position: left center;
@@ -632,7 +632,7 @@ window.background.csd {
     }
   }
 
-  > headerbar.titlebar { // gnome 3.32
+  > headerbar.titlebar { // gnome 3.32 or later
     > box.horizontal > headerbar:first-child,
     > hdyleaflet > headerbar:first-child {
       @extend %side_headerbar;
@@ -758,7 +758,7 @@ window.background.csd {
   }
 }
 
-window#GearyMainWindow {
+window#GearyMainWindow, window.geary-main-window {
   .titlebar {
     box-shadow: inset 0 -1px $borders_color;
     background-color: $header_bg;
@@ -885,7 +885,7 @@ window.background.csd {
         row.activatable {
           @extend %side_views;
 
-          button { @extend %side_buttons.flat; }
+          button { @extend %side_buttons_flat; }
 
           &:selected button { @extend %selected-button; }
         }
@@ -913,12 +913,23 @@ window.background.csd {
 .polari-room-list {
   .sidebar {
     @extend %side_background;
-    // border-color: if($variant == 'light', $bg_color, $solid_borders_color); // Not use
+    margin-top: -1px;
+    border-color: if($variant == 'light', $bg_color, $solid_borders_color); // Not use
 
     .activatable, .inactive, .room-list-header {
       @extend %side_views;
     }
   }
+}
+
+.polari-entry-area {
+  @extend %side_searchbar;
+
+  button { @extend %side_buttons; }
+}
+
+overlay > infobar.info.top {
+  margin-bottom: 0;
 }
 
 //
@@ -988,7 +999,7 @@ hdyleaflet {
       color: transparentize($selection_mode_fg, 0.4);
     }
 
-    .subtitle:link { @extend *:link:selected;  }
+    .subtitle:link { @extend %link_selected;  }
 
     .selection-menu {
       box-shadow: none;
@@ -1011,12 +1022,22 @@ hdyleaflet {
       }
 
       &:hover { background-color: gtkalpha($selection_mode_fg, 0.3); }
-      &:active, &:checked { @extend %selected-button:active; }
+      &:active, &:checked {
+        color: $selected_fg_color;
+        background-color: transparentize($selected_fg_color, 0.65);
+        border-color: transparentize($selected_fg_color, 0.35);
+      }
 
       &:disabled {
-        @extend %selected-button.flat:disabled;
+        &, label { color: transparentize($selected_fg_color, 0.5); }
+        background-color: transparentize($selected_fg_color, 1);
+        border-color: transparentize($selected_fg_color, 0.6);
 
-        &:checked, &:active { @extend %selected-button:disabled:checked; }
+        &:active, &:checked {
+          color: transparentize($selected_fg_color, 0.25);
+          background-color: transparentize($selected_fg_color, 0.8);
+          border-color: transparentize($selected_fg_color, 0.6);
+        }
       }
 
       &:backdrop { opacity: 0.7; background: none; }

@@ -21,7 +21,7 @@ Gnome ≥ 3.22:
 
 Fedora/RedHat distros:
 
-    yum install gtk-murrine-engine gtk2-engines
+    dnf install gtk-murrine-engine gtk2-engines
 
 Ubuntu/Mint/Debian distros:
 
@@ -63,6 +63,16 @@ Usage:  ./install.sh  [OPTIONS...]
 ```sh
 sudo ./install.sh -g -c dark -t standard  (Install standard dark gdm theme)
 ```
+
+### Install on OpenBSD/FreeBSD
+
+Let me show you how to install this theme on OpenBSD
+
+    sudo pkg_add bash (sudo pkg install bash #FreeBSD run this)
+    sudo ln -s /usr/local/bin/bash /bin/bash
+    git clone https://github.com/vinceliuice/Qogir-theme
+    cd Qogir-theme
+    bash install.sh
 
 ## Nautilus logos
 ```sh
