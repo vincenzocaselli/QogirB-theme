@@ -164,8 +164,6 @@ window.background { // gnome-terminal 3.32
 }
 
 %file_manager_img,
-.nautilus-window,
-.nautilus-window notebook,
 .nautilus-window notebook > stack {
   background-image: none;
   // @extend %nautilus_backimage;
@@ -173,11 +171,7 @@ window.background { // gnome-terminal 3.32
 
 .nautilus-window {
 
-  // searchbar { border-bottom: none; }
-
   .searchbar-container { margin-top: -1px; }
-
-  actionbar { border-color: $solid_borders_color; }
 
   > menubar { // For wayland
     border: none;
@@ -189,6 +183,12 @@ window.background { // gnome-terminal 3.32
 .nautilus-window notebook,
 .nautilus-window notebook > stack:not(:only-child) searchbar {
   background-color: $base_color;
+}
+
+.nautilus-list-view {
+  treeview.view:not(:selected):not(:hover):not(:focus) {
+    background: none;
+  }
 }
 
 button.nautilus-circular-button.image-button {
@@ -1148,6 +1148,36 @@ window.background > box.vertical > toolbar.primary-toolbar {
       margin: 0;
     }
   }
+}
+
+//
+// Gnome Clocks
+//
+window.background.csd.unified {
+  > deck > deck > deck {
+    > box.vertical > headerbar.titlebar.windowhandle {
+      > viewswitchertitle > squeezer {
+        > viewswitcher > box.horizontal {
+          > button.radio {
+            margin: 0;
+            border-radius: 0;
+            padding: 0 6px;
+            border-width: 0;
+
+            &:hover {
+              box-shadow: inset 0 -1px $borders_color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+hdyviewswitcherbar > actionbar,
+viewswitcherbar > actionbar { // Gnome 3.38
+  background: none;
+  border: none;
 }
 
 //

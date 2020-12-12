@@ -1184,9 +1184,14 @@ searchbar {
 }
 
 actionbar {
-  padding: $cont_padding;
-  border-top: 1px solid $borders_color;
-  background-color: darken($bg_color, 3%);
+  border: none;
+  background: none;
+
+  > revealer > box {
+    padding: $cont_padding;
+    border-top: 1px solid $borders_color;
+    background-color: darken($bg_color, 3%);
+  }
 }
 
 //
@@ -3223,10 +3228,6 @@ placesview {
     -gtk-icon-transform: rotate(-0.5turn);
   }
 
-  > actionbar {
-    border-top: 1px solid $borders_color;
-  }
-
   // this selects the "connect to server" label
   > actionbar > revealer > box > label {
     padding-left: 8px;
@@ -3304,15 +3305,15 @@ infobar {
   margin: 0;
   padding: 0;
 
-  &.info { background-color: $success_color; }
-  &.question { background-color: $suggested_color; }
-  &.warning { background-color: $warning_color; }
-  &.error { background-color: $error_color; }
+  &.info > revealer > box { background-color: $success_color; }
+  &.question > revealer > box { background-color: $suggested_color; }
+  &.warning > revealer > box { background-color: $warning_color; }
+  &.error > revealer > box { background-color: $error_color; }
 
-  &.info,
-  &.question,
-  &.warning,
-  &.error {
+  &.info > revealer > box,
+  &.question > revealer > box,
+  &.warning > revealer > box,
+  &.error > revealer > box {
     color: $selected_fg_color;
     caret-color: currentColor;
 
