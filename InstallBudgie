@@ -19,15 +19,28 @@ THEME_NAME=Qogir
 THEME_VARIANTS=('' '-manjaro' '-ubuntu')
 WIN_VARIANTS=('' '-win')
 COLOR_VARIANTS=('' '-light' '-dark')
-LOGO_VARIANTS=('' '-arch' '-budgie' '-debian' '-fedora' '-gnome' '-manjaro' '-ubuntu')
+LOGO_VARIANTS=('' '-arch' '-budgie' '-debian' '-fedora' '-gnome' '-gentoo' '-manjaro' '-ubuntu' '-qogir')
 LOGO_NAME=''
+
+if [[ "$(command -v gnome-shell)" ]]; then
+  SHELL_VERSION="$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f -1)"
+  echo "Your gnome-shell version is '$(gnome-shell --version)'"
+  if [[ "${SHELL_VERSION:-}" -ge "40" ]]; then
+    GS_VERSION="new"
+  else
+    GS_VERSION="old"
+  fi
+  else
+    echo "'gnome-shell' not found, using styles for last gnome-shell version available."
+    GS_VERSION="new"
+fi
 
 usage() {
   printf "%s\n" "Usage: $0 [OPTIONS...]"
   printf "\n%s\n" "OPTIONS:"
   printf "  %-25s%s\n" "-d, --dest DIR" "Specify theme destination directory (Default: ${DEST_DIR})"
   printf "  %-25s%s\n" "-n, --name NAME" "Specify theme name (Default: ${THEME_NAME})"
-  printf "  %-25s%s\n" "-l, --logo VARIANTS" "Specify nautilus logo [arch|budgie|debian|fedora|gnome|manjaro|ubuntu] (Default: qogir icon)"
+  printf "  %-25s%s\n" "-l, --logo VARIANTS" "Specify nautilus logo [arch|budgie|debian|fedora|gnome|gentoo|manjaro|ubuntu] (Default: qogir icon)"
   printf "  %-25s%s\n" "-w, --win VARIANTS..." "Specify titlebutton variant(s) [standard|square] (Default: All variants)"
   printf "  %-25s%s\n" "-t, --theme VARIANTS..." "Specify theme primary color variant(s) [standard|manjaro|ubuntu] (Default: All variants)"
   printf "  %-25s%s\n" "-c, --color VARIANTS..." "Specify theme color variant(s) [standard|light|dark] (Default: All variants)"
@@ -78,26 +91,67 @@ install() {
   cp -r ${SRC_DIR}/src/gtk-2.0/menubar-toolbar${color}.rc                            ${THEME_DIR}/gtk-2.0/menubar-toolbar.rc
 
   mkdir -p                                                                           ${THEME_DIR}/gtk-3.0
-  cp -r ${SRC_DIR}/src/gtk-3.0/assets/assets${theme}                                 ${THEME_DIR}/gtk-3.0/assets
+  cp -r ${SRC_DIR}/src/gtk/assets/assets${theme}                                     ${THEME_DIR}/gtk-3.0/assets
 
-  if [[ -f ${SRC_DIR}/src/gtk-3.0/assets/logos/logo-${logo}.svg ]] ; then
-    cp -r ${SRC_DIR}/src/gtk-3.0/assets/logos/logo-${logo}.svg                         ${THEME_DIR}/gtk-3.0/assets/logo.svg
+  if [[ -f ${SRC_DIR}/src/gtk/assets/logos/logo-${logo}.svg ]] ; then
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo-${logo}.svg                           ${THEME_DIR}/gtk-3.0/assets/logo.svg
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo@2-${logo}.svg                         ${THEME_DIR}/gtk-3.0/assets/logo@2.svg
   else
-    echo "${logo} icon not supported default icon will install..."
-    cp -r ${SRC_DIR}/src/gtk-3.0/assets/logos/logo-${LOGO_NAME}.svg                    ${THEME_DIR}/gtk-3.0/assets/logo.svg
+    echo "${logo} icon not supported, default icon will install..."
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo-.svg                                  ${THEME_DIR}/gtk-3.0/assets/logo.svg
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo@2-.svg                                ${THEME_DIR}/gtk-3.0/assets/logo@2.svg
   fi
 
-  cp -r ${SRC_DIR}/src/gtk-3.0/assets/assets-common/*                                ${THEME_DIR}/gtk-3.0/assets
-  cp -r ${SRC_DIR}/src/gtk-3.0/theme${theme}/gtk${win}${color}.css                   ${THEME_DIR}/gtk-3.0/gtk.css
+  cp -r ${SRC_DIR}/src/gtk/assets/assets-common/*                                    ${THEME_DIR}/gtk-3.0/assets
+  cp -r ${SRC_DIR}/src/gtk/theme${theme}-3.0/gtk${win}${color}.css                   ${THEME_DIR}/gtk-3.0/gtk.css
   [[ ${color} != '-dark' ]] && \
-  cp -r ${SRC_DIR}/src/gtk-3.0/theme${theme}/gtk${win}-dark.css                      ${THEME_DIR}/gtk-3.0/gtk-dark.css
-  cp -r ${SRC_DIR}/src/gtk-3.0/assets/thumbnail${theme}${ELSE_DARK}.png              ${THEME_DIR}/gtk-3.0/thumbnail.png
+  cp -r ${SRC_DIR}/src/gtk/theme${theme}-3.0/gtk${win}-dark.css                      ${THEME_DIR}/gtk-3.0/gtk-dark.css
+  cp -r ${SRC_DIR}/src/gtk/assets/thumbnail${theme}${ELSE_DARK}.png                  ${THEME_DIR}/gtk-3.0/thumbnail.png
+
+  mkdir -p                                                                           ${THEME_DIR}/gtk-4.0
+  cp -r ${SRC_DIR}/src/gtk/assets/assets${theme}                                     ${THEME_DIR}/gtk-4.0/assets
+
+  if [[ -f ${SRC_DIR}/src/gtk/assets/logos/logo-${logo}.svg ]] ; then
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo-${logo}.svg                           ${THEME_DIR}/gtk-4.0/assets/logo.svg
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo@2-${logo}.svg                         ${THEME_DIR}/gtk-4.0/assets/logo@2.svg
+  else
+    echo "${logo} icon not supported, default icon will install..."
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo-.svg                                  ${THEME_DIR}/gtk-4.0/assets/logo.svg
+    cp -r ${SRC_DIR}/src/gtk/assets/logos/logo@2-.svg                                ${THEME_DIR}/gtk-4.0/assets/logo@2.svg
+  fi
+
+  cp -r ${SRC_DIR}/src/gtk/assets/assets-common/*                                    ${THEME_DIR}/gtk-4.0/assets
+  cp -r ${SRC_DIR}/src/gtk/theme${theme}-4.0/gtk${win}${color}.css                   ${THEME_DIR}/gtk-4.0/gtk.css
+  [[ ${color} != '-dark' ]] && \
+  cp -r ${SRC_DIR}/src/gtk/theme${theme}-4.0/gtk${win}-dark.css                      ${THEME_DIR}/gtk-4.0/gtk-dark.css
+  cp -r ${SRC_DIR}/src/gtk/assets/thumbnail${theme}${ELSE_DARK}.png                  ${THEME_DIR}/gtk-4.0/thumbnail.png
 
   mkdir -p                                                                           ${THEME_DIR}/gnome-shell
-  cp -r ${SRC_DIR}/src/gnome-shell/assets${theme}/common-assets                      ${THEME_DIR}/gnome-shell
-  cp -r ${SRC_DIR}/src/gnome-shell/assets${theme}/assets${ELSE_DARK}                 ${THEME_DIR}/gnome-shell/assets
-  cp -r ${SRC_DIR}/src/gnome-shell/background${ELSE_DARK}.jpeg                       ${THEME_DIR}/gnome-shell/background.jpeg
-  cp -r ${SRC_DIR}/src/gnome-shell/theme${theme}/gnome-shell${color}.css             ${THEME_DIR}/gnome-shell/gnome-shell.css
+  cp -r ${SRC_DIR}/src/gnome-shell/common-assets                                     ${THEME_DIR}/gnome-shell/assets
+  cp -r ${SRC_DIR}/src/gnome-shell/assets${theme}/*.svg                              ${THEME_DIR}/gnome-shell/assets
+  cp -r ${SRC_DIR}/src/gnome-shell/assets${theme}/assets${ELSE_DARK}/*.svg           ${THEME_DIR}/gnome-shell/assets
+  cp -r ${SRC_DIR}/src/gnome-shell/background.jpeg                                   ${THEME_DIR}/gnome-shell/background.jpeg
+
+  if [[ -f ${SRC_DIR}/src/gnome-shell/logos/logo-${logo}.svg ]] ; then
+    cp -r ${SRC_DIR}/src/gnome-shell/logos/logo-${logo}.svg                          ${THEME_DIR}/gnome-shell/assets/activities.svg
+  else
+    echo "${logo} icon not supported, Qogir icon will install..."
+    cp -r ${SRC_DIR}/src/gnome-shell/logos/logo-qogir.svg                            ${THEME_DIR}/gnome-shell/assets/activities.svg
+  fi
+
+  cp -r ${SRC_DIR}/src/gnome-shell/icons                                             ${THEME_DIR}/gnome-shell
+  cp -r ${SRC_DIR}/src/gnome-shell/pad-osd.css                                       ${THEME_DIR}/gnome-shell
+
+  if [[ "${GS_VERSION:-}" == 'new' ]]; then
+    cp -r ${SRC_DIR}/src/gnome-shell/theme${theme}-40-0/gnome-shell${color}.css      ${THEME_DIR}/gnome-shell/gnome-shell.css
+  else
+    cp -r ${SRC_DIR}/src/gnome-shell/theme${theme}-3-32/gnome-shell${color}.css      ${THEME_DIR}/gnome-shell/gnome-shell.css
+  fi
+
+  cd ${THEME_DIR}/gnome-shell
+  ln -sf assets/no-events.svg no-events.svg
+  ln -sf assets/process-working.svg process-working.svg
+  ln -sf assets/no-notifications.svg no-notifications.svg
 
   mkdir -p                                                                           ${THEME_DIR}/cinnamon
   cp -r ${SRC_DIR}/src/cinnamon/assets${theme}/common-assets                         ${THEME_DIR}/cinnamon
@@ -277,7 +331,7 @@ install_img() {
 
 restore_img() {
   cd ${SRC_DIR}/src/_sass/gtk/apps
-  [[ -d _gnome.scss.bak ]] && rm -rf _gnome.scss
+  [[ -f _gnome.scss.bak ]] && rm -rf _gnome.scss
   mv _gnome.scss.bak _gnome.scss
   echo -e "Restore scss files ..."
 }
