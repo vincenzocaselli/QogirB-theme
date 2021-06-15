@@ -58,6 +58,7 @@ $side_theme_alt_fg: $dark_sidebar_icon_fg;
   color: $side_theme_fg;
   background-color: $side_theme_bg;
 
+  &.has-open-popup,
   &:hover {
     color: $side_theme_alt_fg;
     background-color: mix($side_theme_alt_fg, $side_theme_bg, 10%);
@@ -536,25 +537,12 @@ textview.view.sourceview.gedit-view {
 //
 // Gnome Tweak Tool (Gnome tweaks)
 //
-row#Focus,
-row#ClickMethod,
-row#StaticWorkspaceTweak, // for 3.26.0
-row#dynamic-workspaces,
-row#PrimaryWorkspaceTweak, // for 3.26.0
-row#workspaces-only-on-primary {
+.tweak-group > .tweak > list {
   padding: 0;
   border: 1px solid $borders_color;
 
-  row:not(:last-child) { border-bottom: 1px solid $borders_color; }
-
-  &.tweak > list { margin-top: -3px; }
+  > row:not(:last-child) { border-bottom: 1px solid $borders_color; }
 }
-
-// Add more spaces between title and list
-row#Focus,
-row#ClickMethod,
-row#PrimaryWorkspaceTweak, // for 3.26.0
-row#workspaces-only-on-primary { margin-top: 4px; }
 
 row#AutostartTitle.tweak {
   padding: 3px;
@@ -580,18 +568,13 @@ list#AutostartListBoxTweakGroup {
 }
 
 // Themed left sidebar
-.tweak-categories,
-.tweak-category:not(:selected):not(:hover) {
+list.tweak-categories {
   @extend %side_background;
 
   separator { background: none; }
-}
 
-.tweak-category:not(:selected) {
-  &:hover {
-    color: $side_theme_alt_fg;
-    background-image: image(rgba($side_theme_fg, 0.06));
-    // transition: all 50ms $ease-out-quad;
+  > row.activatable.tweak-category {
+    @extend %side_views;
   }
 }
 
@@ -914,7 +897,6 @@ stack#conversation_viewer {
       statusbar {
         @extend %side_background;
         margin: -8px -12px;
-        spacing: 6px;
         padding: 6px;
       }
     }
