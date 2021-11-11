@@ -42,13 +42,13 @@ Usage:  ./install.sh  [OPTIONS...]
 |:-------------|:-------------|
 | -d, --dest   | destination directory (Default: $HOME/.themes) |
 | -n, --name   | name (Default: Qogir) |
-| -t, --theme  | theme primary color variant(s) (standard/manjaro/ubuntu) |
+| -t, --theme  | theme primary color variant(s) (default/manjaro/ubuntu/all) (Default: blue color)|
 | -l, --logo   | theme nautilius logo variant(s) (default/arch/budgie/debian/fedora/gnome/gentoo/manjaro/ubuntu) |
-| -c, --color  | color variant(s) (standard/light/dark) |
+| -c, --color  | color variant(s) (standard/light/dark) (Default: all)|
 | -i, --image  | Install theme with nautilus background image |
-| -w, --win    | titlebutton variant(s) (standard/square) |
-| -g, --gdm    | Install GDM theme, you should run this with sudo!|
-| -r, --revert | revert GDM theme, you should run this with sudo!|
+| -w, --win    | titlebutton variant(s) (standard/square/all) (Default: standard) |
+| -g, --gdm    | Install GDM theme, you should run this with sudo! |
+| -r, --revert | revert GDM theme, you should run this with sudo! |
 | -h, --help   | Show this help |
 
 **FOR EXAMPLE:**
@@ -122,6 +122,8 @@ All variants are available via Flathub:
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub org.gtk.Gtk3theme.Qogir{,-dark,-light,-win,-manjaro, ...}
 ```
+### AUR
+[AUR](https://aur.archlinux.org/packages/qogir-gtk-theme/)
 
 ### Kde theme
 [Qogir-kde](https://github.com/vinceliuice/Qogir-kde)
