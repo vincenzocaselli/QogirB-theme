@@ -30,28 +30,31 @@
 
 // message bubbles
 .message {
-  background: $bg_color;
-  border: 1px solid $borders_color;
-  border-radius: 3px;
-  color: $alt_fg_color;
+  // @extend %bubble-dialog;
+  border-radius: $bt_radius;
   text-shadow: none;
 
-  &:hover {
-    background-color: lighten($bg_color, 5%);
-    color: $fg_color;
-  }
-
-  &:hover {
-    background-color: darken($bg_color, 5%);
-    color: $fg_color;
-  }
+  // &:hover, &:focus {
+  //   background-color: mix($fg_color, $button_bg, 10%);
+  //   border: 1px solid if($variant=='light', darken($button_border, 8%), lighten($button_border, 8%));
+  // }
+  //
+  // &:active {
+  //   background-color: mix($fg_color, $button_bg, 12%);
+  //   border: 1px solid if($variant=='light', darken($button_border, 10%), lighten($button_border, 10%));
+  // }
 
   .popup-menu & {
     box-shadow: none;
+    @include button(hover);
+
+    &:hover, &:focus {
+      background-color: if($variant=='light', rgba(black, 0.06), rgba(white, 0.1));
+      border: 1px solid if($variant=='light', darken($button_border, 8%), lighten($button_border, 8%));
+    }
 
     &:active {
-      background-color: $selected_bg_color;
-      color: $selected_fg_color;
+      @include button(active);
 
       .message-content,
       .message-title,
@@ -121,7 +124,7 @@
     min-height: 24px;
     min-width: 24px;
     color: $alt_fg_color;
-    border-radius: 100px;
+    border-radius: 1000px;
     padding: 0;
     magrin: 0;
 
@@ -174,14 +177,14 @@
 // album-art
 .media-message-cover-icon {
   icon-size: 32px !important; // 48px
-  border-radius: 2px;
+  border-radius: $bt_radius;
 
   // when there is no artwork
   &.fallback {
     color: rgba($fg_color, 0.75);
     background-color: $bg_color;
     border: 1px solid transparent;
-    border-radius: 2px;
+    border-radius: $bt_radius;
     icon-size: 32px !important;
   }
 }

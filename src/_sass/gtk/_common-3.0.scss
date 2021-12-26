@@ -344,7 +344,6 @@ button {
   border: 1px solid;
   border-radius: $bt_radius;
   padding: 2px $cont_padding;
-
   @include button(normal);
 
   separator { margin: 4px 1px; }
@@ -435,9 +434,7 @@ button {
 
   // big standalone buttons like in Documents pager
   &.osd {
-    color: $osd_fg_color;
-    background-color: $osd_bg_color;
-    border-color: darken($osd_bg_color, 8%);
+    @include button(osd);
 
     &.image-button {
       padding: 0;
@@ -445,7 +442,7 @@ button {
       min-width: 36px;
     }
 
-    &:hover { color: $selected_bg_color; }
+    &:hover { @include button(osd-hover); }
     &:active, &:checked { @include button(osd-active); }
     &:disabled { @include button(osd-insensitive); }
   }
@@ -455,23 +452,29 @@ button {
     @include button(osd);
 
     &:hover { @include button(osd-hover); }
+
     &:active, &:checked {
       background-clip: padding-box;
       @include button(osd-active);
     }
+
     &:disabled { @include button(osd-insensitive); }
 
     &.flat {
       @include button(undecorated);
       box-shadow: none;
+
       &:hover { @include button(osd-hover); }
+
       &:disabled {
         @include button(osd-insensitive);
         background-image: none;
       }
+
       &:active, &:checked { @include button(osd-active); }
     }
   }
+
   .osd .linked:not(.vertical):not(.path-bar) > &:hover:not(:checked):not(:active):not(:only-child),
   .osd .linked:not(.vertical):not(.path-bar) > &:hover:not(:checked):not(:active) + &:not(:checked):not(:active) { box-shadow: none; }
 
@@ -1108,10 +1111,11 @@ toolbar {
   .osd & { background-color: transparent; }
 
   &.osd {
-    padding: 7px;
-    border: 1px solid $borders_color;
-    border-radius: $bt_radius;
+    padding: 8px;
+    border: none;
+    border-radius: $material_radius;
     background-color: $osd_bg_color;
+    box-shadow: 0 2px 5px rgba(black, 0.25);
 
     &.left,
     &.right,
@@ -1184,6 +1188,7 @@ actionbar {
     padding: $cont_padding;
     border-top: 1px solid $borders_color;
     background-color: darken($bg_color, 3%);
+    border-radius: 0 0 $corner_radius $corner_radius;
 
     > viewswitcher > box > button {
       @extend %linked;
@@ -2051,8 +2056,6 @@ menubar,
   }
 }
 
-$_menu_bg: if($variant=='light', $base_color, $bg_color);
-
 .csd.popup {
   border-radius: $corner_radius;
 }
@@ -2063,7 +2066,7 @@ menu,
   // margin: 0; // See https://bugzilla.gnome.org/show_bug.cgi?id=591258
   border-radius: 0;
   transition: none;
-  background-color: $_menu_bg;
+  background-color: $menu_bg;
   border: 1px solid $borders_color; // adds borders in a non composited env
 
   @if $window == 'round' {
@@ -2080,7 +2083,7 @@ menu,
   separator,
   .csd & separator {
     margin: 4px 0;
-    background-color: $_menu_bg;
+    background-color: $menu_bg;
   }
 
   menuitem {
@@ -2141,7 +2144,7 @@ menu,
     min-width: 16px;
     min-height: 16px;
     padding: 4px;
-    background-color: $_menu_bg;
+    background-color: $menu_bg;
     border-radius: 0;
     transition: none;
     // border: 1px solid $borders_color;
@@ -2172,13 +2175,12 @@ menu,
 //
 // Popovers
 //
-$_popover_bg: if($variant=='light', $base_color, $bg_color);
 
 popover,
 popover.background {
   padding: 2px;
   background-clip: border-box;
-  background-color: $_popover_bg;
+  background-color: $menu_bg;
 
   &, .csd &, &.menu {
     border-radius: $material_radius;
@@ -2186,7 +2188,7 @@ popover.background {
     box-shadow: 0 2px 8px 0 if($variant=='light', rgba(black, 0.1), rgba(black, 0.15));
   }
 
-  & separator { background-color: $_popover_bg; }
+  & separator { background-color: $menu_bg; }
   label.separator {
     @extend .dim-label;
 
@@ -2785,21 +2787,18 @@ scale {
 
     // OSD sliders
     .osd & {
-      background-clip: border-box;
-      background-color: $selected_bg_color;
-      border-color: $selected_bg_color;
+      background-color: $osd_fg_color;
+      border: none;
 
       &:hover {
-        background-color: lighten($selected_bg_color, 10%);
-        border-color: lighten($selected_bg_color, 10%)
+        background-color: $selected_fg_color;
       }
 
       &:active {
-        background-color: $alt_selected_bg_color;
-        border-color: $alt_selected_bg_color;
+        background-color: $selected_fg_color;
       }
 
-      &:disabled {  }
+      &:disabled { background-color: darken($osd_fg_color, 25%); }
     }
   }
 
@@ -3246,7 +3245,7 @@ calendar {
   border-bottom: none;
 }
 
-$dialog_bg: if($variant == 'light' and $titlebar == 'dark', $header_bg, $_menu_bg);
+$dialog_bg: if($variant == 'light' and $titlebar == 'dark', $header_bg, $menu_bg);
 $dialog_fg: $header_fg;
 
 messagedialog { // Message Dialog styling
@@ -3262,7 +3261,7 @@ messagedialog { // Message Dialog styling
     border-bottom: none;
     border-top-left-radius: $material_radius;
     border-top-right-radius: $material_radius;
-    box-shadow: inset 0 1px $highlight;
+    // box-shadow: inset 0 1px $highlight;
 
     &:backdrop {
       background-color: $dialog_bg;
@@ -3805,13 +3804,12 @@ stackswitcher button {
 // Window Decorations
 //
 
-$_wm_border: if($variant=='light', rgba(black, 0.12), rgba(black, 0.25));
+$_wm_border: if($variant=='light', rgba(black, 0.12), rgba(white, 0.12));
 
 decoration {
   border-radius: $corner_radius;
   border: none;
   transition: $backdrop_transition;
-
   box-shadow: 0 3px 5px 0 if($variant == 'light', rgba(black, 0.15), rgba(black, 0.08)),
               0 8px 8px 0 if($variant == 'light', rgba(black, 0.15), rgba(black, 0.08)),
               0 0 0 1px $_wm_border;

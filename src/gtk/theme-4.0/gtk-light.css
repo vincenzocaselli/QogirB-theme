@@ -383,8 +383,8 @@ entry:drop(active):focus-within, entry:drop(active), spinbutton.vertical > text:
 
 .osd entry, .osd spinbutton.vertical > text, .osd spinbutton:not(.vertical) > text {
   color: #D3DAE3;
-  border-color: rgba(13, 14, 17, 0.4);
-  background-color: rgba(89, 94, 114, 0.4);
+  border-color: #434655;
+  background-color: #333641;
 }
 
 .osd entry image, .osd spinbutton.vertical > text image, .osd spinbutton:not(.vertical) > text image {
@@ -393,13 +393,13 @@ entry:drop(active):focus-within, entry:drop(active), spinbutton.vertical > text:
 
 .osd entry:focus-within, .osd spinbutton.vertical > text:focus-within, .osd spinbutton:not(.vertical) > text:focus-within {
   color: #ffffff;
-  border-color: rgba(13, 14, 17, 0.4);
+  border-color: #434655;
   background-color: #5294e2;
 }
 
 .osd entry:disabled, .osd spinbutton.vertical > text:disabled, .osd spinbutton:not(.vertical) > text:disabled {
   color: rgba(211, 218, 227, 0.55);
-  background-color: rgba(89, 94, 114, 0.25);
+  background-color: rgba(51, 54, 65, 0.85);
 }
 
 .osd entry selection, .osd spinbutton.vertical > text selection, .osd spinbutton:not(.vertical) > text selection {
@@ -442,14 +442,14 @@ treeview entry.flat:focus-within, treeview entry:focus-within {
 
 popover.background.touch-selection button, popover.background.magnifier button, .osd button {
   color: #D3DAE3;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.4);
+  border-color: #434655;
+  background-color: #333641;
 }
 
 popover.background.touch-selection button:hover, popover.background.magnifier button:hover, .osd button:hover {
-  color: #D3DAE3;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(105, 110, 134, 0.5);
+  color: #5294e2;
+  border-color: #434655;
+  background-color: #3e4250;
 }
 
 popover.background.touch-selection button:active, popover.background.magnifier button:active, .osd button:active, popover.background.touch-selection button:checked, popover.background.magnifier button:checked, .osd button:checked {
@@ -461,8 +461,8 @@ popover.background.touch-selection button:active, popover.background.magnifier b
 
 popover.background.touch-selection button:disabled, popover.background.magnifier button:disabled, .osd button:disabled {
   color: #5b5f68;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.25);
+  border-color: #434655;
+  background-color: rgba(51, 54, 65, 0.85);
 }
 
 
@@ -641,8 +641,8 @@ button.osd:checked {
 
 button.osd:disabled {
   color: #5b5f68;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.25);
+  border-color: #434655;
+  background-color: rgba(51, 54, 65, 0.85);
 }
 
 .osd button.flat {
@@ -653,15 +653,15 @@ button.osd:disabled {
 }
 
 .osd button.flat:hover {
-  color: #D3DAE3;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(105, 110, 134, 0.5);
+  color: #5294e2;
+  border-color: #434655;
+  background-color: #3e4250;
 }
 
 .osd button.flat:disabled {
   color: #5b5f68;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.25);
+  border-color: #434655;
+  background-color: rgba(51, 54, 65, 0.85);
   background-image: none;
 }
 
@@ -979,7 +979,7 @@ stacksidebar row.needs-attention > label:dir(rtl), stackswitcher > button.needs-
 }
 
 .osd .linked:not(.vertical) > entry + entry {
-  border-left-color: rgba(13, 14, 17, 0);
+  border-left-color: rgba(67, 70, 85, 0.3);
 }
 
 .osd .linked:not(.vertical) > entry.error + entry,
@@ -1052,12 +1052,12 @@ stacksidebar row.needs-attention > label:dir(rtl), stackswitcher > button.needs-
 
 .osd .linked:not(.vertical) > button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action):hover:not(:only-child),
 .osd .linked:not(.vertical) > button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action):hover + button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action) {
-  box-shadow: inset 1px 0 rgba(98, 103, 125, 0.55);
+  box-shadow: inset 1px 0 #434655;
 }
 
 .osd .linked:not(.vertical) > button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action):disabled:not(:only-child),
 .osd .linked:not(.vertical) > button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action):disabled + button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action):not(:hover) {
-  box-shadow: inset 1px 0 rgba(98, 103, 125, 0.05);
+  box-shadow: inset 1px 0 rgba(67, 70, 85, 0.5);
 }
 
 .osd .linked:not(.vertical) > button:active + button:not(:checked):not(:active):not(.suggested-action):not(.destructive-action):hover,
@@ -1616,7 +1616,7 @@ spinbutton:not(.vertical) > text:drop(active) + button {
 
 .osd spinbutton:not(.vertical) > button:hover:not(:active),
 .osd spinbutton:not(.vertical) > button:hover + button {
-  border-left-color: rgba(98, 103, 125, 0.55);
+  border-left-color: #434655;
 }
 
 .osd spinbutton:not(.vertical) > button:first-child:hover:not(:active),
@@ -1659,14 +1659,14 @@ spinbutton.vertical > text:drop(active) + button {
 
 .osd spinbutton.vertical > button:first-child {
   color: #D3DAE3;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.4);
+  border-color: #434655;
+  background-color: #333641;
 }
 
 .osd spinbutton.vertical > button:first-child:hover {
-  color: #D3DAE3;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(105, 110, 134, 0.5);
+  color: #5294e2;
+  border-color: #434655;
+  background-color: #3e4250;
 }
 
 .osd spinbutton.vertical > button:first-child:active {
@@ -1677,8 +1677,8 @@ spinbutton.vertical > text:drop(active) + button {
 
 .osd spinbutton.vertical > button:first-child:disabled {
   color: #5b5f68;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.25);
+  border-color: #434655;
+  background-color: rgba(51, 54, 65, 0.85);
 }
 
 treeview spinbutton:not(.vertical) {
@@ -1932,7 +1932,7 @@ headerbar.selection-mode .selection-menu .arrow {
   background-color: white;
 }
 
-headerbar.default-decoration:not(.csd) windowcontrols button {
+headerbar:not(.csd).default-decoration windowcontrols button {
   min-height: 23px;
   min-width: 23px;
   padding: 2px;
@@ -4185,7 +4185,7 @@ columnview row:not(:selected) cell editablelabel.editing text selection {
   border-radius: 0 0 2px 2px;
   border-width: 0 1px 1px 1px;
   border-style: solid;
-  border-color: rgba(98, 103, 125, 0.55);
+  border-color: #434655;
 }
 
 .app-notification border {
@@ -4194,8 +4194,8 @@ columnview row:not(:selected) cell editablelabel.editing text selection {
 
 .app-notification button {
   color: #D3DAE3;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.4);
+  border-color: #434655;
+  background-color: #333641;
 }
 
 .app-notification button.flat {
@@ -4203,9 +4203,9 @@ columnview row:not(:selected) cell editablelabel.editing text selection {
 }
 
 .app-notification button:hover {
-  color: #D3DAE3;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(105, 110, 134, 0.5);
+  color: #5294e2;
+  border-color: #434655;
+  background-color: #3e4250;
 }
 
 .app-notification button:active, .app-notification button:checked {
@@ -4216,8 +4216,8 @@ columnview row:not(:selected) cell editablelabel.editing text selection {
 
 .app-notification button:disabled {
   color: #5b5f68;
-  border-color: rgba(98, 103, 125, 0.55);
-  background-color: rgba(89, 94, 114, 0.25);
+  border-color: #434655;
+  background-color: rgba(51, 54, 65, 0.85);
 }
 
 expander arrow {
@@ -4697,13 +4697,13 @@ infobar.info > revealer > box selection, infobar.question > revealer > box selec
   background-color: #ffffff;
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button, .nautilus-window .floating-bar button, infobar.info > revealer > box button, infobar.question > revealer > box button, infobar.warning > revealer > box button, infobar.error > revealer > box button {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button, .nautilus-window .floating-bar button, infobar.info > revealer > box button, infobar.question > revealer > box button, infobar.warning > revealer > box button, infobar.error > revealer > box button {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0);
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button.flat, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.flat.page-row-close-button, .nautilus-window .floating-bar button.flat, infobar.info > revealer > box button.flat, infobar.question > revealer > box button.flat, infobar.warning > revealer > box button.flat, infobar.error > revealer > box button.flat {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button.flat, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.flat.page-row-close-button, .nautilus-window .floating-bar button.flat, infobar.info > revealer > box button.flat, infobar.question > revealer > box button.flat, infobar.warning > revealer > box button.flat, infobar.error > revealer > box button.flat {
   border-color: transparent;
   background-color: transparent;
   background-image: none;
@@ -4711,32 +4711,32 @@ leaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat, 
   background-color: rgba(255, 255, 255, 0);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button.flat:disabled, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.flat.page-row-close-button:disabled, .nautilus-window .floating-bar button.flat:disabled, infobar.info > revealer > box button.flat:disabled, infobar.question > revealer > box button.flat:disabled, infobar.warning > revealer > box button.flat:disabled, infobar.error > revealer > box button.flat:disabled, leaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat:disabled label, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button.flat:disabled label, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.flat.page-row-close-button:disabled label, .nautilus-window .floating-bar button.flat:disabled label, infobar.info > revealer > box button.flat:disabled label, infobar.question > revealer > box button.flat:disabled label, infobar.warning > revealer > box button.flat:disabled label, infobar.error > revealer > box button.flat:disabled label {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat:disabled, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button.flat:disabled, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.flat.page-row-close-button:disabled, .nautilus-window .floating-bar button.flat:disabled, infobar.info > revealer > box button.flat:disabled, infobar.question > revealer > box button.flat:disabled, infobar.warning > revealer > box button.flat:disabled, infobar.error > revealer > box button.flat:disabled, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat:disabled label, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button.flat:disabled label, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button.flat:disabled label, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.flat.page-row-close-button:disabled label, .nautilus-window .floating-bar button.flat:disabled label, infobar.info > revealer > box button.flat:disabled label, infobar.question > revealer > box button.flat:disabled label, infobar.warning > revealer > box button.flat:disabled label, infobar.error > revealer > box button.flat:disabled label {
   color: rgba(255, 255, 255, 0.4);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button:hover, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:hover, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:hover, .nautilus-window .floating-bar button:hover, infobar.info > revealer > box button:hover, infobar.question > revealer > box button:hover, infobar.warning > revealer > box button:hover, infobar.error > revealer > box button:hover {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:hover, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:hover, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:hover, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:hover, .nautilus-window .floating-bar button:hover, infobar.info > revealer > box button:hover, infobar.question > revealer > box button:hover, infobar.warning > revealer > box button:hover, infobar.error > revealer > box button:hover {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.65);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button:active, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:active, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:active, .nautilus-window .floating-bar button:active, infobar.info > revealer > box button:active, infobar.question > revealer > box button:active, infobar.warning > revealer > box button:active, infobar.error > revealer > box button:active, leaflet > scrolledwindow > viewport.frame > list > row.activatable button:checked, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:checked, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:checked, .nautilus-window .floating-bar button:checked, infobar.info > revealer > box button:checked, infobar.question > revealer > box button:checked, infobar.warning > revealer > box button:checked, infobar.error > revealer > box button:checked {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:active, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:active, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:active, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:active, .nautilus-window .floating-bar button:active, infobar.info > revealer > box button:active, infobar.question > revealer > box button:active, infobar.warning > revealer > box button:active, infobar.error > revealer > box button:active, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:checked, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:checked, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:checked, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:checked, .nautilus-window .floating-bar button:checked, infobar.info > revealer > box button:checked, infobar.question > revealer > box button:checked, infobar.warning > revealer > box button:checked, infobar.error > revealer > box button:checked {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.35);
   border-color: rgba(255, 255, 255, 0.65);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled, .nautilus-window .floating-bar button:disabled, infobar.info > revealer > box button:disabled, infobar.question > revealer > box button:disabled, infobar.warning > revealer > box button:disabled, infobar.error > revealer > box button:disabled {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled, .nautilus-window .floating-bar button:disabled, infobar.info > revealer > box button:disabled, infobar.question > revealer > box button:disabled, infobar.warning > revealer > box button:disabled, infobar.error > revealer > box button:disabled {
   background-color: rgba(255, 255, 255, 0);
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled, .nautilus-window .floating-bar button:disabled, infobar.info > revealer > box button:disabled, infobar.question > revealer > box button:disabled, infobar.warning > revealer > box button:disabled, infobar.error > revealer > box button:disabled, leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled label, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled label, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled label, .nautilus-window .floating-bar button:disabled label, infobar.info > revealer > box button:disabled label, infobar.question > revealer > box button:disabled label, infobar.warning > revealer > box button:disabled label, infobar.error > revealer > box button:disabled label {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled, .nautilus-window .floating-bar button:disabled, infobar.info > revealer > box button:disabled, infobar.question > revealer > box button:disabled, infobar.warning > revealer > box button:disabled, infobar.error > revealer > box button:disabled, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled label, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled label, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled label, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled label, .nautilus-window .floating-bar button:disabled label, infobar.info > revealer > box button:disabled label, infobar.question > revealer > box button:disabled label, infobar.warning > revealer > box button:disabled label, infobar.error > revealer > box button:disabled label {
   color: rgba(255, 255, 255, 0.5);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled:active, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled:active, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled:active, .nautilus-window .floating-bar button:disabled:active, infobar.info > revealer > box button:disabled:active, infobar.question > revealer > box button:disabled:active, infobar.warning > revealer > box button:disabled:active, infobar.error > revealer > box button:disabled:active, leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled:checked, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled:checked, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled:checked, .nautilus-window .floating-bar button:disabled:checked, infobar.info > revealer > box button:disabled:checked, infobar.question > revealer > box button:disabled:checked, infobar.warning > revealer > box button:disabled:checked, infobar.error > revealer > box button:disabled:checked {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled:active, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled:active, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled:active, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled:active, .nautilus-window .floating-bar button:disabled:active, infobar.info > revealer > box button:disabled:active, infobar.question > revealer > box button:disabled:active, infobar.warning > revealer > box button:disabled:active, infobar.error > revealer > box button:disabled:active, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled:checked, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable button:disabled:checked, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected button:disabled:checked, popover.background > scrolledwindow > viewport.frame > list > row.activatable:selected button.page-row-close-button:disabled:checked, .nautilus-window .floating-bar button:disabled:checked, infobar.info > revealer > box button:disabled:checked, infobar.question > revealer > box button:disabled:checked, infobar.warning > revealer > box button:disabled:checked, infobar.error > revealer > box button:disabled:checked {
   color: rgba(255, 255, 255, 0.75);
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
@@ -5128,25 +5128,25 @@ headerbar windowcontrols > button.restore:active {
   background-image: -gtk-scaled(url("assets/titlebutton-restore-active.png"), url("assets/titlebutton-restore-active@2.png"));
 }
 
-.nemo-window .sidebar .view.cell:selected, .nemo-window .sidebar row.cell:selected, leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected,
+.nemo-window .sidebar .view.cell:selected, .nemo-window .sidebar row.cell:selected, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable:selected, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected, .polari-room-list .sidebar .activatable:selected, .polari-room-list .sidebar .inactive:selected, .polari-room-list .sidebar .room-list-header:selected, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:selected, list.tweak-categories > row.activatable.tweak-category:selected, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:selected, list.gedit-document-panel row.activatable:selected, .view:selected, .view:selected:focus,
 textview > text:selected,
 textview > text:selected:focus, textview > text > selection:focus, textview > text > selection,
 iconview:selected,
-iconview:selected:focus, flowbox > flowboxchild:selected, gridview > child:selected, entry > text > selection:focus, entry > text > selection, modelbutton.flat:active, modelbutton.flat:selected, spinbutton:not(.vertical) > text > text > selection, spinbutton.vertical > text > text > selection, spinbutton.vertical > text > selection, treeview.view:selected, treeview.view:selected:focus, row:selected, row.activatable:selected, row.activatable.has-open-popup:selected, row.activatable:selected:hover, calendar > grid > label.day-number:selected {
+iconview:selected:focus, flowbox > flowboxchild:selected, gridview > child:selected, entry > text > selection:focus, entry > text > selection, modelbutton.flat:active, modelbutton.flat:selected, spinbutton:not(.vertical) > text > text > selection, spinbutton.vertical > text > text > selection, spinbutton.vertical > text > selection, treeview.view:selected, treeview.view:selected:focus, row:selected, row.activatable:selected, row.activatable:selected.has-open-popup, row.activatable:selected:hover, calendar > grid > label.day-number:selected {
   background-color: #5294e2;
 }
 
-row:selected label, label:selected, .nemo-window .sidebar .view.cell:selected, .nemo-window .sidebar row.cell:selected, leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected,
+row:selected label, label:selected, .nemo-window .sidebar .view.cell:selected, .nemo-window .sidebar row.cell:selected, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable:selected, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected, .polari-room-list .sidebar .activatable:selected, .polari-room-list .sidebar .inactive:selected, .polari-room-list .sidebar .room-list-header:selected, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:selected, list.tweak-categories > row.activatable.tweak-category:selected, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:selected, list.gedit-document-panel row.activatable:selected, .view:selected, .view:selected:focus,
 textview > text:selected,
 textview > text:selected:focus, textview > text > selection:focus, textview > text > selection,
 iconview:selected,
-iconview:selected:focus, flowbox > flowboxchild:selected, gridview > child:selected, entry > text > selection:focus, entry > text > selection, modelbutton.flat:active, modelbutton.flat:selected, spinbutton:not(.vertical) > text > text > selection, spinbutton.vertical > text > text > selection, spinbutton.vertical > text > selection, treeview.view:selected, treeview.view:selected:focus, row:selected, row.activatable:selected, row.activatable.has-open-popup:selected, row.activatable:selected:hover, calendar > grid > label.day-number:selected {
+iconview:selected:focus, flowbox > flowboxchild:selected, gridview > child:selected, entry > text > selection:focus, entry > text > selection, modelbutton.flat:active, modelbutton.flat:selected, spinbutton:not(.vertical) > text > text > selection, spinbutton.vertical > text > text > selection, spinbutton.vertical > text > selection, treeview.view:selected, treeview.view:selected:focus, row:selected, row.activatable:selected, row.activatable:selected.has-open-popup, row.activatable:selected:hover, calendar > grid > label.day-number:selected {
   color: #ffffff;
 }
 
-row:selected label:disabled, label:disabled:selected, .nemo-window .sidebar .view.cell:disabled:selected, .nemo-window .sidebar row.cell:disabled:selected, leaflet > scrolledwindow > viewport.frame > list > row.activatable:disabled:selected, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:disabled:selected, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:disabled:selected,
+row:selected label:disabled, label:disabled:selected, .nemo-window .sidebar .view.cell:disabled:selected, .nemo-window .sidebar row.cell:disabled:selected, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable:disabled:selected, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable:disabled:selected, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:disabled:selected, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:disabled:selected,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:disabled:selected, .polari-room-list .sidebar .activatable:disabled:selected, .polari-room-list .sidebar .inactive:disabled:selected, .polari-room-list .sidebar .room-list-header:disabled:selected, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:disabled:selected, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:disabled:selected, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:disabled:selected, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:disabled:selected, list.tweak-categories > row.activatable.tweak-category:disabled:selected, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:disabled:selected, list.gedit-document-panel row.activatable:disabled:selected, .view:disabled:selected,
 textview > text:disabled:selected,
 textview > text:disabled:selected:focus, textview > text > selection:disabled,
@@ -5303,6 +5303,14 @@ window.background > box.vertical > box.horizontal > stack > widget > notebook.fr
 
 .nautilus-window.background.csd.unified {
   border-radius: 0;
+}
+
+.nautilus-window.background.csd placessidebar.sidebar {
+  border-bottom-left-radius: 0;
+}
+
+.nautilus-window.background.csd notebook, .nautilus-window.background.csd notebook > stack {
+  border-radius: 0 0 0 0;
 }
 
 .nautilus-window headerbar.titlebar .path-bar-box {
@@ -6008,6 +6016,32 @@ window.background > box.vertical > overlay > stack > widget > stack widget > box
   border-image: linear-gradient(to bottom, #cad5df, #cad5df) 1 1 1 1/1px 1px 1px 1px stretch;
 }
 
+button.osd.featured-button-left,
+button.osd.featured-button-right {
+  background-image: image(rgba(255, 255, 255, 0.15));
+}
+
+button.osd.featured-button-left image,
+button.osd.featured-button-right image {
+  color: white;
+}
+
+label.title-1 {
+  color: white;
+}
+
+label:backdrop.title-1 {
+  opacity: 0.5;
+}
+
+label.caption {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+label:backdrop.caption {
+  opacity: 0.5;
+}
+
 .maps-popover button.radio.layer-radio-button:checked {
   box-shadow: 0 0 0 2px #5294e2;
 }
@@ -6519,7 +6553,7 @@ window.background.csd.unified.fullscreen > decoration-overlay {
   border-radius: 0;
 }
 
-leaflet > scrolledwindow > viewport.frame > list, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar, hdyleaflet > stack > frame > grid.vertical > actionbar,
+window > hdyleaflet > scrolledwindow > viewport.frame > list, window > leaflet > scrolledwindow > viewport.frame > list, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar, hdyleaflet > stack > frame > grid.vertical > actionbar,
 leaflet.unfolded > stack > frame > grid.vertical > actionbar, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list, hdyleaflet > stack > frame > grid.vertical,
 leaflet.unfolded > stack > frame > grid.vertical, .polari-room-list .sidebar, window.background.csd > box.horizontal > box.vertical > box.linked.horizontal, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list, .geary-main-window .geary-main-layout > leaflet > leaflet > box statusbar, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame, .sidebar.vertical > paned.geary-sidebar-pane-separator statusbar, .sidebar.vertical > paned.geary-sidebar-pane-separator, .sidebar.vertical > paned.sidebar-pane-separator statusbar, .sidebar.vertical > paned.sidebar-pane-separator, window#GearyMainWindow > overlay > box.vertical > paned.horizontal > box.sidebar.vertical,
@@ -6530,13 +6564,13 @@ window.background.csd > leaflet > box.vertical > scrolledwindow.view, list.tweak
   background-color: #32343D;
 }
 
-leaflet > scrolledwindow > viewport.frame > list:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar:disabled, hdyleaflet > stack > frame > grid.vertical > actionbar:disabled,
+window > hdyleaflet > scrolledwindow > viewport.frame > list:disabled, window > leaflet > scrolledwindow > viewport.frame > list:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar:disabled, hdyleaflet > stack > frame > grid.vertical > actionbar:disabled,
 leaflet.unfolded > stack > frame > grid.vertical > actionbar:disabled, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list:disabled,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list:disabled, hdyleaflet > stack > frame > grid.vertical:disabled,
 leaflet.unfolded > stack > frame > grid.vertical:disabled, .polari-room-list .sidebar:disabled, window.background.csd > box.horizontal > box.vertical > box.linked.horizontal:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list:disabled, .geary-main-window .geary-main-layout > leaflet > leaflet > box statusbar:disabled, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame:disabled, .sidebar.vertical > paned.geary-sidebar-pane-separator statusbar:disabled, .sidebar.vertical > paned.geary-sidebar-pane-separator:disabled, .sidebar.vertical > paned.sidebar-pane-separator statusbar:disabled, .sidebar.vertical > paned.sidebar-pane-separator:disabled, window#GearyMainWindow > overlay > box.vertical > paned.horizontal > box.sidebar.vertical:disabled,
 window.geary-main-window > overlay > box.vertical > paned.horizontal > box.sidebar.vertical:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow.view:disabled,
 window.background.csd > hdyleaflet > box.vertical > scrolledwindow.view:disabled,
-window.background.csd > leaflet > box.vertical > scrolledwindow.view:disabled, list.tweak-categories:disabled, textview.view.sourceview.gedit-view window#gtk-tooltip:disabled, .gedit-map-frame:disabled, .gedit-side-panel-paned:disabled, .gedit-document-panel-dragged-row:disabled, list.gedit-document-panel:disabled, leaflet > scrolledwindow > viewport.frame > list label:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar label:disabled, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list label:disabled,
+window.background.csd > leaflet > box.vertical > scrolledwindow.view:disabled, list.tweak-categories:disabled, textview.view.sourceview.gedit-view window#gtk-tooltip:disabled, .gedit-map-frame:disabled, .gedit-side-panel-paned:disabled, .gedit-document-panel-dragged-row:disabled, list.gedit-document-panel:disabled, window > hdyleaflet > scrolledwindow > viewport.frame > list label:disabled, window > leaflet > scrolledwindow > viewport.frame > list label:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar label:disabled, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list label:disabled,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list label:disabled, hdyleaflet > stack > frame > grid.vertical label:disabled,
 leaflet.unfolded > stack > frame > grid.vertical label:disabled, .polari-room-list .sidebar label:disabled, window.background.csd > box.horizontal > box.vertical > box.linked.horizontal label:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list label:disabled, .geary-main-window .geary-main-layout > leaflet > leaflet > box statusbar label:disabled, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame label:disabled, .sidebar.vertical > paned.geary-sidebar-pane-separator label:disabled, .sidebar.vertical > paned.sidebar-pane-separator label:disabled, window#GearyMainWindow > overlay > box.vertical > paned.horizontal > box.sidebar.vertical label:disabled,
 window.geary-main-window > overlay > box.vertical > paned.horizontal > box.sidebar.vertical label:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow.view label:disabled,
@@ -6597,27 +6631,27 @@ leaflet.unfolded > stack > frame > grid.vertical > actionbar button.flat:disable
   color: rgba(246, 246, 251, 0.35);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row,
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row, .polari-room-list .sidebar .activatable, .polari-room-list .sidebar .inactive, .polari-room-list .sidebar .room-list-header, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar, list.tweak-categories > row.activatable.tweak-category, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view, .gedit-side-panel-paned treeview.view, list.gedit-document-panel row.activatable {
   color: rgba(246, 246, 251, 0.8);
   background-color: #32343D;
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.has-open-popup.activatable, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.has-open-popup.activatable, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.has-open-popup.activatable.contact-data-row,
-leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.has-open-popup.activatable.contact-data-row, .polari-room-list .sidebar .has-open-popup.activatable, .polari-room-list .sidebar .has-open-popup.inactive, .polari-room-list .sidebar .has-open-popup.room-list-header, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.has-open-popup.activatable, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.has-open-popup.view.sidebar, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.has-open-popup.view.sidebar, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.has-open-popup.view.sidebar, list.tweak-categories > row.has-open-popup.activatable.tweak-category, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.has-open-popup.view, .gedit-side-panel-paned treeview.has-open-popup.view, list.gedit-document-panel row.has-open-popup.activatable, leaflet > scrolledwindow > viewport.frame > list > row.activatable:hover, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:hover, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:hover,
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.has-open-popup.activatable, window > leaflet > scrolledwindow > viewport.frame > list > row.has-open-popup.activatable, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.has-open-popup.activatable, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.has-open-popup.activatable.contact-data-row,
+leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.has-open-popup.activatable.contact-data-row, .polari-room-list .sidebar .has-open-popup.activatable, .polari-room-list .sidebar .has-open-popup.inactive, .polari-room-list .sidebar .has-open-popup.room-list-header, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.has-open-popup.activatable, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.has-open-popup.view.sidebar, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.has-open-popup.view.sidebar, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.has-open-popup.view.sidebar, list.tweak-categories > row.has-open-popup.activatable.tweak-category, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.has-open-popup.view, .gedit-side-panel-paned treeview.has-open-popup.view, list.gedit-document-panel row.has-open-popup.activatable, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable:hover, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable:hover, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:hover, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:hover,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:hover, .polari-room-list .sidebar .activatable:hover, .polari-room-list .sidebar .inactive:hover, .polari-room-list .sidebar .room-list-header:hover, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:hover, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:hover, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:hover, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:hover, list.tweak-categories > row.activatable.tweak-category:hover, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:hover, .gedit-side-panel-paned treeview.view:hover, list.gedit-document-panel row.activatable:hover {
   color: #F6F6FB;
   background-color: #464750;
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:disabled, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:disabled,
-leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:disabled, .polari-room-list .sidebar .activatable:disabled, .polari-room-list .sidebar .inactive:disabled, .polari-room-list .sidebar .room-list-header:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:disabled, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:disabled, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:disabled, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:disabled, list.tweak-categories > row.activatable.tweak-category:disabled, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:disabled, .gedit-side-panel-paned treeview.view:disabled, list.gedit-document-panel row.activatable:disabled, leaflet > scrolledwindow > viewport.frame > list > row.activatable label:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable label:disabled, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row label:disabled,
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable:disabled, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:disabled, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:disabled,
+leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:disabled, .polari-room-list .sidebar .activatable:disabled, .polari-room-list .sidebar .inactive:disabled, .polari-room-list .sidebar .room-list-header:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:disabled, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:disabled, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:disabled, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:disabled, list.tweak-categories > row.activatable.tweak-category:disabled, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:disabled, .gedit-side-panel-paned treeview.view:disabled, list.gedit-document-panel row.activatable:disabled, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable label:disabled, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable label:disabled, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable label:disabled, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row label:disabled,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row label:disabled, .polari-room-list .sidebar .activatable label:disabled, .polari-room-list .sidebar .inactive label:disabled, .polari-room-list .sidebar .room-list-header label:disabled, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable label:disabled, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar label:disabled, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar label:disabled, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar label:disabled, list.tweak-categories > row.activatable.tweak-category label:disabled, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view label:disabled, .gedit-side-panel-paned treeview.view label:disabled, list.gedit-document-panel row.activatable label:disabled {
   color: rgba(246, 246, 251, 0.35);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected.has-open-popup, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected.has-open-popup, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected.has-open-popup,
-leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected.has-open-popup, .polari-room-list .sidebar .activatable:selected.has-open-popup, .polari-room-list .sidebar .inactive:selected.has-open-popup, .polari-room-list .sidebar .room-list-header:selected.has-open-popup, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected.has-open-popup, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected.has-open-popup, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected.has-open-popup, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:selected.has-open-popup, list.tweak-categories > row.activatable.tweak-category:selected.has-open-popup, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:selected.has-open-popup, .gedit-side-panel-paned treeview.view:selected.has-open-popup, list.gedit-document-panel row.activatable:selected.has-open-popup, leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected:hover, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected:hover, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected:hover,
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable:selected.has-open-popup, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected.has-open-popup, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected.has-open-popup, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected.has-open-popup,
+leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected.has-open-popup, .polari-room-list .sidebar .activatable:selected.has-open-popup, .polari-room-list .sidebar .inactive:selected.has-open-popup, .polari-room-list .sidebar .room-list-header:selected.has-open-popup, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected.has-open-popup, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected.has-open-popup, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected.has-open-popup, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:selected.has-open-popup, list.tweak-categories > row.activatable.tweak-category:selected.has-open-popup, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:selected.has-open-popup, .gedit-side-panel-paned treeview.view:selected.has-open-popup, list.gedit-document-panel row.activatable:selected.has-open-popup, window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable:selected:hover, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable:selected:hover, hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar list > row.activatable:selected:hover, hdyleaflet > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected:hover,
 leaflet.unfolded > stack > frame > grid.vertical > scrolledwindow > viewport.frame > list.contacts-contact-list row.activatable.contact-data-row:selected:hover, .polari-room-list .sidebar .activatable:selected:hover, .polari-room-list .sidebar .inactive:selected:hover, .polari-room-list .sidebar .room-list-header:selected:hover, window.background.csd > box.horizontal > box.vertical > scrolledwindow > viewport.frame > list row.activatable:selected:hover, .geary-main-window .geary-main-layout > leaflet > leaflet > box .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected:hover, .sidebar.vertical > paned.geary-sidebar-pane-separator .geary-folder-frame > scrolledwindow treeview.view.sidebar:selected:hover, .sidebar.vertical > paned.sidebar-pane-separator .folder-frame > scrolledwindow treeview.view.sidebar:selected:hover, list.tweak-categories > row.activatable.tweak-category:selected:hover, textview.view.sourceview.gedit-view window#gtk-tooltip treeview.view:selected:hover, .gedit-side-panel-paned treeview.view:selected:hover, list.gedit-document-panel row.activatable:selected:hover {
   background-color: #4a85cb;
 }
@@ -6968,6 +7002,14 @@ filechooser paned > separator {
   background-image: image(#cad5df);
 }
 
+.nautilus-window {
+  background-color: #f6f9fb;
+  background-image: image(#32343D);
+  background-size: 38px auto;
+  background-repeat: no-repeat;
+  border-radius: 0 0 0;
+}
+
 .nautilus-window paned > separator {
   background-image: linear-gradient(to bottom, #d3e1eb, #d3e1eb);
 }
@@ -6981,8 +7023,7 @@ filechooser paned > separator {
 }
 
 .nautilus-window placessidebar.sidebar {
-  box-shadow: inset 38px 0 0 0 #32343D;
-  background-color: #f6f9fb;
+  background: none;
 }
 
 .nautilus-window placessidebar.sidebar row.sidebar-row {
@@ -7608,7 +7649,7 @@ hdyleaflet > box.vertical > scrolledwindow > viewport .sidebar label:disabled {
   color: rgba(246, 246, 251, 0.35);
 }
 
-leaflet > scrolledwindow > viewport.frame > list > row.activatable .seahorse-sidebar-item {
+window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable .seahorse-sidebar-item, window > leaflet > scrolledwindow > viewport.frame > list > row.activatable .seahorse-sidebar-item {
   -gtk-icon-style: symbolic;
 }
 

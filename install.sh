@@ -52,11 +52,13 @@ OPTIONS:
 
   -c, --color VARIANT     Specify theme color variant(s) [standard|light|dark] (Default: All variants)
 
+  -l, --logo VARIANT      Specify logo icon on nautilus [default|manjaro|ubuntu|fedora|debian|arch|gnome|budgie|popos] (Default: mountain icon)
+
   -g, --gdm               Install GDM theme, this option need root user authority! please run this with sudo
 
   -r, --revert            revert GDM theme, this option need root user authority! please run this with sudo
 
-  --tweaks                Specify versions for tweaks [image|square|round]
+  --tweaks                Specify versions for tweaks [image|square|round] (options can mix use)
                           1. image:    Install with a background image on (Nautilus/Nemo)
                           2. square:   Install square window button like Windows 10
                           3. round:    Install rounded window and popup/menu version
@@ -219,14 +221,20 @@ install() {
   # METACITY
   mkdir -p                                                                           ${THEME_DIR}/metacity-1
 
-  if [[ "$square" == 'true' ]]; then
-    cp -r ${SRC_DIR}/src/metacity-1/assets${ELSE_LIGHT}-win/*.png                    ${THEME_DIR}/metacity-1
-    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3-win.xml                         ${THEME_DIR}/metacity-1/metacity-theme-3.xml
-    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}-win.xml            ${THEME_DIR}/metacity-1/metacity-theme-1.xml
+  if [[ "$window" == 'round' ]]; then
+    cp -r ${SRC_DIR}/src/metacity-1/assets-round                                     ${THEME_DIR}/metacity-1/assets
+    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3-round.xml                       ${THEME_DIR}/metacity-1/metacity-theme-3.xml
+    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}-round.xml          ${THEME_DIR}/metacity-1/metacity-theme-1.xml
   else
-    cp -r ${SRC_DIR}/src/metacity-1/assets${ELSE_LIGHT}/*.png                        ${THEME_DIR}/metacity-1
-    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3.xml                             ${THEME_DIR}/metacity-1/metacity-theme-3.xml
-    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}.xml                ${THEME_DIR}/metacity-1/metacity-theme-1.xml
+    if [[ "$square" == 'true' ]]; then
+      cp -r ${SRC_DIR}/src/metacity-1/assets${ELSE_LIGHT}-win/*.png                  ${THEME_DIR}/metacity-1
+      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3-win.xml                       ${THEME_DIR}/metacity-1/metacity-theme-3.xml
+      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}-win.xml          ${THEME_DIR}/metacity-1/metacity-theme-1.xml
+    else
+      cp -r ${SRC_DIR}/src/metacity-1/assets${ELSE_LIGHT}/*.png                      ${THEME_DIR}/metacity-1
+      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3.xml                           ${THEME_DIR}/metacity-1/metacity-theme-3.xml
+      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}.xml              ${THEME_DIR}/metacity-1/metacity-theme-1.xml
+    fi
   fi
 
   cp -r ${SRC_DIR}/src/metacity-1/thumbnail${ELSE_LIGHT}.png                         ${THEME_DIR}/metacity-1/thumbnail.png
@@ -254,10 +262,9 @@ install() {
 
 GS_THEME_FILE="/usr/share/gnome-shell/gnome-shell-theme.gresource"
 SHELL_THEME_FOLDER="/usr/share/gnome-shell/theme"
-ETC_THEME_FOLDER="/etc/alternatives"
-ETC_THEME_FILE="/etc/alternatives/gdm3.css"
-UBUNTU_THEME_FILE="/usr/share/gnome-shell/theme/ubuntu.css"
-UBUNTU_NEW_THEME_FILE="/usr/share/gnome-shell/theme/gnome-shell.css"
+UBUNTU_THEME_FILE="/usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource"
+POP_OS_THEME_FILE="/usr/share/gnome-shell/theme/Pop/gnome-shell-theme.gresource"
+ZORIN_THEME_FILE="/usr/share/gnome-shell/theme/ZorinBlue-Light/gnome-shell-theme.gresource"
 
 install_gdm() {
   local GDM_THEME_DIR="${1}/${2}${3}${4}"
@@ -271,23 +278,22 @@ install_gdm() {
       "${SRC_DIR}/src/gnome-shell/gnome-shell-theme.gresource.xml"
   fi
 
-  if [[ -f "$UBUNTU_THEME_FILE" && -f "$GS_THEME_FILE.bak" ]]; then
+  if [[ -f "$UBUNTU_THEME_FILE" ]]; then
     echo "Installing '$UBUNTU_THEME_FILE'..."
     cp -an "$UBUNTU_THEME_FILE" "$UBUNTU_THEME_FILE.bak"
-    rm -rf "$GS_THEME_FILE"
-    mv "$GS_THEME_FILE.bak" "$GS_THEME_FILE"
-    cp -af "$GDM_THEME_DIR/gnome-shell/gnome-shell.css" "$UBUNTU_THEME_FILE"
+    cp -rf "$GS_THEME_FILE" "$UBUNTU_THEME_FILE"
   fi
 
-  if [[ -f "$ETC_THEME_FILE" && -f "$GS_THEME_FILE.bak" ]]; then
-    echo "Installing Ubuntu gnome-shell theme..."
-    cp -an "$ETC_THEME_FILE" "$ETC_THEME_FILE.bak"
-    rm -rf "$ETC_THEME_FILE" "$GS_THEME_FILE"
-    mv "$GS_THEME_FILE.bak" "$GS_THEME_FILE"
-    [[ -d $SHELL_THEME_FOLDER/$THEME_NAME ]] && rm -rf $SHELL_THEME_FOLDER/$THEME_NAME
-    cp -r "$GDM_THEME_DIR/gnome-shell" "$SHELL_THEME_FOLDER/$THEME_NAME"
-    cd "$ETC_THEME_FOLDER"
-    ln -s "$SHELL_THEME_FOLDER/$THEME_NAME/gnome-shell.css" gdm3.css
+  if [[ -f "$POP_OS_THEME_FILE" ]]; then
+    echo "Installing '$POP_OS_THEME_FILE'..."
+    cp -an "$POP_OS_THEME_FILE" "$POP_OS_THEME_FILE.bak"
+    cp -rf "$GS_THEME_FILE" "$POP_OS_THEME_FILE"
+  fi
+
+  if [[ -f "$ZORIN_THEME_FILE" ]]; then
+    echo "Installing '$ZORIN_THEME_FILE'..."
+    cp -an "$ZORIN_THEME_FILE" "$ZORIN_THEME_FILE.bak"
+    cp -rf "$GS_THEME_FILE" "$ZORIN_THEME_FILE"
   fi
 }
 
@@ -304,11 +310,16 @@ revert_gdm() {
     mv "$UBUNTU_THEME_FILE.bak" "$UBUNTU_THEME_FILE"
   fi
 
-  if [[ -f "$ETC_THEME_FILE.bak" ]]; then
-    echo "reverting Ubuntu gnome-shell theme..."
-    rm -rf "$ETC_THEME_FILE"
-    mv "$ETC_THEME_FILE.bak" "$ETC_THEME_FILE"
-    [[ -d $SHELL_THEME_FOLDER/$THEME_NAME ]] && rm -rf $SHELL_THEME_FOLDER/$THEME_NAME
+  if [[ -f "$POP_OS_THEME_FILE.bak" ]]; then
+    echo "reverting '$POP_OS_THEME_FILE'..."
+    rm -rf "$POP_OS_THEME_FILE"
+    mv "$POP_OS_THEME_FILE.bak" "$POP_OS_THEME_FILE"
+  fi
+
+  if [[ -f "$ZORIN_THEME_FILE.bak" ]]; then
+    echo "reverting '$ZORIN_THEME_FILE'..."
+    rm -rf "$ZORIN_THEME_FILE"
+    mv "$ZORIN_THEME_FILE.bak" "$ZORIN_THEME_FILE"
   fi
 }
 

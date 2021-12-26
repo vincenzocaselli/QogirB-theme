@@ -5,6 +5,8 @@ Qogir is a flat Design theme for GTK 3, GTK 2 and Gnome-Shell which supports GTK
 based on Arc gtk theme
 horst3180 - Arc gtk theme: https://github.com/horst3180/Arc-theme
 
+![1](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot01.png?raw=true)
+
 ## Info
 
 ### GTK+ 3.20 or later
@@ -47,11 +49,13 @@ Usage:  ./install.sh  [OPTIONS...]
 
   -c, --color VARIANT     Specify theme color variant(s) [standard|light|dark] (Default: All variants)
 
+  -l, --logo VARIANT      Specify logo icon on nautilus [default|manjaro|ubuntu|fedora|debian|arch|gnome|budgie|popos] (Default: mountain icon)
+
   -g, --gdm               Install GDM theme, this option need root user authority! please run this with sudo
 
   -r, --revert            revert GDM theme, this option need root user authority! please run this with sudo
 
-  --tweaks                Specify versions for tweaks [image|square|round]
+  --tweaks                Specify versions for tweaks [image|square|round] (options can mix use)
                           1. image:    Install with a background image on (Nautilus/Nemo)
                           2. square:   Install square window button like Windows 10
                           3. round:    Install rounded window and popup/menu version
@@ -61,16 +65,32 @@ Usage:  ./install.sh  [OPTIONS...]
 ```
 
 **FOR EXAMPLE:**
-```sh
-./install.sh  (Install all themes)
-```
+
+Install default themes
 
 ```sh
-./install.sh -i  (Install themes with nautilus background image)
+./install.sh
 ```
 
+Install rounded window version with square window button and nautilus background image
+
 ```sh
-sudo ./install.sh -g -c dark -t standard  (Install standard dark gdm theme)
+./install.sh --tweaks image square round
+```
+
+Install standard dark gdm theme
+
+```sh
+sudo ./install.sh -g -c dark -t standard
+```
+
+### On Flatpak
+
+All variants are available via Flathub:
+
+```
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub org.gtk.Gtk3theme.Qogir{,-dark,-light,-win,-manjaro, ...}
 ```
 
 ### On Snapcraft
@@ -101,15 +121,23 @@ for i in $(snap connections | grep gtk-common-themes:gtk-3-themes | awk '{print 
 for i in $(snap connections | grep gtk-common-themes:icon-themes | awk '{print $2}'); do sudo snap connect $i qogir-themes:icon-themes; done
 ```
 
-### Install on OpenBSD/FreeBSD
+### Install on FreeBSD
+
+- Qogir Theme ：`pkg install qogir-gtk-themes`
+
+- Qogir Icon: `pkg install qogir-icon-themes`
+
+### Install on OpenBSD
 
 Let me show you how to install this theme on OpenBSD
 
-    sudo pkg_add bash (sudo pkg install bash #FreeBSD run this)
-    sudo ln -s /usr/local/bin/bash /bin/bash
-    git clone https://github.com/vinceliuice/Qogir-theme
-    cd Qogir-theme
-    bash install.sh
+```sh
+sudo pkg_add bash
+sudo ln -s /usr/local/bin/bash /bin/bash
+git clone https://github.com/vinceliuice/Qogir-theme
+cd Qogir-theme
+bash install.sh
+```
 
 ## Nautilus logos
 ```sh
@@ -123,14 +151,6 @@ Let me show you how to install this theme on OpenBSD
 
 ![firefox-theme](src/firefox/preview.png?raw=true)
 
-### Flatpak
-
-All variants are available via Flathub:
-
-```
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.gtk.Gtk3theme.Qogir{,-dark,-light,-win,-manjaro, ...}
-```
 ### AUR
 [AUR](https://aur.archlinux.org/packages/qogir-gtk-theme/)
 
@@ -141,7 +161,6 @@ flatpak install flathub org.gtk.Gtk3theme.Qogir{,-dark,-light,-win,-manjaro, ...
 [Qogir](https://github.com/vinceliuice/Qogir-icon-theme)
 
 ## Screenshots
-![1](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot01.png?raw=true)
 ![2](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot02.png?raw=true)
 ![3](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot03.png?raw=true)
 ![4](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot04.png?raw=true)
