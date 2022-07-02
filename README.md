@@ -7,6 +7,11 @@ horst3180 - Arc gtk theme: https://github.com/horst3180/Arc-theme
 
 ![1](https://github.com/vinceliuice/Qogir-theme/blob/images/screenshots/screenshot01.png?raw=true)
 
+## NOTICE
+
+In Gnome 42 can not use `Qogir-dark` theme, so I renamed all `*-dark` themes to `*-Dark`
+So you need to remove all old themes and reinstall the last version 
+
 ## Info
 
 ### GTK+ 3.20 or later
@@ -49,18 +54,20 @@ Usage:  ./install.sh  [OPTIONS...]
 
   -c, --color VARIANT     Specify theme color variant(s) [standard|light|dark] (Default: All variants)
 
-  -l, --logo VARIANT      Specify logo icon on nautilus [default|manjaro|ubuntu|fedora|debian|arch|gnome|budgie|popos] (Default: mountain icon)
+  -l, --logo VARIANT      Specify logo icon on nautilus [default|manjaro|ubuntu|fedora|debian|arch|gnome|budgie|popos|gentoo|void|zorin|mxlinux|opensuse] (Default: mountain icon)
 
   -g, --gdm               Install GDM theme, this option need root user authority! please run this with sudo
 
-  -r, --revert            revert GDM theme, this option need root user authority! please run this with sudo
+  -r, --remove,
+  -u, --uninstall         Uninstall/Remove installed themes
 
   --tweaks                Specify versions for tweaks [image|square|round] (options can mix use)
-                          1. image:    Install with a background image on (Nautilus/Nemo)
-                          2. square:   Install square window button like Windows 10
-                          3. round:    Install rounded window and popup/menu version
+                          1. image:      Install with a background image on (Nautilus/Nemo)
+                          2. square:     Install square window button like Windows 10
+                          3. round:      Install rounded window and popup/menu version
 
   -h, --help              Show help
+
 
 ```
 
@@ -81,7 +88,13 @@ Install rounded window version with square window button and nautilus background
 Install standard dark gdm theme
 
 ```sh
-sudo ./install.sh -g -c dark -t standard
+sudo ./install.sh -g -c dark -t default
+```
+
+Uninstall gdm theme
+
+```sh
+sudo ./install.sh -g -r
 ```
 
 ### On Flatpak

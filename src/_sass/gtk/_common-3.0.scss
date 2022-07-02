@@ -74,9 +74,12 @@ button.gtkstyle-fallback { // For Cinnamon system setting
 
 .view,
 %view {
-  @extend %row_activatable;
   color: $text_color;
   background-color: $base_color;
+
+  &:hover {
+    background-color: if($variant == 'light', rgba(black, 0.08), rgba(white, 0.06));
+  }
 
   &:selected {
     &, &:focus {
@@ -145,7 +148,7 @@ label {
 }
 
 .dim-label {
-  opacity: 0.55;
+  color: $insensitive_fg_color;
 }
 
 assistant {
@@ -395,18 +398,18 @@ button {
 
   &.image-button {
     min-width: 24px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: $cont_padding;
+    padding-right: $cont_padding;
   }
 
   &.text-button {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: $cont_padding * 2;
+    padding-right: $cont_padding * 2;
   }
 
   &.text-button.image-button {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: $cont_padding;
+    padding-right: $cont_padding;
 
     label {
       &:first-child {
@@ -576,7 +579,7 @@ button {
     &:active, &:checked { @include button(active); }
   }
 
-  @at-root %circle_button,
+  @at-root %circular_button,
   &.close,
   &.circular { // The Bloody Circul Button
     min-height: 24px;
@@ -714,7 +717,7 @@ toolbar.inline-toolbar toolbutton {
     > entry.error + entry.warning,
     > entry.warning + entry.error { border-#{$_border}-color: $e_border; }
 
-    @each $e_type, $e_color in (':focus',$selected_bg_color),
+    @each $e_type, $e_color in (':focus', $selected_bg_color),
                                (':drop(active)', $drop_target_color),
                                ('.warning:focus', $warning_color),
                                ('.error:focus', $error_color) {
@@ -729,6 +732,11 @@ toolbar.inline-toolbar toolbutton {
       > entry#{$e_type}:not(:only-child) {
         + button,
         + combobox > box > button.combo { border-#{$_border}-color: transparent; }
+      }
+
+      > entry#{$e_type}:not(:only-child) {
+        + button:active,
+        + combobox > box > button.combo:active { border-#{$_border}-color: if($titlebar == 'light', $sec_selected_bg_color, $alt_selected_bg_color); }
       }
     }
 
@@ -759,8 +767,9 @@ toolbar.inline-toolbar toolbutton {
     > button:checked + #{$_uncolored_button}:hover,
     > button.suggested-action + #{$_uncolored_button}:hover,
     > button.destructive-action + #{$_uncolored_button}:hover,
-    > entry + #{$_uncolored_button}:hover:not(:only-child),
-    > #{$_uncolored_button}:first-child:hover, {
+    > entry:not(:only-child) + #{$_uncolored_button}:hover:not(:only-child),
+    > entry:focus:not(:only-child) + #{$_uncolored_button}:hover:not(:only-child),
+    > #{$_uncolored_button}:first-child:hover {
       box-shadow: inset if($vert=='false', 1px 0, 0 1px) $b_border;
       border-#{$_border}-color: if($titlebar == 'light', rgba(black, 0.12), rgba(white, 0.12));
     }
@@ -795,11 +804,8 @@ toolbar.inline-toolbar toolbutton {
   .osd & { @include linking_rules($e_border:$osd_entry_border, $b_border:$osd_button_border); }
 }
 
-headerbar,
-headerbar.titlebar {
-  .linked:not(.vertical):not(.path-bar):not(.nautilus-path-bar):not(.stack-switcher) {
-    @include linking_rules($entry_rules:'false', $button_rules:'false', $e_border: $header_entry_border, $b_border: transparent);
-  }
+headerbar .linked:not(.vertical):not(.path-bar):not(.nautilus-path-bar):not(.stack-switcher) {
+  @include linking_rules($entry_rules:'false', $button_rules:'false', $e_border: $header_entry_border, $b_border: transparent);
 }
 
 .linked.vertical { @include linking_rules($vert:'true'); }
@@ -1040,8 +1046,8 @@ spinbutton {
 combobox {
   button.combo {
     min-width: 0;       // otherwise the arrow placement is unsymmetric
-    padding-left: 8px;  //
-    padding-right: 8px  //
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   arrow {
@@ -1134,11 +1140,13 @@ toolbar {
     entry,
     spinbutton,
     button {
-      margin-right: 1px;
-      margin-bottom: 1px;
+      margin: 1px;
     }
+
     .linked > button,
-    .linked > entry { margin-right:0; }
+    .linked > entry,
+    spinbutton > button,
+    spinbutton > entry { margin:0; }
   }
 }
 
@@ -1212,18 +1220,12 @@ actionbar {
 // Headerbars
 //
 
-headerbar,
-%titlebar {
-  padding: 0 10px;
+headerbar {
+  padding: 0 $cont_padding;
   color: $header_fg;
   box-shadow: inset 0 -1px $borders_color;
   background-color: $header_bg;
   min-height: $large_size;
-
-  // .csd & {  // Transparent header-bars only in csd windows
-  //   background-color: $header_bg;
-  //   min-height: $medium_size + 6px;
-  // }
 
   &:backdrop {
     transition: $backdrop_transition;
@@ -1232,14 +1234,14 @@ headerbar,
   }
 
   .title {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: $cont_padding * 2;
+    padding-right: $cont_padding * 2;
   }
 
   .subtitle {
     font-size: 80%;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: $cont_padding * 2;
+    padding-right: $cont_padding * 2;
     margin-top: -3px;
     @extend .dim-label;
   }
@@ -1283,34 +1285,28 @@ headerbar,
     &:backdrop { background-color: opacify($header_bg_backdrop, 1); }
   }
 
-  %square_titlebutton {
-    min-width: 38px;
-    min-height: 30px;
-    margin: 0 -3px;
-  }
-
-  %circle_titlebutton {
-    min-height: 23px;
-    min-width: 23px;
-    padding: 2px;
-  }
-
   &:not(.csd).default-decoration {
     min-height: 30px;
     padding: 0 if($titlebutton == 'circle', 8px, 3px);
-    background-color: $header_bg;
 
     > button.titlebutton {
       border: none;
-      @if $titlebutton == 'circle' { @extend %circle_titlebutton; }
-      @else { @extend %square_titlebutton; }
+
+      @if $titlebutton == 'circle' {
+        min-height: 26px;
+        min-width: 26px;
+        padding: 0;
+        margin: 0 3px;
+      } @else {
+        min-width: $large_size;
+        min-height: 30px;
+        margin: 0 -3px;
+      }
     }
   }
 
   &.default-decoration,
-  .csd &.default-decoration,             // needed under wayland, since all gtk3 windows are csd windows
-  &.default-decoration:backdrop,
-  .csd &.default-decoration:backdrop {
+  &.default-decoration:backdrop {
     background-color: $header_bg;
     border-bottom-width: 0;
     box-shadow: none;
@@ -1411,8 +1407,8 @@ headerbar {
   @extend %header_widgets;
 
   entry, button, separator:not(.sidebar) {
-    margin-top: $icon_padding;
-    margin-bottom: $icon_padding;
+    margin-top: $cont_padding;
+    margin-bottom: $cont_padding;
   }
 
   &.windowhandle {
@@ -1503,8 +1499,6 @@ headerbar {
       background-image: if($variant == 'light', image($header_bg), image($header_border));
     }
   }
-
-  // @extend %titlebar;
 }
 
 %header_separator {
@@ -1587,7 +1581,7 @@ headerbar {
   &:hover {
     color: $alt_header_fg;
     background-color: transparent;
-    box-shadow: inset 0 -2px rgba($selected_bg_color, 0.5);
+    box-shadow: inset 0 -2px mix($selected_bg_color, $header_bg, 50%);
   }
 
   &:checked, &:active {
@@ -1835,7 +1829,6 @@ headerbar {
 // Pathbars
 //
 .path-bar button {
-
   &:hover { background-color: rgba($fg_color, 0.06); }
   &:checked, &:active {
     background-color: $selected_bg_color;
@@ -1884,14 +1877,14 @@ treeview.view {
     -GtkTreeView-expander-size: 16;
   }
 
-  @extend %row_activatable;
-
   border-left-color: transparentize($fg_color, 0.85);   // this is actually the tree lines color,
   border-top-color: transparentize(black, 0.9);         // while this is the grid lines color, better then nothing
 
   rubberband { @extend rubberband; }                    // to avoid borders being overridden by the previously set props
 
   acceleditor > label { background-color: $selected_bg_color; }
+
+  .background:not(.csd) &:not(:selected):not(.progressbar):not(.expander):not(.trough):not(.separator):hover { background-color: if($variant == 'light', mix(black, $base_color, 8%), mix(white, $base_color, 6%)); }
 
   &:selected {
     &, &:focus {
@@ -2176,9 +2169,8 @@ menu,
 // Popovers
 //
 
-popover,
 popover.background {
-  padding: 2px;
+  padding: 0;
   background-clip: border-box;
   background-color: $menu_bg;
 
@@ -2198,7 +2190,7 @@ popover.background {
   > list,
   > .view,
   > toolbar {
-    border-style: none;
+    border: none;
     background-color: transparent;
   }
 
@@ -2219,6 +2211,17 @@ popover.background {
     &:active {
       background-color: $selected_bg_color;
       color: $selected_fg_color;
+    }
+  }
+
+  &.combo {
+    list {
+      padding: $cont_padding / 2;
+      background-color: transparent;
+
+      > row {
+        padding: $cont_padding / 2 $cont_padding;
+      }
     }
   }
 }
@@ -3093,9 +3096,7 @@ list {
   &.content:not(.conversation-listbox) {
     @extend %circular_list;
 
-    > row {
-      @extend %circular_row;
-    }
+    > row { @extend %circular_row; }
   }
 }
 
@@ -3103,20 +3104,15 @@ row {
   &:selected {
     @extend %selected_items;
 
-    button {
-      @extend %selected-button;
-      // &:active, &:checked { background-image: image($selected_fg_color); }
-    }
+    button { @extend %selected-button; }
   }
-
-  // button { &:active, &:checked { background-image: image($selected_bg_color); } }
 
   @at-root %row_activatable, &.activatable {
     &.has-open-popup,
     &:hover {
       transition: none;
       animation: none;
-      background-color: if($variant == 'light', mix(black, $base_color, 8%), mix(white, $base_color, 6%));
+      background-color: if($variant == 'light', rgba(black, 0.08), rgba(white, 0.06));
     }
 
     &:active, &:checked {
@@ -3154,7 +3150,7 @@ row {
   button {
     @include button(osd);
     &.flat {
-      @extend %circle_button;
+      @extend %circular_button;
       @extend %undecorated_button;
       border-color: transparentize($selected_bg_color, 1);
       &:disabled { @extend %undecorated_button; }
@@ -3249,7 +3245,6 @@ $dialog_bg: if($variant == 'light' and $titlebar == 'dark', $header_bg, $menu_bg
 $dialog_fg: $header_fg;
 
 messagedialog { // Message Dialog styling
-
   &.background {
     background-color: $dialog_bg;
     color: $dialog_fg;
@@ -3296,7 +3291,6 @@ messagedialog { // Message Dialog styling
   }
 
   .dialog-action-area button:not(.suggested-action):not(.destructive-action) {
-
     &:hover {
       background-color: rgba($dialog_fg, 0.06);
     }
@@ -3343,6 +3337,8 @@ messagedialog.background:not(.csd) {
     }
   }
 }
+
+dialog > .dialog-vbox.view { background: none; }
 
 //
 // Sidebar
@@ -3771,7 +3767,7 @@ colorchooser .popover.osd { border-radius: $bt_radius; }
 //
 button.circular,
 button.circular-button {
-  @extend %circle_button;
+  @extend %circular_button;
 }
 
 .keycap {
@@ -3804,15 +3800,13 @@ stackswitcher button {
 // Window Decorations
 //
 
-$_wm_border: if($variant=='light', rgba(black, 0.12), rgba(white, 0.12));
-
 decoration {
   border-radius: $corner_radius;
   border: none;
   transition: $backdrop_transition;
-  box-shadow: 0 3px 5px 0 if($variant == 'light', rgba(black, 0.15), rgba(black, 0.08)),
-              0 8px 8px 0 if($variant == 'light', rgba(black, 0.15), rgba(black, 0.08)),
-              0 0 0 1px $_wm_border;
+  box-shadow: 0 3px 5px 0 if($variant == 'light', rgba(black, 0.15), rgba(black, 0.12)),
+              0 8px 8px 0 if($variant == 'light', rgba(black, 0.15), rgba(black, 0.12)),
+              0 0 0 1px $borders_color;
 
   // this is used for the resize cursor area
   margin: 6px;
@@ -3821,15 +3815,15 @@ decoration {
     // the transparent shadow here is to enforce that the shadow extents don't
     // change when we go to backdrop, to prevent jumping windows
     box-shadow: 0 3px 5px 0 transparent, 0 8px 8px 0 transparent,
-                0 3px 3px 0 if($variant == 'light', rgba(black, 0.1), rgba(black, 0.06)),
-                0 0 0 1px $_wm_border;
+                0 3px 3px 0 if($variant == 'light', rgba(black, 0.1), rgba(black, 0.08)),
+                0 0 0 1px $borders_color;
   }
 
   .maximized &,
   .fullscreen &,
   .tiled & {
     border-radius: 0;
-    box-shadow: 0 3px 3px 0 if($variant == 'light', rgba(black, 0.1), rgba(black, 0.06));
+    box-shadow: 0 3px 3px 0 if($variant == 'light', rgba(black, 0.1), rgba(black, 0.08));
   }
 
   // server-side decorations as used by mutter
@@ -3847,12 +3841,12 @@ decoration {
 
   .csd.popup & {
     border-radius: $corner_radius;
-    box-shadow: 0 3px 6px if($variant == 'light', $_wm_border, transparentize($_wm_border, 0.1)), 0 0 0 1px $borders_color;
+    box-shadow: 0 3px 6px if($variant == 'light', rgba(black, 0.12), rgba(black, 0.1)), 0 0 0 1px $borders_color;
   }
 
   tooltip.csd & {
     border-radius: $material_radius;
-    box-shadow: 0 1px 3px 0 if($variant == 'light', $_wm_border, transparentize($_wm_border, 0.3));
+    box-shadow: 0 1px 3px 0 if($variant == 'light', rgba(black, 0.12), rgba(black, 0.1));
   }
 
   messagedialog.csd & {
@@ -3872,148 +3866,42 @@ decoration {
 // Titlebuttons
 //
 
-%small_titlebutton {
-  > box.horizontal {
-    &.left {
-      @each $class, $_left, $_right in ('.close', -3px, 0),
-                                       ('.maximize', -3px, 0),
-                                       ('.minimize', -3px, 0) {
-        > button.titlebutton#{$class} {
-          margin-left: #{$_left};
-        }
-      }
-    }
-
-    &.right {
-      @each $class, $_left, $_right in ('.close', 0, -3px),
-                                       ('.maximize', 0, -3px),
-                                       ('.minimize', 0, -3px) {
-        > button.titlebutton#{$class} {
-          margin-right: #{$_right};
-        }
-      }
-    }
-  }
-
-  button.titlebutton {
-    &.close, &.maximize, &.minimize, &.restore {
-      min-width: 38px;
-      min-height: 30px;
-    }
-
-    // Load png assets for each button, Fix the Chrome window restore button bug
-    @each $k in ('close', 'maximize', 'minimize', 'restore') {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-
-        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-smaller.png'),
-                                                     url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}-smaller@2.png')); }
-      }
-    }
-  }
-
-  .fullscreen &,
-  .maximized & {
-    button.titlebutton {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-      &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-smaller.png'),
-                                                      url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}-smaller@2.png')); }
-      }
-    }
-  }
-}
-
 %csd_titlebutton {
   @if $titlebutton == 'square' {
     > box.horizontal {
       &.left {
-        @each $class, $_left, $_right in ('.close', -10px, 0),
-                                         ('.maximize', -6px, 0),
-                                         ('.minimize', -6px, 0) {
-          > button.titlebutton#{$class} {
-            margin-left: #{$_left};
-          }
-        }
+        margin-left: -3px;
 
         > button.titlebutton.close { border-top-left-radius: $corner_radius; }
       }
 
       &.right {
-        @each $class, $_left, $_right in ('.close', 0, -10px),
-                                         ('.maximize', 0, -6px),
-                                         ('.minimize', 0, -6px) {
-          > button.titlebutton#{$class} {
-            margin-right: #{$_right};
-          }
-        }
+        margin-right: -3px;
 
         > button.titlebutton.close { border-top-right-radius: $corner_radius; }
       }
     }
 
-    &.default-decoration { @extend %small_titlebutton; }
-  }
+    &.default-decoration {
+      > box.horizontal {
+        &.left {
+          margin-left: 0;
+        }
 
-  button.titlebutton { // csd titlebuttons
-    margin: 0;
-    padding: 0;
-    min-width: $medium_size;
-    min-height: $medium_size;
+        &.right {
+          margin-right: 0;
+        }
+      }
 
-    @include button(undecorated);
-    background-color: transparentize($header_bg, 1);
-
-    &:hover {
-      @include button(header-hover);
-    }
-
-    &:active, &:checked {
-      @include button(header-active);
-    }
-
-    &.close, &.maximize, &.minimize, &.restore { // csd windows control titlebuttons
-      padding: 0;
-      min-width: if($titlebutton == 'circle', 27px, 38px);
-      min-height: if($titlebutton == 'circle', 27px, 38px);
-      color: transparent;
-      background-color: transparent;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-width: 0;
-      border-radius: 0;
-
-      &:backdrop { opacity: 1; }
-    }
-
-    // Load png assets for each button, Fix the Chrome window restore button bug
-    @each $k in ('close', 'maximize', 'minimize', 'restore') {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-
-        &.#{$k}#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}.png'),
-                                                     url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}@2.png'));
+      button.titlebutton {
+        &.close, &.maximize, &.minimize {
+          min-height: 30px;
         }
       }
     }
-  }
 
-  .fullscreen &,
-  .maximized & {
-    button.titlebutton {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':hover','-hover'), (':active','-active') {
-        &.maximize#{$l} { background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}.png'),
-                                                        url('assets/titlebutton-restore#{$m}#{$asset_suffix_dark}#{$asset_suffix_win}@2.png'));
-        }
-      }
-    }
-  }
-}
-
-headerbar, .titlebar {
-  &, .csd &, .solid-csd & {
-    @extend %csd_titlebutton;
-  }
-
-  .maximized &, .maximized.csd &, .maximized.solid-csd & {
-    @if $titlebutton == 'square' {
+    .maximized &,
+    .tiled & {
       > box.horizontal {
         &.left {
           > button.titlebutton.close { border-top-left-radius: 0; }
@@ -4025,6 +3913,48 @@ headerbar, .titlebar {
       }
     }
   }
+
+  button.titlebutton { // csd titlebuttons
+    padding: 0;
+    min-width: $medium_size;
+    min-height: $medium_size;
+
+    &.close, &.maximize, &.minimize { // csd windows control titlebuttons
+      padding: 0;
+      min-width: if($titlebutton == 'circle', 24px, $large_size);
+      min-height: if($titlebutton == 'circle', 24px, $large_size);
+      border: none;
+      border-radius: if($titlebutton == 'circle', $circular_radius, 0);
+      margin: if($titlebutton == 'circle', 0 3px, 0 -3px);
+    }
+
+    &.maximize, &.minimize {
+      &:hover {
+        background-color: rgba($header_fg, 0.1);
+      }
+
+      &:active {
+        background-color: rgba($header_fg, 0.2);
+        color: $header_fg;
+      }
+    }
+
+    &.close {
+      &:hover {
+        background-color: $wm_button_close_hover_bg;
+        color: white;
+      }
+
+      &:active {
+        background-color: $wm_button_close_active_bg;
+        color: white;
+      }
+    }
+  }
+}
+
+headerbar, .titlebar {
+  @extend %csd_titlebutton;
 }
 
 // catch all extend

@@ -15,6 +15,7 @@
 
 .calendar {
   margin: 0;
+  padding: 6px;
   box-shadow: none;
   background: none;
   border: none;
@@ -29,10 +30,10 @@
 .datemenu-calendar-column {
   spacing: 6px;
   border: none;
-  // padding: 0 12px;
+  padding: 0 6px;
 
-  // &:ltr { margin-right: 12px; border-left-width: 0; }
-  // &:rtl { margin-left: 12px; border-right-width: 0; }
+  &:ltr { margin-right: 12px; border-left-width: 0; }
+  &:rtl { margin-left: 12px; border-right-width: 0; }
 
   .datemenu-displays-section { padding-bottom: 0; }
   .datemenu-displays-box { spacing: 6px; }
@@ -68,6 +69,7 @@
   font-weight: bold;
   padding: 8px 0;
   text-shadow: none;
+  font-size: 1em;
   // &:focus {}
 }
 
@@ -76,7 +78,7 @@
   height: 28px !important;
   margin: 2px !important;
   padding: 0 !important;
-  border-radius: 1000px;
+  border-radius: $circular_radius;
   background-color: transparent;
   color: $fg_color;
 
@@ -87,7 +89,7 @@
 
 .calendar-change-month-back,
 .calendar-change-month-forward {
-  padding: 0 2px;
+  padding: 0 1px !important;
 
   StIcon { icon-size: 16px; }
 }
@@ -166,11 +168,13 @@
 .calendar-week-number {
   font-size: 70%;
   font-weight: bold;
-  width: 2.3em; height: 2.3em;
+  text-align: center;
+  width: 2.3em;
+  height: 2.3em;
   border-radius: $bt_radius;
-  padding: 0 0;
-  margin: 6px;
-  background-color: rgba($fg_color, 0.15);
+  padding: 0 !important;
+  margin: 6px !important;
+  background-color: rgba($fg_color, 0.1);
   color: $alt_fg_color;
 }
 
@@ -269,6 +273,7 @@
   .events-list {
     spacing: 12px;
     text-shadow: none;
+    color: $sec_fg_color;
   }
 
   .events-title {
@@ -282,4 +287,8 @@
     color: $alt_fg_color;
     font-feature-settings: "tnum";
   }
+
+  &:active .events-list,
+  &:active .events-title,
+  &:active .event-time { color: white !important; }
 }

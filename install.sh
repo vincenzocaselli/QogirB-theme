@@ -13,9 +13,8 @@ fi
 SRC_DIR=$(cd $(dirname $0) && pwd)
 
 THEME_NAME=Qogir
-THEME_VARIANTS=('' '-manjaro' '-ubuntu')
-WIN_VARIANTS=('' '-win')
-COLOR_VARIANTS=('' '-light' '-dark')
+THEME_VARIANTS=('' '-Manjaro' '-Ubuntu')
+COLOR_VARIANTS=('' '-Light' '-Dark')
 LOGO_NAME=''
 
 image=''
@@ -27,16 +26,18 @@ theme_color='default'
 SASSC_OPT="-M -t expanded"
 
 if [[ "$(command -v gnome-shell)" ]]; then
+  gnome-shell --version
   SHELL_VERSION="$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f -1)"
-  echo "Your gnome-shell version is '$(gnome-shell --version)'"
-  if [[ "${SHELL_VERSION:-}" -ge "40" ]]; then
-    GS_VERSION="new"
+  if [[ "${SHELL_VERSION:-}" -ge "42" ]]; then
+    GS_VERSION="42-0"
+  elif [[ "${SHELL_VERSION:-}" -ge "40" ]]; then
+    GS_VERSION="40-0"
   else
-    GS_VERSION="old"
+    GS_VERSION="3-32"
   fi
   else
     echo "'gnome-shell' not found, using styles for last gnome-shell version available."
-    GS_VERSION="new"
+    GS_VERSION="42-0"
 fi
 
 usage() {
@@ -52,16 +53,17 @@ OPTIONS:
 
   -c, --color VARIANT     Specify theme color variant(s) [standard|light|dark] (Default: All variants)
 
-  -l, --logo VARIANT      Specify logo icon on nautilus [default|manjaro|ubuntu|fedora|debian|arch|gnome|budgie|popos] (Default: mountain icon)
+  -l, --logo VARIANT      Specify logo icon on nautilus [default|manjaro|ubuntu|fedora|debian|arch|gnome|budgie|popos|gentoo|void|zorin|mxlinux|opensuse] (Default: mountain icon)
 
   -g, --gdm               Install GDM theme, this option need root user authority! please run this with sudo
 
-  -r, --revert            revert GDM theme, this option need root user authority! please run this with sudo
+  -r, --remove,
+  -u, --uninstall         Uninstall/Remove installed themes
 
   --tweaks                Specify versions for tweaks [image|square|round] (options can mix use)
-                          1. image:    Install with a background image on (Nautilus/Nemo)
-                          2. square:   Install square window button like Windows 10
-                          3. round:    Install rounded window and popup/menu version
+                          1. image:      Install with a background image on (Nautilus/Nemo)
+                          2. square:     Install square window button like Windows 10
+                          3. round:      Install rounded window and popup/menu version
 
   -h, --help              Show help
 EOF
@@ -74,8 +76,8 @@ install() {
   local color=${4}
   local logo=${5}
 
-  [[ ${color} == '-dark' ]] && local ELSE_DARK=${color}
-  [[ ${color} == '-light' ]] && local ELSE_LIGHT=${color}
+  [[ ${color} == '-Dark' ]] && local ELSE_DARK=${color}
+  [[ ${color} == '-Light' ]] && local ELSE_LIGHT=${color}
 
   local THEME_DIR=${dest}/${name}${theme}${color}
 
@@ -126,16 +128,10 @@ install() {
 
   if [[ "$tweaks" == 'true' ]]; then
     sassc $SASSC_OPT ${SRC_DIR}/src/gtk/theme-3.0/gtk${color}.scss                   ${THEME_DIR}/gtk-3.0/gtk.css
+    sassc $SASSC_OPT ${SRC_DIR}/src/gtk/theme-3.0/gtk-Dark.scss                      ${THEME_DIR}/gtk-3.0/gtk-dark.css
   else
     cp -r ${SRC_DIR}/src/gtk/theme-3.0/gtk${color}.css                               ${THEME_DIR}/gtk-3.0/gtk.css
-  fi
-
-  if [[ ${color} != '-dark' ]]; then
-    if [[ "$tweaks" == 'true' ]]; then
-      sassc $SASSC_OPT ${SRC_DIR}/src/gtk/theme-3.0/gtk-dark.scss                    ${THEME_DIR}/gtk-3.0/gtk-dark.css
-    else
-      cp -r ${SRC_DIR}/src/gtk/theme-3.0/gtk-dark.css                                ${THEME_DIR}/gtk-3.0/gtk-dark.css
-    fi
+    cp -r ${SRC_DIR}/src/gtk/theme-3.0/gtk-Dark.css                                  ${THEME_DIR}/gtk-3.0/gtk-dark.css
   fi
 
   cp -r ${SRC_DIR}/src/gtk/assets/thumbnail${theme}${ELSE_DARK}.png                  ${THEME_DIR}/gtk-3.0/thumbnail.png
@@ -157,21 +153,22 @@ install() {
 
   if [[ "$tweaks" == 'true' ]]; then
     sassc $SASSC_OPT ${SRC_DIR}/src/gtk/theme-4.0/gtk${color}.scss                   ${THEME_DIR}/gtk-4.0/gtk.css
+    sassc $SASSC_OPT ${SRC_DIR}/src/gtk/theme-4.0/gtk-Dark.scss                      ${THEME_DIR}/gtk-4.0/gtk-dark.css
   else
     cp -r ${SRC_DIR}/src/gtk/theme-4.0/gtk${color}.css                               ${THEME_DIR}/gtk-4.0/gtk.css
-  fi
-
-  if [[ ${color} != '-dark' ]]; then
-    if [[ "$tweaks" == 'true' ]]; then
-      sassc $SASSC_OPT ${SRC_DIR}/src/gtk/theme-4.0/gtk-dark.scss                    ${THEME_DIR}/gtk-4.0/gtk-dark.css
-    else
-      cp -r ${SRC_DIR}/src/gtk/theme-4.0/gtk-dark.css                                ${THEME_DIR}/gtk-4.0/gtk-dark.css
-    fi
+    cp -r ${SRC_DIR}/src/gtk/theme-4.0/gtk-Dark.css                                  ${THEME_DIR}/gtk-4.0/gtk-dark.css
   fi
 
   cp -r ${SRC_DIR}/src/gtk/assets/thumbnail${theme}${ELSE_DARK}.png                  ${THEME_DIR}/gtk-4.0/thumbnail.png
 
- # GNOME SHELL
+  # link gtk4.0 for libadwaita
+  mkdir -p                                                                           ${HOME}/.config/gtk-4.0
+  rm -rf ${HOME}/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}
+  ln -sf ${THEME_DIR}/gtk-4.0/assets                                                 ${HOME}/.config/gtk-4.0/assets
+  ln -sf ${THEME_DIR}/gtk-4.0/gtk.css                                                ${HOME}/.config/gtk-4.0/gtk.css
+  ln -sf ${THEME_DIR}/gtk-4.0/gtk-dark.css                                           ${HOME}/.config/gtk-4.0/gtk-dark.css
+
+  # GNOME SHELL
   mkdir -p                                                                           ${THEME_DIR}/gnome-shell
   cp -r ${SRC_DIR}/src/gnome-shell/common-assets                                     ${THEME_DIR}/gnome-shell/assets
   cp -r ${SRC_DIR}/src/gnome-shell/assets${theme}/{background.jpg,calendar-today.svg} ${THEME_DIR}/gnome-shell/assets
@@ -187,18 +184,11 @@ install() {
   cp -r ${SRC_DIR}/src/gnome-shell/icons                                             ${THEME_DIR}/gnome-shell
   cp -r ${SRC_DIR}/src/gnome-shell/pad-osd.css                                       ${THEME_DIR}/gnome-shell
 
-  if [[ "${GS_VERSION:-}" == 'new' ]]; then
-    if [[ "$tweaks" == 'true' ]]; then
-      sassc $SASSC_OPT ${SRC_DIR}/src/gnome-shell/theme-40-0/gnome-shell${ELSE_DARK}.scss ${THEME_DIR}/gnome-shell/gnome-shell.css
-    else
-      cp -r ${SRC_DIR}/src/gnome-shell/theme-40-0/gnome-shell${ELSE_DARK}.css        ${THEME_DIR}/gnome-shell/gnome-shell.css
-    fi
+
+  if [[ "$tweaks" == 'true' ]]; then
+    sassc $SASSC_OPT ${SRC_DIR}/src/gnome-shell/theme-${GS_VERSION}/gnome-shell${ELSE_DARK}.scss ${THEME_DIR}/gnome-shell/gnome-shell.css
   else
-    if [[ "$tweaks" == 'true' ]]; then
-      sassc $SASSC_OPT ${SRC_DIR}/src/gnome-shell/theme-3-32/gnome-shell${ELSE_DARK}.scss ${THEME_DIR}/gnome-shell/gnome-shell.css
-    else
-      cp -r ${SRC_DIR}/src/gnome-shell/theme-3-32/gnome-shell${ELSE_DARK}.css        ${THEME_DIR}/gnome-shell/gnome-shell.css
-    fi
+    cp -r ${SRC_DIR}/src/gnome-shell/theme-${GS_VERSION}/gnome-shell${ELSE_DARK}.css ${THEME_DIR}/gnome-shell/gnome-shell.css
   fi
 
   cd ${THEME_DIR}/gnome-shell
@@ -222,14 +212,14 @@ install() {
   mkdir -p                                                                           ${THEME_DIR}/metacity-1
 
   if [[ "$window" == 'round' ]]; then
-    cp -r ${SRC_DIR}/src/metacity-1/assets-round                                     ${THEME_DIR}/metacity-1/assets
-    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3-round.xml                       ${THEME_DIR}/metacity-1/metacity-theme-3.xml
-    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}-round.xml          ${THEME_DIR}/metacity-1/metacity-theme-1.xml
+    cp -r ${SRC_DIR}/src/metacity-1/assets-Round                                     ${THEME_DIR}/metacity-1/assets
+    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3-Round.xml                       ${THEME_DIR}/metacity-1/metacity-theme-3.xml
+    cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}-Round.xml          ${THEME_DIR}/metacity-1/metacity-theme-1.xml
   else
     if [[ "$square" == 'true' ]]; then
-      cp -r ${SRC_DIR}/src/metacity-1/assets${ELSE_LIGHT}-win/*.png                  ${THEME_DIR}/metacity-1
-      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3-win.xml                       ${THEME_DIR}/metacity-1/metacity-theme-3.xml
-      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}-win.xml          ${THEME_DIR}/metacity-1/metacity-theme-1.xml
+      cp -r ${SRC_DIR}/src/metacity-1/assets${ELSE_LIGHT}-Win/*.png                  ${THEME_DIR}/metacity-1
+      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3-Win.xml                       ${THEME_DIR}/metacity-1/metacity-theme-3.xml
+      cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-1${ELSE_LIGHT}-Win.xml          ${THEME_DIR}/metacity-1/metacity-theme-1.xml
     else
       cp -r ${SRC_DIR}/src/metacity-1/assets${ELSE_LIGHT}/*.png                      ${THEME_DIR}/metacity-1
       cp -r ${SRC_DIR}/src/metacity-1/metacity-theme-3.xml                           ${THEME_DIR}/metacity-1/metacity-theme-3.xml
@@ -241,25 +231,50 @@ install() {
   cd ${THEME_DIR}/metacity-1
   ln -s metacity-theme-1.xml metacity-theme-2.xml
 
-  # XFWM4
-  mkdir -p                                                                           ${THEME_DIR}/xfwm4
-
-  if [[ "$square" == 'true' ]]; then
-    cp -r ${SRC_DIR}/src/xfwm4/themerc-win${ELSE_LIGHT}                              ${THEME_DIR}/xfwm4/themerc
-    cp -r ${SRC_DIR}/src/xfwm4/assets-win${ELSE_LIGHT}/*.png                         ${THEME_DIR}/xfwm4
-  else
-    cp -r ${SRC_DIR}/src/xfwm4/themerc${ELSE_LIGHT}                                  ${THEME_DIR}/xfwm4/themerc
-    cp -r ${SRC_DIR}/src/xfwm4/assets${ELSE_LIGHT}/*.png                             ${THEME_DIR}/xfwm4
-  fi
-
   # OTHER
   cp -r ${SRC_DIR}/src/plank                                                         ${THEME_DIR}
   cp -r ${SRC_DIR}/src/unity                                                         ${THEME_DIR}
   cp -r ${SRC_DIR}/src/xfce-notify-4.0                                               ${THEME_DIR}
 }
 
-# Backup and install files related to GDM theme
+install_xfwm() {
+  local dest=${1}
+  local name=${2}
+  local color=${3}
+  local screen=${4}
 
+  [[ ${color} == '-Dark' ]] && local ELSE_DARK=${color}
+  [[ ${color} == '-Light' ]] && local ELSE_LIGHT=${color}
+
+  local THEME_DIR=${dest}/${name}${color}${screen}
+
+  [[ ${screen} != '' && -d ${THEME_DIR} ]] && rm -rf ${THEME_DIR}
+
+  # XFWM4
+  mkdir -p                                                                           ${THEME_DIR}/xfwm4
+
+  if [[ "$square" == 'true' ]]; then
+    cp -r ${SRC_DIR}/src/xfwm4/themerc-Win${ELSE_LIGHT}                              ${THEME_DIR}/xfwm4/themerc
+    cp -r ${SRC_DIR}/src/xfwm4/assets-Win${ELSE_LIGHT}${screen}/*.png                ${THEME_DIR}/xfwm4
+  else
+    cp -r ${SRC_DIR}/src/xfwm4/themerc${ELSE_LIGHT}                                  ${THEME_DIR}/xfwm4/themerc
+    cp -r ${SRC_DIR}/src/xfwm4/assets${ELSE_LIGHT}${screen}/*.png                    ${THEME_DIR}/xfwm4
+  fi
+}
+
+uninstall() {
+  local dest=${1}
+  local name=${2}
+  local theme=${3}
+  local color=${4}
+  local screen=${5}
+
+  local THEME_DIR=${dest}/${name}${theme}${color}${screen}
+
+  [[ -d "$THEME_DIR" ]] && rm -rf "$THEME_DIR" && echo -e "Uninstalling "$THEME_DIR" ..."
+}
+
+# Backup and install files related to GDM theme
 GS_THEME_FILE="/usr/share/gnome-shell/gnome-shell-theme.gresource"
 SHELL_THEME_FOLDER="/usr/share/gnome-shell/theme"
 UBUNTU_THEME_FILE="/usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource"
@@ -345,8 +360,8 @@ while [[ $# -gt 0 ]]; do
       gdm='true'
       shift
       ;;
-    -r|--revert)
-      revert='true'
+    -r|--remove|-u|--uninstall)
+      remove='true'
       shift
       ;;
     -t|--theme)
@@ -521,6 +536,26 @@ install_theme() {
       install "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${theme}" "${color}" "${logo:-${LOGO_NAME}}"
     done
   done
+
+  for color in "${colors[@]-${COLOR_VARIANTS[@]}}"; do
+    for screen in '' '-hdpi' '-xhdpi'; do
+      install_xfwm "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${color}" "${screen}"
+    done
+  done
+}
+
+uninstall_theme() {
+  for theme in "${themes[@]-${THEME_VARIANTS[@]}}"; do
+    for color in "${colors[@]-${COLOR_VARIANTS[@]}}"; do
+      for screen in '' '-hdpi' '-xhdpi'; do
+        uninstall "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${theme}" "${color}" "${screen}"
+      done
+    done
+  done
+
+  [[ -L "${HOME}/.config/gtk-4.0/assets" ]] && rm -rf "${HOME}/.config/gtk-4.0/assets" && echo -e "Removing ${HOME}/.config/gtk-4.0/assets"
+  [[ -L "${HOME}/.config/gtk-4.0/gtk.css" ]] && rm -rf "${HOME}/.config/gtk-4.0/gtk.css" && echo -e "Removing ${HOME}/.config/gtk-4.0/gtk.css"
+  [[ -L "${HOME}/.config/gtk-4.0/gtk-dark.css" ]] && rm -rf "${HOME}/.config/gtk-4.0/gtk-dark.css" && echo -e "Removing ${HOME}/.config/gtk-4.0/gtk-dark.css"
 }
 
 tweaks_temp() {
@@ -545,10 +580,10 @@ install_round_window() {
 install_theme_color() {
   if [[ "$theme" != '' ]]; then
     case "$theme" in
-      -manjaro)
+      -Manjaro)
         theme_color='manjaro'
         ;;
-      -ubuntu)
+      -Ubuntu)
         theme_color='ubuntu'
         ;;
     esac
@@ -575,17 +610,22 @@ theme_tweaks() {
   fi
 }
 
-if [[ "${gdm:-}" != 'true' && "${revert:-}" != 'true' ]]; then
+./clean-old-theme.sh
+
+if [[ "${gdm:-}" != 'true' && "${remove:-}" != 'true' ]]; then
   install_theme
 fi
 
-if [[ "${gdm:-}" == 'true' && "${revert:-}" != 'true' && "$UID" -eq "$ROOT_UID" ]]; then
+if [[ "${gdm:-}" != 'true' && "${remove:-}" == 'true' ]]; then
+  uninstall_theme
+fi
+
+if [[ "${gdm:-}" == 'true' && "${remove:-}" != 'true' && "$UID" -eq "$ROOT_UID" ]]; then
   install_theme && install_gdm "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${theme}" "${color}"
 fi
 
-if [[ "${gdm:-}" != 'true' && "${revert:-}" == 'true' && "$UID" -eq "$ROOT_UID" ]]; then
+if [[ "${gdm:-}" == 'true' && "${remove:-}" == 'true' && "$UID" -eq "$ROOT_UID" ]]; then
   revert_gdm
 fi
 
-echo
-echo Done.
+echo -e "\nDone.\n"
