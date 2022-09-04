@@ -3804,8 +3804,9 @@ decoration {
   border-radius: $corner_radius;
   border: none;
   transition: $backdrop_transition;
-  box-shadow: 0 2px 2px 2px if($variant == 'light', rgba($selected_bg_color, 0.8), rgba($selected_bg_color, 0.8)),
-              0 0 2px 2px if($variant == 'light', rgba(197,215,237, 0.8), rgba(197,215,237, 0.8));
+  box-shadow: 0 3px 5px 0 if($variant == 'light', rgba($selected_bg_color, 0.3), rgba($selected_bg_color, 0.3)),
+              0 8px 8px 0 if($variant == 'light', rgba(197,215,237, 0.3), rgba(197,215,237, 0.3)),
+              0 0 0 1px $borders_color;
 
   // this is used for the resize cursor area
   margin: 6px;
