@@ -4822,7 +4822,7 @@ decoration {
   border-radius: 0;
   border: none;
   transition: 200ms ease-out;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15), 0 8px 8px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 2px rgba(82, 148, 226, 0.8), 0 0 2px 2px rgba(197, 215, 237, 0.8);
   margin: 6px;
 }
 
@@ -5365,7 +5365,7 @@ window.thunar notebook scrolledwindow.frame.standard-view, .nemo-window .nemo-wi
 
 .nautilus-window .floating-bar button {
   border: none;
-  border-radius: 100px;
+  border-radius: 9999px;
   min-height: 0;
   min-width: 0;
   padding: 0;
