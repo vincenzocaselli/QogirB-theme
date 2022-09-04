@@ -1224,7 +1224,7 @@ headerbar {
   padding: 0 $cont_padding;
   color: $header_fg;
   box-shadow: inset 0 -1px $borders_color;
-  background-color: $header_bg;
+  background-color: $selected_bg_color;
   min-height: $large_size;
 
   &:backdrop {
