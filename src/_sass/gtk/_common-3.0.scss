@@ -1279,7 +1279,7 @@ headerbar {
   }
 
   .maximized & {
-    background-color: opacify($header_bg, 1);
+    background-color: opacify($selected_bg_color, 1);
     border-color: opacify($header_border, 1);
 
     &:backdrop { background-color: opacify($header_bg_backdrop, 1); }
