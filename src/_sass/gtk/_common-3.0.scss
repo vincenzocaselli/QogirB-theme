@@ -3802,7 +3802,7 @@ stackswitcher button {
 
 decoration {
   border-radius: $corner_radius;
-  border: none;
+  border: 1px solid $selected_bg_color;
   transition: $backdrop_transition;
   box-shadow: 0 3px 5px 0 if($variant == 'light', rgba($selected_bg_color, 0.3), rgba($selected_bg_color, 0.3)),
               0 8px 8px 0 if($variant == 'light', rgba(197,215,237, 0.3), rgba(197,215,237, 0.3)),
@@ -3814,6 +3814,7 @@ decoration {
   &:backdrop {
     // the transparent shadow here is to enforce that the shadow extents don't
     // change when we go to backdrop, to prevent jumping windows
+    border: 1px solid $borders_color;
     box-shadow: 0 3px 5px 0 transparent, 0 8px 8px 0 transparent,
                 0 3px 3px 0 if($variant == 'light', rgba(black, 0.1), rgba(black, 0.08)),
                 0 0 0 1px $borders_color;

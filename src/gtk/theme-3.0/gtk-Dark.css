@@ -4832,13 +4832,14 @@ stackswitcher button.circular {
 
 decoration {
   border-radius: 0;
-  border: none;
+  border: 1px solid #5294e2;
   transition: 200ms ease-out;
   box-shadow: 0 3px 5px 0 rgba(82, 148, 226, 0.3), 0 8px 8px 0 rgba(197, 215, 237, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
   margin: 6px;
 }
 
 decoration:backdrop {
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 3px 5px 0 transparent, 0 8px 8px 0 transparent, 0 3px 3px 0 rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
