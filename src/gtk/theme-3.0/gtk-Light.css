@@ -10276,10 +10276,18 @@ leaflet.unfolded > headerbar:first-child, .geary-main-window > headerbar > leafl
 window.background.csd > headerbar.titlebar > hdyleaflet > headerbar:first-child,
 window.background.csd > headerbar.titlebar > leaflet > headerbar:first-child, window.background.csd > box.titlebar.horizontal > headerbar:first-child, .titlebar > headerbar.titlebar.tweak-titlebar-left, window.org-gnome-gedit .titlebar > headerbar:first-child {
   color: rgba(246, 246, 251, 0.8);
-  background-color: #32343D;
-  background-image: image(#32343D);
+  background-color: #5294e2;
+  background-image: image(#5294e2);
   border: none;
   box-shadow: none;
+}
+
+hdyleaflet > headerbar:backdrop:first-child,
+leaflet.unfolded > headerbar:backdrop:first-child, .geary-main-window > headerbar > leaflet > leaflet > headerbar:backdrop:not(:last-child), .geary-titlebar-left:backdrop, window.background.csd > headerbar.titlebar > box.horizontal > headerbar:backdrop:first-child,
+window.background.csd > headerbar.titlebar > hdyleaflet > headerbar:backdrop:first-child,
+window.background.csd > headerbar.titlebar > leaflet > headerbar:backdrop:first-child, window.background.csd > box.titlebar.horizontal > headerbar:backdrop:first-child, .titlebar > headerbar.titlebar.tweak-titlebar-left:backdrop, window.org-gnome-gedit .titlebar > headerbar:backdrop:first-child {
+  background-color: #32343D;
+  background-image: image(#32343D);
 }
 
 hdyleaflet > headerbar:first-child button:not(.titlebutton),
