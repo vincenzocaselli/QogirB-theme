@@ -10330,7 +10330,7 @@ window.background.csd > headerbar.titlebar > leaflet > headerbar:first-child, wi
   background-color: #5294e2;
   background-image: image(#5294e2);
   border: none;
-  box-shadow: none;
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.12);
 }
 
 hdyleaflet > headerbar:backdrop:first-child,
