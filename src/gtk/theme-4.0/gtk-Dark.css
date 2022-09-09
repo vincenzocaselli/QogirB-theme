@@ -2012,7 +2012,7 @@ headerbar.selection-mode .selection-menu .arrow {
 
 headerbar.default-decoration {
   min-height: 30px;
-  padding: 0 8px;
+  padding: 0 3px;
 }
 
 headerbar.default-decoration windowcontrols menubutton button {
@@ -5310,6 +5310,19 @@ window.ssd {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
+headerbar.default-decoration windowcontrols > button.close, headerbar.default-decoration windowcontrols > button.maximize, headerbar.default-decoration windowcontrols > button.minimize {
+  min-width: 40px;
+  min-height: 30px;
+}
+
+headerbar > windowhandle box.end > windowcontrols {
+  margin-right: -6px;
+}
+
+headerbar > windowhandle box.start > windowcontrols {
+  margin-left: -6px;
+}
+
 headerbar windowcontrols > button {
   margin: 0;
   padding: 0;
@@ -5319,11 +5332,11 @@ headerbar windowcontrols > button {
 
 headerbar windowcontrols > button.close, headerbar windowcontrols > button.maximize, headerbar windowcontrols > button.minimize {
   padding: 0;
-  min-width: 26px;
-  min-height: 26px;
+  min-width: 40px;
+  min-height: 40px;
   border: none;
-  border-radius: 9999px;
-  margin: 0 3px;
+  border-radius: 0;
+  margin: 0;
 }
 
 headerbar windowcontrols > button.close > image, headerbar windowcontrols > button.maximize > image, headerbar windowcontrols > button.minimize > image {

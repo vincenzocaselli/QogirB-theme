@@ -12,7 +12,7 @@ fi
 
 SRC_DIR=$(cd $(dirname $0) && pwd)
 
-THEME_NAME=Qogir
+THEME_NAME=QogirB
 THEME_VARIANTS=('' '-Manjaro' '-Ubuntu')
 COLOR_VARIANTS=('' '-Light' '-Dark')
 LOGO_NAME=''
@@ -177,7 +177,7 @@ install() {
   if [[ -f ${SRC_DIR}/src/gnome-shell/logos/logo-${logo}.svg ]] ; then
     cp -r ${SRC_DIR}/src/gnome-shell/logos/logo-${logo}.svg                          ${THEME_DIR}/gnome-shell/assets/activities.svg
   else
-    echo "${logo} icon not supported, Qogir icon will install..."
+    echo "${logo} icon not supported, QogirB icon will install..."
     cp -r ${SRC_DIR}/src/gnome-shell/logos/logo-qogir.svg                            ${THEME_DIR}/gnome-shell/assets/activities.svg
   fi
 
