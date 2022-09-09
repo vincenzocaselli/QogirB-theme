@@ -6,7 +6,7 @@ stage {
 .modal-dialog, .notification-banner {
   color: #e6ebef;
   background-color: #282A33;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 3px 8px -3px rgba(0, 0, 0, 0.35) !important;
 }
 
@@ -74,14 +74,14 @@ StEntry {
   border-radius: 2px;
   color: #e0e5eb;
   background-color: #282a33;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: inset 0 2px 4px rgba(40, 42, 51, 0.05);
 }
 
 StEntry:hover {
   color: #e6ebef;
   background-color: #282a33;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: inset 0 2px 4px rgba(40, 42, 51, 0.05);
 }
 
@@ -95,7 +95,7 @@ StEntry:focus {
 StEntry:insensitive {
   color: rgba(230, 235, 239, 0.45);
   background-color: #2d2f38;
-  border-color: 1px solid rgba(65, 67, 75, 0.516);
+  border-color: 1px solid rgba(80, 82, 90, 0.5875);
   box-shadow: inset 0 2px 4px rgba(45, 47, 56, 0.05);
 }
 
@@ -125,7 +125,7 @@ StEntry StLabel.hint-text {
   text-shadow: none;
   color: #e6ebef;
   background-color: #2c2f39;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -134,7 +134,7 @@ StEntry StLabel.hint-text {
   text-shadow: none;
   color: #e6ebef;
   background-color: #2c2f39;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -143,7 +143,7 @@ StEntry StLabel.hint-text {
   text-shadow: none;
   color: #e6ebef;
   background-color: #383a44;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -222,16 +222,16 @@ StEntry StLabel.hint-text {
 /* Slider */
 .slider {
   height: 15px;
-  color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.25);
   -slider-height: 4px;
-  -slider-background-color: rgba(255, 255, 255, 0.12);
+  -slider-background-color: rgba(255, 255, 255, 0.25);
   -slider-border-color: transparent;
   -slider-active-background-color: #5294e2;
   -slider-active-border-color: transparent;
   -slider-border-width: 0;
   -slider-handle-radius: 0;
   -barlevel-height: 4px;
-  -barlevel-background-color: rgba(255, 255, 255, 0.12);
+  -barlevel-background-color: rgba(255, 255, 255, 0.25);
   -barlevel-border-width: 0;
   -barlevel-border-color: transparent;
   -barlevel-active-background-color: #5294e2;
@@ -290,7 +290,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   -arrow-border-radius: 2px;
   -arrow-background-color: transparent;
   -arrow-border-width: 0;
-  -arrow-border-color: rgba(255, 255, 255, 0.12);
+  -arrow-border-color: rgba(255, 255, 255, 0.25);
   -arrow-base: 64px;
   -arrow-rise: 0;
   -arrow-box-shadow: none;
@@ -310,11 +310,11 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 }
 
 .popup-menu .search-entry {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .popup-menu .search-entry:hover {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .popup-menu .search-entry:focus {
@@ -327,7 +327,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   border-radius: 3px;
   margin: 2px 7px 12px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
 }
 
 .popup-menu-item {
@@ -339,7 +339,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .popup-menu-item:checked {
   background-color: #21232a !important;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.25);
   color: #e6ebef !important;
   border-radius: 0;
 }
@@ -374,7 +374,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .popup-sub-menu {
   background-color: #21232a !important;
   border: none;
-  box-shadow: inset 0 -1px rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 -1px rgba(255, 255, 255, 0.25);
   border-radius: 0;
 }
 
@@ -490,7 +490,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   text-shadow: none;
   color: #e6ebef;
   background-color: #383a44;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -650,7 +650,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   text-shadow: none;
   color: #e6ebef;
   background-color: #383a44;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -660,7 +660,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .events-button:hover,
 .events-button:focus {
   background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .world-clocks-button:active,
@@ -770,7 +770,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   width: 29em;
   padding-left: 16px;
   text-shadow: none;
-  border: solid rgba(255, 255, 255, 0.12);
+  border: solid rgba(255, 255, 255, 0.25);
 }
 
 .message-list:ltr {
@@ -839,13 +839,13 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   text-shadow: none;
   color: #e6ebef;
   background-color: #383a44;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
 .popup-menu .message:hover, .popup-menu .message:focus {
   background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .popup-menu .message:active {
@@ -1048,7 +1048,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 }
 
 .candidate-page-button:insensitive {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .candidate-page-button:first-child {
@@ -1091,7 +1091,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .notification-banner .notification-actions {
   padding-top: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
   spacing: 0;
 }
 
@@ -1185,7 +1185,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   color: #D3DAE3;
   background-color: #282A33;
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
 }
 
 .modal-dialog-linked-button:hover {
@@ -1392,7 +1392,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 }
 
 .audio-selection-device {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
 }
 
@@ -1453,7 +1453,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 }
 
 .nm-dialog-scroll-view {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 0;
   background-color: #282A33;
   border-radius: 2px;
@@ -1461,7 +1461,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .nm-dialog-item {
   font-size: 10pt;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   padding: 12px;
   spacing: 0px;
 }
@@ -1556,7 +1556,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .switcher-list .separator {
   width: 1px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .switcher-list .switcher-list-item-container {
@@ -2284,7 +2284,7 @@ StWidget.focused .app-well-app-running-dot {
 /* On-screen Keyboard */
 #keyboard {
   background-color: rgba(32, 33, 39, 0.9);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
 }
 
 #keyboard .page-indicator {
@@ -2305,7 +2305,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #32343D;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
   font-size: 15pt;
   min-height: 1.2em;
@@ -2319,7 +2319,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #2c2f39;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2327,7 +2327,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #3d3f48;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2349,7 +2349,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #3d404b;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2357,7 +2357,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #484a55;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2373,7 +2373,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #ffffff;
   background-color: #5294e2;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2381,7 +2381,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #ffffff;
   background-color: #67a1e5;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2406,7 +2406,7 @@ StWidget.focused .app-well-app-running-dot {
   -arrow-border-radius: 2px;
   -arrow-background-color: #282A33;
   -arrow-border-width: 1px;
-  -arrow-border-color: rgba(255, 255, 255, 0.12);
+  -arrow-border-color: rgba(255, 255, 255, 0.25);
   -arrow-base: 20px;
   -arrow-rise: 10px;
   -boxpointer-gap: 6px;
@@ -2416,7 +2416,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #32343D;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
   border-radius: 3px;
 }
@@ -2425,7 +2425,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #2c2f39;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2433,7 +2433,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #3d3f48;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -2659,7 +2659,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #ffffff;
   background-color: #5294e2;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
   border-color: #5294e2;
 }
@@ -2670,7 +2670,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #ffffff;
   background-color: #5b99e3;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
   background-color: #68a2e6;
   border-color: #68a2e6;
@@ -3197,7 +3197,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #2c2f39;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -3205,7 +3205,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #383a44;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
@@ -3213,7 +3213,7 @@ StWidget.focused .app-well-app-running-dot {
   text-shadow: none;
   color: #e6ebef;
   background-color: #2c2f39;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: none;
 }
 
