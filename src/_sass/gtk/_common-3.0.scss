@@ -1305,7 +1305,9 @@ headerbar {
     }
   }
 
-  &.default-decoration,
+  &.default-decoration {
+    background-color: $selected_bg_color;
+  }
   &.default-decoration:backdrop {
     background-color: $header_bg;
     border-bottom-width: 0;

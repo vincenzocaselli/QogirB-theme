@@ -1811,13 +1811,17 @@ headerbar.default-decoration:not(.csd) > button.titlebutton {
   margin: 0 -3px;
 }
 
-headerbar.default-decoration, headerbar.default-decoration:backdrop {
+headerbar.default-decoration {
+  background-color: #5294e2;
+}
+
+headerbar.default-decoration:backdrop {
   background-color: #ffffff;
   border-bottom-width: 0;
   box-shadow: none;
 }
 
-.tiled headerbar.default-decoration, .maximized headerbar.default-decoration, .fullscreen headerbar.default-decoration, .tiled headerbar.default-decoration:backdrop, .maximized headerbar.default-decoration:backdrop, .fullscreen headerbar.default-decoration:backdrop {
+.tiled headerbar.default-decoration:backdrop, .maximized headerbar.default-decoration:backdrop, .fullscreen headerbar.default-decoration:backdrop {
   box-shadow: none;
 }
 
