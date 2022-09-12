@@ -1,0 +1,2 @@
+cd .themes/QogirB-Dark
+tar -zcvf ../QogirB.tar.gz *
