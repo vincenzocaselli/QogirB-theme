@@ -1,7 +1,7 @@
 <svg width="16" height="16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <linearGradient id="a" x1="25" x2="25" y1="31.362" y2="45.362" gradientTransform="translate(-33.837 991.99)" gradientUnits="userSpaceOnUse">
-   <stop stop-color="#5294e2" offset="0"/>
+   <stop stop-color="#0a70da" offset="0"/>
   </linearGradient>
  </defs>
  <g transform="translate(0 -1036.4)">

@@ -185,7 +185,7 @@
          id="rect538"
          style="opacity:0;fill:#191919;fill-opacity:1;stroke:none;stroke-width:0.18661945;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" />
       <path
-         style="opacity:1;fill:#5294e2;fill-opacity:1;stroke:none;stroke-width:0.09562311;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.49411765;paint-order:stroke fill markers"
+         style="opacity:1;fill:#0a70da;fill-opacity:1;stroke:none;stroke-width:0.09562311;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.49411765;paint-order:stroke fill markers"
          d="m 122.89999,84.220219 c -0.0473,0 -0.0949,0.01809 -0.13332,0.05478 l -1.05834,1.058334 h 2.38125 l -1.05833,-1.058334 c -0.0369,-0.03669 -0.0839,-0.05478 -0.13126,-0.05478 z m -1.19166,1.377693 v 0.264583 h 2.38125 v -0.264583 z"
          id="path715"
          inkscape:connector-curvature="0" />
@@ -264,7 +264,7 @@
          inkscape:connector-curvature="0"
          id="path745"
          d="m 122.89999,84.220219 c -0.0473,0 -0.0949,0.01809 -0.13332,0.05478 l -1.05834,1.058334 h 2.38125 l -1.05833,-1.058334 c -0.0369,-0.03669 -0.0839,-0.05478 -0.13126,-0.05478 z m -1.19166,1.377693 v 0.264583 h 2.38125 v -0.264583 z"
-         style="opacity:1;fill:#5294e2;fill-opacity:1;stroke:none;stroke-width:0.09562311;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.49411765;paint-order:stroke fill markers" />
+         style="opacity:1;fill:#0a70da;fill-opacity:1;stroke:none;stroke-width:0.09562311;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.49411765;paint-order:stroke fill markers" />
     </g>
     <g
        id="menu_focused_pressed"
@@ -284,7 +284,7 @@
          inkscape:connector-curvature="0"
          id="rect781"
          d="m 80.565627,285.09369 c -0.80618,0 -1.45521,0.64903 -1.45521,1.45521 0,0.80618 0.64903,1.4552 1.45521,1.4552 0.80618,0 1.45521,-0.64902 1.45521,-1.4552 0,-0.80618 -0.64903,-1.45521 -1.45521,-1.45521 z m 0,0.26458 c 0.6596,0 1.19062,0.53102 1.19062,1.19063 0,0.6596 -0.53102,1.19062 -1.19062,1.19062 -0.6596,0 -1.19063,-0.53102 -1.19063,-1.19062 0,-0.65961 0.53103,-1.19063 1.19063,-1.19063 z m 0,0.52917 c -0.36645,0 -0.66146,0.29501 -0.66146,0.66146 0,0.36644 0.29501,0.66145 0.66146,0.66145 0.36644,0 0.66146,-0.29501 0.66146,-0.66145 0,-0.36645 -0.29502,-0.66146 -0.66146,-0.66146 z"
-         style="opacity:1;fill:#5294e2;fill-opacity:1;stroke:none;stroke-width:0.08925235;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" />
+         style="opacity:1;fill:#0a70da;fill-opacity:1;stroke:none;stroke-width:0.08925235;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" />
     </g>
     <g
        id="menu_focused_prelight"
