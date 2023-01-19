@@ -1,0 +1,10 @@
+Pling https://www.pling.com/p/1903089
+
+QogirB is just a fork of UbuntuBudgie Qogir-theme (mainly focused on its Dark version), with some customizations (highlight headerbar and border of active window).
+
+Best results with: 
+* Budgie desktop (e.g. Ubuntu Budgie) and 
+* OpenDesktop-Icons   -   https://www.gnome-look.org/p/1498619
+
+Download and unzip the compressed file into ~/.themes (create .themes folder if it doesn't exists in your home); 
+then apply it with GNOME Tweaks, Appearance, Applications.
