@@ -16,7 +16,7 @@ $alt_fg_color: rgba($fg_color, 0.75);
 $sec_fg_color: rgba($fg_color, 0.6);
 
 $selected_fg_color: #ffffff;
-$selected_bg_color: #217def;
+$selected_bg_color: #3884de;
 
 @if $theme == 'manjaro' { $selected_bg_color: #2eb398; }
 @if $theme == 'ubuntu' { $selected_bg_color: #fb8441; }
