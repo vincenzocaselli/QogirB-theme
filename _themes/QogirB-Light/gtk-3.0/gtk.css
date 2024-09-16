@@ -4899,6 +4899,11 @@ headerbar button.titlebutton, .titlebar button.titlebutton {
   padding: 0;
   min-width: 28px;
   min-height: 28px;
+  color: #ffffff; /* White for focused window icons */
+}
+
+headerbar button.titlebutton, .titlebar button.titlebutton:backdrop  {
+    color: #4a4c59; /* Gray for unfocused window icons */
 }
 
 headerbar button.titlebutton.close, .titlebar button.titlebutton.close, headerbar button.titlebutton.maximize, .titlebar button.titlebutton.maximize, headerbar button.titlebutton.minimize, .titlebar button.titlebutton.minimize {
