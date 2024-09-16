@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=QogirB-Light
+Comment=An Clean Gtk+ theme based on Flat Design
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=QogirB-Light
+MetacityTheme=QogirB-Light
+IconTheme=QogirB
+CursorTheme=Adwaita
+ButtonLayout=menu:minimize,maximize,close
