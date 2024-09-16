@@ -1,6 +1,3 @@
-cd ~/git/QogirB-theme
-./clean-old-theme.sh
-./install.sh -n QogirB --tweaks square square square
-cd ~/.themes
-rm QogirB.tar.gz
-tar -zcvf QogirB.tar.gz QogirB*
+cd _themes
+rm QogirB-Light.tar.gz
+tar -zcvf QogirB-Light.tar.gz QogirB-Light
