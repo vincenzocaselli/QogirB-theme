@@ -1,3 +1,5 @@
+1.0.6 24/09/2024 thicker scrollbars in general + nemo file manager
+
 1.0.5 16/09/2024 changed to white color the titlebar title and icons for active window
 
 2024-09-16 replaced all with end result from installed theme
